@@ -1,0 +1,574 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 15:26:47 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 23892@MSI
+
+[2022-03-08 15:26:48 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 15:26:48 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 15:26:48 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 15:26:48 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 15:26:48 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 15:26:48 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 15:26:52 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 13564@MSI
+
+[2022-03-08 15:26:52 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 15:26:52 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 15:26:52 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 15:26:52 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 15:26:52 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 15:26:52 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 15:26:56 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 15496@MSI
+
+[2022-03-08 15:26:56 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 15:26:56 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 15:26:56 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 15:26:56 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 15:26:56 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 15:26:56 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 15:27:04 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 23060@MSI
+
+[2022-03-08 15:27:05 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 15:27:05 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 15:27:05 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 15:27:05 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 15:27:05 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 15:27:05 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 15:33:11 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 10796@MSI
+
+[2022-03-08 15:33:11 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 15:33:11 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 15:33:11 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 15:33:11 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 15:33:11 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 15:33:11 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 15:34:23 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 18400@MSI
+
+[2022-03-08 15:34:23 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 15:34:23 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 15:34:23 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 15:34:23 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 15:34:23 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 15:34:23 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 15:58:44 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 25568@MSI
+
+[2022-03-08 15:58:44 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 15:58:44 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 15:58:44 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 15:58:44 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 15:58:44 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 15:58:44 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 15:58:56 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 20492@MSI
+
+[2022-03-08 15:58:56 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 15:58:56 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 15:58:56 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 15:58:56 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 15:58:56 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 15:58:56 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 16:03:26 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 12480@MSI
+
+[2022-03-08 16:03:27 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 16:03:27 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 16:03:27 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 16:03:27 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 16:03:27 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 16:03:27 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 16:05:13 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 3856@MSI
+
+[2022-03-08 16:05:13 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 16:05:13 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 16:05:13 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 16:05:13 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 16:05:13 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 16:05:13 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 16:23:10 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 11048@MSI
+
+[2022-03-08 16:23:11 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 16:23:11 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 16:23:11 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 16:23:11 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 16:23:11 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 16:23:11 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 16:53:59 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 17520@MSI
+
+[2022-03-08 16:53:59 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 16:53:59 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 16:53:59 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 16:53:59 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 16:53:59 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 16:53:59 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 17:00:00 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 3008@MSI
+
+[2022-03-08 17:00:00 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 17:00:00 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 17:00:00 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 17:00:00 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 17:00:00 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 17:00:00 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 17:00:12 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 5808@MSI
+
+[2022-03-08 17:00:12 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 17:00:12 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 17:00:12 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 17:00:12 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 17:00:12 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 17:00:12 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 17:25:15 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 18912@MSI
+
+[2022-03-08 17:25:15 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 17:25:15 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 17:25:15 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 17:25:15 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 17:25:15 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 17:25:15 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2022-03-08 17:25:20 #8 type.registry] 
+New type domain.User
+
+[2022-03-08 17:25:20 #9 type] 
+Type domain.User is not enhanced.
+
+[2022-03-08 17:25:20 #10 type.registry] 
+New type domain.Pronostico
+
+[2022-03-08 17:25:20 #11 type.registry] 
+New type java.util.ArrayList<domain.Pronostico>
+
+[2022-03-08 17:25:20 #12 type] 
+Type domain.Pronostico is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 17:25:54 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 24752@MSI
+
+[2022-03-08 17:25:54 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 17:25:54 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 17:25:54 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 17:25:54 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 17:25:54 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 17:25:54 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2022-03-08 17:26:04 #8 type.registry] 
+New type domain.User
+
+[2022-03-08 17:26:04 #9 type] 
+Type domain.User is not enhanced.
+
+[2022-03-08 17:26:04 #10 type.registry] 
+New type domain.Pronostico
+
+[2022-03-08 17:26:04 #11 type.registry] 
+New type java.util.ArrayList<domain.Pronostico>
+
+[2022-03-08 17:26:04 #12 type] 
+Type domain.Pronostico is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 17:26:58 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 25080@MSI
+
+[2022-03-08 17:26:58 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 17:26:58 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 17:26:58 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 17:26:58 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 17:26:58 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 17:26:58 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2022-03-08 17:27:05 #8 type.registry] 
+New type domain.User
+
+[2022-03-08 17:27:05 #9 type] 
+Type domain.User is not enhanced.
+
+[2022-03-08 17:27:05 #10 type.registry] 
+New type domain.Pronostico
+
+[2022-03-08 17:27:05 #11 type.registry] 
+New type java.util.ArrayList<domain.Pronostico>
+
+[2022-03-08 17:27:05 #12 type] 
+Type domain.Pronostico is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 18:04:59 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 9712@MSI
+
+[2022-03-08 18:04:59 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 18:04:59 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 18:04:59 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 18:04:59 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 18:04:59 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 18:04:59 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 18:05:48 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 25620@MSI
+
+[2022-03-08 18:05:48 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 18:05:48 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 18:05:48 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 18:05:48 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 18:05:48 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 18:05:48 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 18:06:03 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 14608@MSI
+
+[2022-03-08 18:06:03 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 18:06:03 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 18:06:03 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 18:06:03 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 18:06:03 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 18:06:03 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 18:06:19 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 8556@MSI
+
+[2022-03-08 18:06:19 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 18:06:19 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 18:06:19 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 18:06:19 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 18:06:19 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 18:06:19 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 18:06:25 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 14364@MSI
+
+[2022-03-08 18:06:25 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 18:06:25 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 18:06:25 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 18:06:25 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 18:06:25 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 18:06:25 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-03-08 18:06:46 #1 store] 
+Database 'C:\Users\34644\eclipse-workspace\IS-ITER\src\main\resources\bets.temp' is opened by 26088@MSI
+
+[2022-03-08 18:06:46 #2 type.registry] 
+New type domain.Question
+
+[2022-03-08 18:06:46 #3 type] 
+Type domain.Question is not enhanced.
+
+[2022-03-08 18:06:46 #4 type.registry] 
+New type domain.Event
+
+[2022-03-08 18:06:46 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-03-08 18:06:46 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-03-08 18:06:46 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
