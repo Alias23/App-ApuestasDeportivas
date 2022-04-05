@@ -113,5 +113,9 @@ public class HacerLogin extends JFrame {
 		btnNewButton.setBounds(137, 215, 132, 29);
 		contentPane.add(btnNewButton);
 	}
+//
+//	private void visibleFalse(ActionEvent e) {
+//		this.setVisible(false);
+//	}
 
 }

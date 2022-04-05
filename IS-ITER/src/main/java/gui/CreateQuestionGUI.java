@@ -43,8 +43,10 @@ public class CreateQuestionGUI extends JFrame {
 	private JLabel jLabelError = new JLabel();
 
 	private Vector<Date> datesWithEventsCurrentMonth = new Vector<Date>();
+	private final JTextField textFieldGanancias = new JTextField();
 
 	public CreateQuestionGUI(Vector<domain.Event> v) {
+		
 		try {
 			jbInit(v);
 		} catch (Exception e) {
@@ -65,7 +67,9 @@ public class CreateQuestionGUI extends JFrame {
 		jTextFieldQuery.setBounds(new Rectangle(100, 211, 429, 20));
 		jLabelMinBet.setBounds(new Rectangle(25, 243, 75, 20));
 		jTextFieldPrice.setBounds(new Rectangle(100, 243, 60, 20));
-
+		textFieldGanancias.setBounds(395, 240, 146, 26);
+		textFieldGanancias.setColumns(10);
+		
 		jCalendar.setBounds(new Rectangle(40, 50, 225, 150));
 		scrollPaneEvents.setBounds(new Rectangle(25, 44, 346, 116));
 
@@ -77,7 +81,7 @@ public class CreateQuestionGUI extends JFrame {
 				jButtonCreate_actionPerformed(e);
 			}
 		});
-		jButtonClose.setBounds(new Rectangle(275, 275, 130, 30));
+		jButtonClose.setBounds(new Rectangle(245, 275, 130, 30));
 		jButtonClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jButtonClose_actionPerformed(e);
@@ -86,10 +90,11 @@ public class CreateQuestionGUI extends JFrame {
 
 		jLabelMsg.setBounds(new Rectangle(275, 182, 305, 20));
 		jLabelMsg.setForeground(Color.red);
+		jLabelError.setText(ResourceBundle.getBundle("Etiquetas").getString("GananciasPorEuroApostado")); //$NON-NLS-1$ //$NON-NLS-2$
 		// jLabelMsg.setSize(new Dimension(305, 20));
 
-		jLabelError.setBounds(new Rectangle(175, 240, 305, 20));
-		jLabelError.setForeground(Color.red);
+		jLabelError.setBounds(new Rectangle(178, 243, 199, 20));
+		jLabelError.setForeground(Color.BLACK);
 
 		this.getContentPane().add(jLabelMsg, null);
 		this.getContentPane().add(jLabelError, null);
@@ -113,6 +118,8 @@ public class CreateQuestionGUI extends JFrame {
 		jLabelEventDate.setBounds(new Rectangle(40, 15, 140, 25));
 		jLabelEventDate.setBounds(40, 16, 140, 25);
 		getContentPane().add(jLabelEventDate);
+		
+		getContentPane().add(textFieldGanancias);
 
 		// Code for JCalendar
 		this.jCalendar.addPropertyChangeListener(new PropertyChangeListener() {

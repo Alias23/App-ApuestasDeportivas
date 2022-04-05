@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.BorderLayout;
 
-
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -39,22 +38,24 @@ public class MainLoginRegister extends JFrame {
 	private JButton JButtonRegistrarse = null;
 	private JButton JButtonHacerLogin = null;
 
-    private static BLFacade FacadeInterface;
-	
-	public static BLFacade getBusinessLogic(){
+	private static BLFacade FacadeInterface;
+
+	public static BLFacade getBusinessLogic() {
 		return FacadeInterface;
 	}
-	 
-	public static void setBussinessLogic (BLFacade afi){
-		FacadeInterface=afi;
+
+	public static void setBussinessLogic(BLFacade afi) {
+		FacadeInterface = afi;
 	}
+
 	protected JLabel JLabelSelectOption;
 	private JRadioButton rdbtnNewRadioButton;
 	private JRadioButton rdbtnNewRadioButton_1;
 	private JRadioButton rdbtnNewRadioButton_2;
 	private JPanel Jpanel;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	
+	private JButton JButtonApuestas = null;
+
 	/**
 	 * This is the default constructor
 	 */
@@ -64,20 +65,19 @@ public class MainLoginRegister extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				try {
-					//if (ConfigXML.getInstance().isBusinessLogicLocal()) facade.close();
+					// if (ConfigXML.getInstance().isBusinessLogicLocal()) facade.close();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
-					System.out.println("Error: "+e1.toString()+" , probably problems with Business Logic or Database");
+					System.out.println(
+							"Error: " + e1.toString() + " , probably problems with Business Logic or Database");
 				}
 				System.exit(1);
 			}
 		});
 
 		initialize();
-		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
-	
 
 	/**
 	 * This method initializes this
@@ -99,15 +99,15 @@ public class MainLoginRegister extends JFrame {
 	private JPanel getJContentPane() {
 		if (JContentPane == null) {
 			JContentPane = new JPanel();
-			JContentPane.setLayout(new GridLayout(4, 1, 0, 0));
+			JContentPane.setLayout(null);
 			JContentPane.add(getLblNewLabel());
 			JContentPane.add(getBoton3());
-			JContentPane.add(getBoton2());
 			JContentPane.add(getPanel());
+			JContentPane.add(getBoton2());
+			JContentPane.add(getJButtonApuestas());
 		}
 		return JContentPane;
 	}
-
 
 	/**
 	 * This method initializes boton1
@@ -117,6 +117,7 @@ public class MainLoginRegister extends JFrame {
 	private JButton getBoton2() {
 		if (JButtonRegistrarse == null) {
 			JButtonRegistrarse = new JButton();
+			JButtonRegistrarse.setBounds(0, 116, 270, 58);
 			JButtonRegistrarse.setText(ResourceBundle.getBundle("Etiquetas").getString("Register"));
 			JButtonRegistrarse.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -127,7 +128,7 @@ public class MainLoginRegister extends JFrame {
 		}
 		return JButtonRegistrarse;
 	}
-	
+
 	/**
 	 * This method initializes boton2
 	 * 
@@ -136,6 +137,7 @@ public class MainLoginRegister extends JFrame {
 	private JButton getBoton3() {
 		if (JButtonHacerLogin == null) {
 			JButtonHacerLogin = new JButton();
+			JButtonHacerLogin.setBounds(0, 59, 270, 58);
 			JButtonHacerLogin.setText(ResourceBundle.getBundle("Etiquetas").getString("Login"));
 			JButtonHacerLogin.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -147,50 +149,70 @@ public class MainLoginRegister extends JFrame {
 		}
 		return JButtonHacerLogin;
 	}
-	
+
+	private JButton getJButtonApuestas() {
+		if (JButtonApuestas == null) {
+			JButtonApuestas = new JButton();
+			JButtonApuestas.setBounds(267, 59, 217, 115);
+			JButtonApuestas.setText(ResourceBundle.getBundle("Etiquetas").getString("ApuestasDisponibles"));
+			JButtonApuestas.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					JFrame a = new FindQuestionsGUI();
+					a.setVisible(true);
+				}
+			});
+		}
+		return JButtonApuestas;
+	}
 
 	private JLabel getLblNewLabel() {
 		if (JLabelSelectOption == null) {
 			JLabelSelectOption = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("SelectOption"));
+			JLabelSelectOption.setBounds(0, 1, 473, 58);
 			JLabelSelectOption.setFont(new Font("Tahoma", Font.BOLD, 13));
 			JLabelSelectOption.setForeground(Color.BLACK);
 			JLabelSelectOption.setHorizontalAlignment(SwingConstants.CENTER);
 		}
 		return JLabelSelectOption;
 	}
+
 	private JRadioButton getRdbtnNewRadioButton() {
 		if (rdbtnNewRadioButton == null) {
 			rdbtnNewRadioButton = new JRadioButton("English");
 			rdbtnNewRadioButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Locale.setDefault(new Locale("en"));
-					System.out.println("Locale: "+Locale.getDefault());
-					redibujar();				}
+					System.out.println("Locale: " + Locale.getDefault());
+					redibujar();
+				}
 			});
 			buttonGroup.add(rdbtnNewRadioButton);
 		}
 		return rdbtnNewRadioButton;
 	}
+
 	private JRadioButton getRdbtnNewRadioButton_1() {
 		if (rdbtnNewRadioButton_1 == null) {
 			rdbtnNewRadioButton_1 = new JRadioButton("Euskara");
 			rdbtnNewRadioButton_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					Locale.setDefault(new Locale("eus"));
-					System.out.println("Locale: "+Locale.getDefault());
-					redibujar();				}
+					System.out.println("Locale: " + Locale.getDefault());
+					redibujar();
+				}
 			});
 			buttonGroup.add(rdbtnNewRadioButton_1);
 		}
 		return rdbtnNewRadioButton_1;
 	}
+
 	private JRadioButton getRdbtnNewRadioButton_2() {
 		if (rdbtnNewRadioButton_2 == null) {
 			rdbtnNewRadioButton_2 = new JRadioButton("Castellano");
 			rdbtnNewRadioButton_2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Locale.setDefault(new Locale("es"));
-					System.out.println("Locale: "+Locale.getDefault());
+					System.out.println("Locale: " + Locale.getDefault());
 					redibujar();
 				}
 			});
@@ -198,20 +220,28 @@ public class MainLoginRegister extends JFrame {
 		}
 		return rdbtnNewRadioButton_2;
 	}
+
 	private JPanel getPanel() {
 		if (Jpanel == null) {
 			Jpanel = new JPanel();
+			Jpanel.setBounds(0, 176, 473, 58);
 			Jpanel.add(getRdbtnNewRadioButton_1());
 			Jpanel.add(getRdbtnNewRadioButton_2());
 			Jpanel.add(getRdbtnNewRadioButton());
 		}
 		return Jpanel;
 	}
-	
+
 	private void redibujar() {
 		JLabelSelectOption.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectOption"));
 		JButtonHacerLogin.setText(ResourceBundle.getBundle("Etiquetas").getString("Login"));
 		JButtonRegistrarse.setText(ResourceBundle.getBundle("Etiquetas").getString("Register"));
+		JButtonApuestas.setText(ResourceBundle.getBundle("Etiquetas").getString("ApuestasDisponibles"));
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
 	}
+
+//	private void visibleFalse(ActionEvent e) {
+//		this.setVisible(false);
+//	}
+
 }

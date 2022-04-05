@@ -134,9 +134,9 @@ public class MainGUI extends JFrame {
 			jButtonCreateEvent.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateEvent"));
 			jButtonCreateEvent.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					JFrame a = new FindQuestionsGUI();
-
-					a.setVisible(true);
+//					JFrame a = new FindQuestionsGUI();
+//
+//					a.setVisible(true);
 					
 					JFrame b =new CreateEventGUI(new Vector<Event>());
 					b.setVisible(true);

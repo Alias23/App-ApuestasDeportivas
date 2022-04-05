@@ -1,6 +1,7 @@
 package gui;
 
 import businessLogic.BLFacade;
+
 import configuration.UtilDate;
 
 import com.toedter.calendar.JCalendar;
@@ -216,15 +217,30 @@ public class HacerPronosticoGUI extends JFrame {
 		tableQueries.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int i = tableQueries.getSelectedRow();
-				domain.Question q = (domain.Question) tableModelQueries.getValueAt(i, 2);
-
-				minBetLabel.setText(String.valueOf(q.getBetMinimum()));
-				minBet = q.getBetMinimum();
-
+//				int i = tableQueries.getSelectedRow();
+//				domain.Question q = new domain.Question();
+//				q.setQuestion(tableQueries.getValueAt(i, 1).toString());
+////				domain.Question q = (domain.Question) tableModelQueries.getValueAt(i, 2);
+//
+//				minBetLabel.setText(String.valueOf(q.getBetMinimum()));
+//				minBet = q.getBetMinimum();
+				int i = tableEvents.getSelectedRow();
+				int u = tableQueries.getSelectedRow();
+				domain.Event ev = (domain.Event) tableModelEvents.getValueAt(i, 2);
+				Vector<Question> queries = ev.getQuestions();
+				for (domain.Question q : queries) {
+					if (q.getQuestion().equals(tableQueries.getValueAt(u, 1))) {
+						domain.Question a = q;
+						a.setQuestion(tableQueries.getValueAt(i, 1).toString());
+						System.out.println(a.getBetMinimum());
+						
+						minBetLabel.setText(String.valueOf(a.getBetMinimum()));
+						minBet = a.getBetMinimum();
+						break;
+					}
+				}
 			}
 		});
-
 		scrollPaneQueries.setViewportView(tableQueries);
 		tableModelQueries = new DefaultTableModel(null, columnNamesQueries);
 
@@ -234,7 +250,7 @@ public class HacerPronosticoGUI extends JFrame {
 
 		this.getContentPane().add(scrollPaneEvents, null);
 		this.getContentPane().add(scrollPaneQueries, null);
-		errorLabel.setBounds(529, 422, 183, 13);
+		errorLabel.setBounds(456, 422, 183, 13);
 
 		getContentPane().add(errorLabel);
 
@@ -254,12 +270,11 @@ public class HacerPronosticoGUI extends JFrame {
 		lblNewLabel_1.setBounds(428, 360, 116, 13);
 		getContentPane().add(lblNewLabel_1);
 
-		JLabel lblNewLabel = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Bet")); //$NON-NLS-1$ //$NON-NLS-2$
+		JLabel lblNewLabel = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Bet"));
 		lblNewLabel.setBounds(138, 364, 266, 13);
 		getContentPane().add(lblNewLabel);
 
-		JLabel lblNewLabel_2 = new JLabel(
-				ResourceBundle.getBundle("Etiquetas").getString("HacerPronosticoGUI.lblNewLabel_2.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		JLabel lblNewLabel_2 = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("ApuestaMin"));
 		lblNewLabel_2.setBounds(548, 360, 90, 13);
 		getContentPane().add(lblNewLabel_2);
 
@@ -285,6 +300,17 @@ public class HacerPronosticoGUI extends JFrame {
 		pronButton.setBounds(291, 443, 140, 30);
 		getContentPane().add(pronButton);
 		pronButton.setVisible(true);
+
+		JButton jButtonLogOut = new JButton(ResourceBundle.getBundle("Etiquetas").getString("LogOut"));
+		jButtonLogOut.setBounds(466, 444, 115, 29);
+		getContentPane().add(jButtonLogOut);
+		jButtonLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jButton2_actionPerformed(e);
+				MainLoginRegister frame = new MainLoginRegister();
+				frame.setVisible(true);
+			}
+		});
 	}
 
 	private void jButton2_actionPerformed(ActionEvent e) {
