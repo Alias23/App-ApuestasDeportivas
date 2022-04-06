@@ -243,11 +243,12 @@ public class CreateQuestionGUI extends JFrame {
 
 			// Displays an exception if the query field is empty
 			String inputQuery = jTextFieldQuery.getText();
-
+			
 			if (inputQuery.length() > 0) {
 
 				// It could be to trigger an exception if the introduced string is not a number
 				float inputPrice = Float.parseFloat(jTextFieldPrice.getText());
+				double inputGanancias = Double.parseDouble(textFieldGanancias.getText());
 
 				if (inputPrice <= 0)
 					jLabelError.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorNumber"));
@@ -256,7 +257,7 @@ public class CreateQuestionGUI extends JFrame {
 					// Obtain the business logic from a StartWindow class (local or remote)
 					BLFacade facade = MainGUI.getBusinessLogic();
 
-					facade.createQuestion(event, inputQuery, inputPrice);
+					facade.createQuestion(event, inputQuery, inputPrice,inputGanancias);
 
 					jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("QueryCreated"));
 				}

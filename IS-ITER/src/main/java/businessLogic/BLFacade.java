@@ -37,7 +37,7 @@ public interface BLFacade  {
 	 * @throws EventFinished if current data is after data of the event
  	 * @throws QuestionAlreadyExist if the same question already exists for the event
 	 */
-	@WebMethod Question createQuestion(Event event, String question, float betMinimum) throws EventFinished, QuestionAlreadyExist;
+	@WebMethod Question createQuestion(Event event, String question, float betMinimum,double gananciasApuesta) throws EventFinished, QuestionAlreadyExist;
 	
 	
 	/**

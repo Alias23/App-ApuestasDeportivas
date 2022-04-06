@@ -69,7 +69,7 @@ public class BLFacadeImplementation implements BLFacade {
 	 *                              event
 	 */
 	@WebMethod
-	public Question createQuestion(Event event, String question, float betMinimum)
+	public Question createQuestion(Event event, String question, float betMinimum,double gananciasApuesta)
 			throws EventFinished, QuestionAlreadyExist {
 
 		// The minimum bed must be greater than 0
@@ -79,7 +79,7 @@ public class BLFacadeImplementation implements BLFacade {
 		if (new Date().compareTo(event.getEventDate()) > 0)
 			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").getString("ErrorEventHasFinished"));
 
-		qry = dbManager.createQuestion(event, question, betMinimum);
+		qry = dbManager.createQuestion(event, question, betMinimum,gananciasApuesta);
 
 		dbManager.close();
 

@@ -103,26 +103,26 @@ public class DataAccess {
 			Question q6;
 
 			if (Locale.getDefault().equals(new Locale("es"))) {
-				q1 = ev1.addQuestion("¿Quién ganará el partido?", 1);
-				q2 = ev1.addQuestion("¿Quién meterá el primer gol?", 2);
-				q3 = ev11.addQuestion("¿Quién ganará el partido?", 1);
-				q4 = ev11.addQuestion("¿Cuántos goles se marcarán?", 2);
-				q5 = ev17.addQuestion("¿Quién ganará el partido?", 1);
-				q6 = ev17.addQuestion("¿Habrá goles en la primera parte?", 2);
+				q1 = ev1.addQuestion("¿Quién ganará el partido?", 1, 1.5);
+				q2 = ev1.addQuestion("¿Quién meterá el primer gol?", 2,1.5 );
+				q3 = ev11.addQuestion("¿Quién ganará el partido?", 1, 3);
+				q4 = ev11.addQuestion("¿Cuántos goles se marcarán?", 2, 2);
+				q5 = ev17.addQuestion("¿Quién ganará el partido?", 1,1.5);
+				q6 = ev17.addQuestion("¿Habrá goles en la primera parte?", 2,3);
 			} else if (Locale.getDefault().equals(new Locale("en"))) {
-				q1 = ev1.addQuestion("Who will win the match?", 1);
-				q2 = ev1.addQuestion("Who will score first?", 2);
-				q3 = ev11.addQuestion("Who will win the match?", 1);
-				q4 = ev11.addQuestion("How many goals will be scored in the match?", 2);
-				q5 = ev17.addQuestion("Who will win the match?", 1);
-				q6 = ev17.addQuestion("Will there be goals in the first half?", 2);
+				q1 = ev1.addQuestion("Who will win the match?", 1, 1.5);
+				q2 = ev1.addQuestion("Who will score first?", 2, 1.5);
+				q3 = ev11.addQuestion("Who will win the match?", 1,3);
+				q4 = ev11.addQuestion("How many goals will be scored in the match?", 2,2);
+				q5 = ev17.addQuestion("Who will win the match?", 1,1.5);
+				q6 = ev17.addQuestion("Will there be goals in the first half?", 2,3);
 			} else {
-				q1 = ev1.addQuestion("Zeinek irabaziko du partidua?", 1);
-				q2 = ev1.addQuestion("Zeinek sartuko du lehenengo gola?", 2);
-				q3 = ev11.addQuestion("Zeinek irabaziko du partidua?", 1);
-				q4 = ev11.addQuestion("Zenbat gol sartuko dira?", 2);
-				q5 = ev17.addQuestion("Zeinek irabaziko du partidua?", 1);
-				q6 = ev17.addQuestion("Golak sartuko dira lehenengo zatian?", 2);
+				q1 = ev1.addQuestion("Zeinek irabaziko du partidua?", 1,1.5);
+				q2 = ev1.addQuestion("Zeinek sartuko du lehenengo gola?", 2,1.5);
+				q3 = ev11.addQuestion("Zeinek irabaziko du partidua?", 1,3);
+				q4 = ev11.addQuestion("Zenbat gol sartuko dira?", 2,2);
+				q5 = ev17.addQuestion("Zeinek irabaziko du partidua?", 1,1.5);
+				q6 = ev17.addQuestion("Golak sartuko dira lehenengo zatian?", 2,3);
 
 			}
 
@@ -161,7 +161,7 @@ public class DataAccess {
 		}
 	}
 
-	public Question createQuestion(Event event, String question, float betMinimum) throws QuestionAlreadyExist {
+	public Question createQuestion(Event event, String question, float betMinimum,double gananciasApuesta ) throws QuestionAlreadyExist {
 		System.out.println(">> DataAccess: createQuestion=> event= " + event + " question= " + question + " betMinimum="
 				+ betMinimum);
 
@@ -171,7 +171,7 @@ public class DataAccess {
 			throw new QuestionAlreadyExist(ResourceBundle.getBundle("Etiquetas").getString("ErrorQueryAlreadyExist"));
 
 		db.getTransaction().begin();
-		Question q = ev.addQuestion(question, betMinimum);
+		Question q = ev.addQuestion(question, betMinimum,gananciasApuesta);
 		// db.persist(q);
 		db.persist(ev); // db.persist(q) not required when CascadeType.PERSIST is added in questions
 						// property of Event class
