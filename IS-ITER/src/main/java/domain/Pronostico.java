@@ -13,6 +13,9 @@ public class Pronostico {
 	@OneToOne
 	private Event event;
 	private float apuesta;
+	private String correcta;
+	private Question question;
+//	private float cuota;
 	
 	public String getDNI() {
 		return DNI;
@@ -22,13 +25,13 @@ public class Pronostico {
 		DNI = dNI;
 	}
 
-	public String getRespuesta() {
-		return respuesta;
-	}
-
-	public void setRespuesta(String respuesta) {
-		this.respuesta = respuesta;
-	}
+//	public String getRespuesta() {
+//		return respuesta;
+//	}
+//
+//	public void setRespuesta(String respuesta) {
+//		this.respuesta = respuesta;
+//	}
 
 	public Event getEvent() {
 		return event;
@@ -41,17 +44,85 @@ public class Pronostico {
 	public float getApuesta() {
 		return apuesta;
 	}
+//
+//	public String[] getRespuestas() {
+//		return respuestas;
+//	}
+//
+//	public void setRespuestas(String[] respuestas) {
+//		this.respuestas = respuestas;
+//	}
+
+//	public String getCorrecta() {
+//		return correcta;
+//	}
+//
+//	public void setCorrecta(String correcta) {
+//		this.correcta = correcta;
+//	}
+//
+//	public float getCuota() {
+//		return cuota;
+//	}
+//
+//	public void setCuota(float cuota) {
+//		this.cuota = cuota;
+//	}
+
+	public void setApuesta(float apuesta) {
+		this.apuesta = apuesta;
+	}
 
 	public void setApuesta(Integer apuesta) {
 		this.apuesta = apuesta;
 	}
+	public Pronostico(Question q,String correcta){	
+		this.question = q;
+		this.correcta = correcta;
+	}
+	
+//	public Pronostico(String dNI, String[] respuestas,String correcta,float cuota, float apuesta){
+//		super();
+//		DNI = dNI;
+//		this.respuestas = respuestas;
+//		this.correcta = correcta;
+//		this.cuota = cuota;
+//		this.apuesta = apuesta;
+//	}
 
-	public Pronostico(String dNI, String respuesta, Event event, float apuesta){
+	public String getCorrecta() {
+		return correcta;
+	}
+
+	public void setCorrecta(String correcta) {
+		this.correcta = correcta;
+	}
+
+	public Question getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
+
+	public Pronostico(String dni2, String respuesta, Question q, float apuesta) {
 		super();
-		DNI = dNI;
+		this.DNI = dni2;
+		this.respuesta=respuesta;
+		this.question=q;
+		this.apuesta=apuesta;
+	}
+	public Pronostico(String dni,Question q) {
+		this.DNI=dni;
+		this.question=q;
+	}
+	public String getRespuesta() {
+		return respuesta;
+	}
+
+	public void setRespuesta(String respuesta) {
 		this.respuesta = respuesta;
-		this.event = event;
-		this.apuesta = apuesta;
 	}
 	
 

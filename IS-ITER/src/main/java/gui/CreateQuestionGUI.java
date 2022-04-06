@@ -44,6 +44,7 @@ public class CreateQuestionGUI extends JFrame {
 
 	private Vector<Date> datesWithEventsCurrentMonth = new Vector<Date>();
 	private final JTextField textFieldGanancias = new JTextField();
+	private final JLabel jLabelError_1 = new JLabel();
 
 	public CreateQuestionGUI(Vector<domain.Event> v) {
 		
@@ -67,7 +68,7 @@ public class CreateQuestionGUI extends JFrame {
 		jTextFieldQuery.setBounds(new Rectangle(100, 211, 429, 20));
 		jLabelMinBet.setBounds(new Rectangle(25, 243, 75, 20));
 		jTextFieldPrice.setBounds(new Rectangle(100, 243, 60, 20));
-		textFieldGanancias.setBounds(395, 240, 146, 26);
+		textFieldGanancias.setBounds(402, 277, 146, 26);
 		textFieldGanancias.setColumns(10);
 		
 		jCalendar.setBounds(new Rectangle(40, 50, 225, 150));
@@ -90,10 +91,10 @@ public class CreateQuestionGUI extends JFrame {
 
 		jLabelMsg.setBounds(new Rectangle(275, 182, 305, 20));
 		jLabelMsg.setForeground(Color.red);
-		jLabelError.setText(ResourceBundle.getBundle("Etiquetas").getString("GananciasPorEuroApostado")); //$NON-NLS-1$ //$NON-NLS-2$
+//		jLabelError.setText(ResourceBundle.getBundle("Etiquetas").getString("GananciasPorEuroApostado")); //$NON-NLS-1$ //$NON-NLS-2$
 		// jLabelMsg.setSize(new Dimension(305, 20));
 
-		jLabelError.setBounds(new Rectangle(178, 243, 199, 20));
+		jLabelError.setBounds(new Rectangle(178, 243, 198, 20));
 		jLabelError.setForeground(Color.BLACK);
 
 		this.getContentPane().add(jLabelMsg, null);
@@ -120,6 +121,12 @@ public class CreateQuestionGUI extends JFrame {
 		getContentPane().add(jLabelEventDate);
 		
 		getContentPane().add(textFieldGanancias);
+		jLabelError_1.setText(ResourceBundle.getBundle("Etiquetas").getString("GananciasPorEuroApostado"));
+		jLabelError_1.setForeground(Color.BLACK);
+		jLabelError_1.setBounds(new Rectangle(178, 243, 198, 20));
+		jLabelError_1.setBounds(382, 243, 198, 20);
+		
+		getContentPane().add(jLabelError_1);
 
 		// Code for JCalendar
 		this.jCalendar.addPropertyChangeListener(new PropertyChangeListener() {

@@ -69,7 +69,7 @@ public class BLFacadeImplementation implements BLFacade {
 	 *                              event
 	 */
 	@WebMethod
-	public Question createQuestion(Event event, String question, float betMinimum,double gananciasApuesta)
+	public Question createQuestion(Event event, String question, float betMinimum, double gananciasApuesta)
 			throws EventFinished, QuestionAlreadyExist {
 
 		// The minimum bed must be greater than 0
@@ -79,7 +79,7 @@ public class BLFacadeImplementation implements BLFacade {
 		if (new Date().compareTo(event.getEventDate()) > 0)
 			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").getString("ErrorEventHasFinished"));
 
-		qry = dbManager.createQuestion(event, question, betMinimum,gananciasApuesta);
+		qry = dbManager.createQuestion(event, question, betMinimum, gananciasApuesta);
 
 		dbManager.close();
 
@@ -193,6 +193,7 @@ public class BLFacadeImplementation implements BLFacade {
 		}
 		return num;
 	}
+
 	@WebMethod
 	public Event createEvent(int eventNumber, String description, Date eventDate) throws EventFinished {
 		dbManager.open(false);
@@ -207,6 +208,31 @@ public class BLFacadeImplementation implements BLFacade {
 
 		return ev;
 
+	}
+	@WebMethod
+	public void storePronosticoVerdadero(Pronostico pron, Question q,Event ev) {
+		dbManager.open(false);
+		dbManager.storePronosticoVerdadero(pron, q, ev);
+		dbManager.close();
+	}
+	@WebMethod
+	public void eliminarEvent(Event e) {
+		dbManager.open(false);
+		dbManager.eliminarEvent(e);
+		dbManager.close();
+	}
+	@WebMethod
+	public void closeEvent(Date eventDate) {
+		dbManager.open(false);
+		dbManager.closeEvent(eventDate);
+		dbManager.close();
+	}
+	
+	@WebMethod
+	public void ajustWallet(Date eventDate, User user) {
+		dbManager.open(false);
+		dbManager.adjustWallet(eventDate, user);
+		dbManager.close();
 	}
 
 }

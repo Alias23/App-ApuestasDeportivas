@@ -27,7 +27,7 @@ public class HacerPronosticoGUI extends JFrame {
 	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events"));
 
 	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
-
+	private Question ques;
 	// Code for JCalendar
 	private JCalendar jCalendar1 = new JCalendar();
 	private Calendar calendarAnt = null;
@@ -56,7 +56,7 @@ public class HacerPronosticoGUI extends JFrame {
 			ResourceBundle.getBundle("Etiquetas").getString("Query")
 
 	};
-	private final JLabel errorLabel = new JLabel(); // $NON-NLS-1$ //$NON-NLS-2$
+	private final JLabel gananciasLabel = new JLabel(); // $NON-NLS-1$ //$NON-NLS-2$
 	private JTextField pronField;
 	private JTextField betField;
 
@@ -211,9 +211,11 @@ public class HacerPronosticoGUI extends JFrame {
 		tableEvents.setModel(tableModelEvents);
 		tableEvents.getColumnModel().getColumn(0).setPreferredWidth(25);
 		tableEvents.getColumnModel().getColumn(1).setPreferredWidth(268);
-		JLabel minBetLabel = new JLabel(); // $NON-NLS-1$ //$NON-NLS-2$
-		minBetLabel.setBounds(631, 360, 45, 13);
+		JLabel minBetLabel = new JLabel();
+		minBetLabel.setBounds(651, 360, 69, 13);
 		getContentPane().add(minBetLabel);
+		gananciasLabel.setBounds(548, 415, 183, 13);
+		getContentPane().add(gananciasLabel);
 		tableQueries.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -231,10 +233,12 @@ public class HacerPronosticoGUI extends JFrame {
 				for (domain.Question q : queries) {
 					if (q.getQuestion().equals(tableQueries.getValueAt(u, 1))) {
 						domain.Question a = q;
+						ques=q;
 						a.setQuestion(tableQueries.getValueAt(i, 1).toString());
 						System.out.println(a.getBetMinimum());
-						
 						minBetLabel.setText(String.valueOf(a.getBetMinimum()));
+						System.out.println(a.getGananciasApuesta());
+						gananciasLabel.setText(String.valueOf(a.getGananciasApuesta()));
 						minBet = a.getBetMinimum();
 						break;
 					}
@@ -250,9 +254,6 @@ public class HacerPronosticoGUI extends JFrame {
 
 		this.getContentPane().add(scrollPaneEvents, null);
 		this.getContentPane().add(scrollPaneQueries, null);
-		errorLabel.setBounds(456, 422, 183, 13);
-
-		getContentPane().add(errorLabel);
 
 		pronField = new JTextField();
 		// $NON-NLS-1$ //$NON-NLS-2$
@@ -275,22 +276,29 @@ public class HacerPronosticoGUI extends JFrame {
 		getContentPane().add(lblNewLabel);
 
 		JLabel lblNewLabel_2 = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("ApuestaMin"));
-		lblNewLabel_2.setBounds(548, 360, 90, 13);
+		lblNewLabel_2.setBounds(548, 360, 102, 13);
 		getContentPane().add(lblNewLabel_2);
 
 		pronButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (Integer.parseInt(betField.getText()) < minBet) {
-					errorLabel.setText("Introduzca una apuesta valida");
+				if (Float.parseFloat(betField.getText()) < minBet) {
+					gananciasLabel.setText("Introduzca una apuesta valida");
 				} else {
 					if (pronField.getText() == null) {
-						errorLabel.setText("Introduzca un pronostico");
+						gananciasLabel.setText("Introduzca un pronostico");
 					} else {
 						User user = facade.getUserLogged();
-						Pronostico pron = new Pronostico(user.getDNI(), pronField.getText(), evento, minBet);
-						user.addPronostico(pron);
+//						String[] prons = new String[] {pronField.getText()};
+						Pronostico pron = new Pronostico(user.getDNI(), pronField.getText(),ques,
+								Float.parseFloat(betField.getText()));
+//						Pronostico pron = new Pronostico(user.getDNI(), prons, null, 0,
+//								Float.parseFloat(betField.getText()));
+//						user.addPronostico(pron);
 						facade.storePronostico(pron);
-						errorLabel.setText("Apuesta realizada con exito");
+						gananciasLabel.setText("Apuesta realizada con exito");
+//						user.addPronostico(pron);
+						facade.storePronostico(pron);
+						gananciasLabel.setText("Apuesta realizada con exito");
 
 					}
 				}
@@ -301,9 +309,14 @@ public class HacerPronosticoGUI extends JFrame {
 		getContentPane().add(pronButton);
 		pronButton.setVisible(true);
 
+		JLabel lblNewLabel_3 = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("GananciasPorEuroApostado")); //$NON-NLS-1$ //$NON-NLS-2$
+		lblNewLabel_3.setBounds(548, 393, 202, 13);
+		getContentPane().add(lblNewLabel_3);
+
 		JButton jButtonLogOut = new JButton(ResourceBundle.getBundle("Etiquetas").getString("LogOut"));
 		jButtonLogOut.setBounds(466, 444, 115, 29);
 		getContentPane().add(jButtonLogOut);
+
 		jButtonLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jButton2_actionPerformed(e);
