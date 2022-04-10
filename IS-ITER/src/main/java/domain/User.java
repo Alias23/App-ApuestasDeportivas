@@ -4,8 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 @Entity
 public class User {
@@ -15,12 +21,14 @@ public class User {
 	private String user;
 	private String password;
 	@Id
+	
 	private String DNI;
 	private Date birthdate;
 	private String email;
 	private boolean admin = false;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private List<Pronostico> pronosticos = new ArrayList<Pronostico>();
-	private Question ques;
+	private List<Question> ques = new ArrayList<Question>();
 	private double Wallet;
 	private double apuesta;
 	
@@ -86,12 +94,21 @@ public class User {
 		this.Wallet = 0.0;
 	}
 
-	public Question getQues() {
-		return ques;
+	public Question getQues(Question q) {
+		for(Question a : ques) {
+			if(a.getQuestion().equals(q.getQuestion())) {
+				return a;
+			}
+		}
+		return null;
 	}
 
-	public void setQues(Question ques) {
-		this.ques = ques;
+	public void setQues(Question quesi) {
+		ques.add(quesi);
+	}
+	
+	public List<Question> getAllQuestions() {
+		return ques;
 	}
 
 	public User(String user, String password) {

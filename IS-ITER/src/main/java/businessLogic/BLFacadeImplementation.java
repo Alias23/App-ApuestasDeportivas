@@ -153,9 +153,9 @@ public class BLFacadeImplementation implements BLFacade {
 	}
 
 	@WebMethod
-	public void storePronostico(Pronostico pron, Event ev, User u) {
+	public void storePronostico(Pronostico pron, Event ev, User u,Question q) {
 		dbManager.open(false);
-		dbManager.storePronostico(pron,ev,u);
+		dbManager.storePronostico(pron,ev,u,q);
 		dbManager.close();
 	}
 
@@ -210,9 +210,9 @@ public class BLFacadeImplementation implements BLFacade {
 
 	}
 	@WebMethod
-	public void storePronosticoVerdadero(Pronostico pron, Question q,Event ev) {
+	public void storePronosticoVerdadero(Pronostico pron, Question q,Event ev,String correcta) {
 		dbManager.open(false);
-		dbManager.storePronosticoVerdadero(pron, q, ev);
+		dbManager.storePronosticoVerdadero(pron, q, ev,correcta);
 		dbManager.close();
 	}
 	@WebMethod
@@ -222,17 +222,18 @@ public class BLFacadeImplementation implements BLFacade {
 		dbManager.close();
 	}
 	@WebMethod
-	public void closeEvent(Date eventDate) {
+	public void closeEvent(Event e) {
 		dbManager.open(false);
-		dbManager.closeEvent(eventDate);
+		dbManager.closeEvent(e);
 		dbManager.close();
 	}
 	
 	@WebMethod
-	public void ajustWallet(Date eventDate, User user) {
+	public double ajustWallet(Event e, User user) {
 		dbManager.open(false);
-		dbManager.adjustWallet(eventDate, user);
+		double a = dbManager.ajustWallet(e, user);
 		dbManager.close();
+		return a;
 	}
 
 }

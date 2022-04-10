@@ -39,10 +39,10 @@ public interface BLFacade {
 			throws EventFinished, QuestionAlreadyExist;
 
 	@WebMethod
-	public void closeEvent(Date eventDate);
+	public void closeEvent(Event e);
 
 	@WebMethod
-	public void ajustWallet(Date eventDate, User user);
+	public double ajustWallet(Event e, User user);
 
 	@WebMethod
 	public void eliminarEvent(Event e);
@@ -67,7 +67,7 @@ public interface BLFacade {
 	public Vector<Date> getEventsMonth(Date date);
 
 	@WebMethod
-	public void storePronosticoVerdadero(Pronostico pron, Question q, Event ev);
+	public void storePronosticoVerdadero(Pronostico pron, Question q, Event ev,String correcta);
 
 	/**
 	 * This method calls the data access to initialize the database with some events
@@ -84,7 +84,7 @@ public interface BLFacade {
 	public void dbEvent(Event event) throws EventAlreadyExists;
 
 	@WebMethod
-	public void storePronostico(Pronostico pron, Event ev, User u);
+	public void storePronostico(Pronostico pron, Event ev, User u,Question q);
 
 	@WebMethod
 	public User getUserLogin(String usuario, String contraseña);

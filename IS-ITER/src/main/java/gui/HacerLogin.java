@@ -1,6 +1,6 @@
 package gui;
 
-
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JButton;
@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import businessLogic.BLFacade;
+import domain.User;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -93,11 +94,13 @@ public class HacerLogin extends JFrame {
 							if ((facade.getUserLogin(user, password).getAdmin(user, password)) == false) {
 								HacerPronosticoGUI a = new HacerPronosticoGUI();
 								a.setVisible(true);
+								VisibleFalse(e);
 							} else {
-								if ((facade.getUserLogin(user, password).getAdmin(user, password))) {
-									MainGUI m = new MainGUI();
-									m.setVisible(true);
-								}
+//								if((facade.getUserLogin(user, password).getAdmin())==true) {
+								MainGUI m = new MainGUI();
+								m.setVisible(true);
+								
+//								}
 							}
 						} else {
 							errorLabel.setText(
@@ -113,9 +116,8 @@ public class HacerLogin extends JFrame {
 		btnNewButton.setBounds(137, 215, 132, 29);
 		contentPane.add(btnNewButton);
 	}
-//
-//	private void visibleFalse(ActionEvent e) {
-//		this.setVisible(false);
-//	}
+	private void VisibleFalse(ActionEvent e ) {
+		this.setVisible(false);
+	}
 
 }

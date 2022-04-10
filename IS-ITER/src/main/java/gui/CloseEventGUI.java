@@ -119,6 +119,7 @@ public class CloseEventGUI extends JFrame {
 		this.getContentPane().add(jLabelError, null);
 
 		this.getContentPane().add(jButtonClose, null);
+		
 		this.getContentPane().add(jButtonCloseEvent, null);
 		this.getContentPane().add(jLabelListOfEvents, null);
 
@@ -150,9 +151,9 @@ public class CloseEventGUI extends JFrame {
 					int monthAct = calendarAct.get(Calendar.MONTH);
 					if (monthAct != monthAnt) {
 						if (monthAct == monthAnt + 2) {
-							// Si en JCalendar estÃ¡ 30 de enero y se avanza al mes siguiente,
-							// devolverÃ­a 2 de marzo (se toma como equivalente a 30 de febrero)
-							// Con este cÃ³digo se dejarÃ¡ como 1 de febrero en el JCalendar
+							// Si en JCalendar está 30 de enero y se avanza al mes siguiente,
+							// devolvería 2 de marzo (se toma como equivalente a 30 de febrero)
+							// Con este código se dejará como 1 de febrero en el JCalendar
 							calendarAct.set(Calendar.MONTH, monthAnt + 1);
 							calendarAct.set(Calendar.DAY_OF_MONTH, 1);
 						}
@@ -211,8 +212,39 @@ public class CloseEventGUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int i = tableEvents.getSelectedRow();
-				domain.Event ev = (domain.Event) tableModelEvents.getValueAt(i, 2);
-				facade.eliminarEvent(ev);
+				eve = (domain.Event) tableModelEvents.getValueAt(i, 2);
+				
+			}
+		});
+		jButtonCloseEvent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				try {
+					jLabelError.setText("");
+					jLabelMsg.setText("");
+					Date eventDate = jCalendar.getDate();
+					BLFacade facade = MainGUI.getBusinessLogic();
+
+					User user = facade.getUserLogged();
+//					Pronostico pronostico = facade.getStorePronostico();
+					facade.closeEvent(eve);
+					System.out.println(facade.ajustWallet(eve,facade.getUserLogged()));
+					System.out.println(user.getWallet());
+					jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("QueryClosed"));
+
+					// } catch (EventFinished e1) {
+					// jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorEventHasFinished")
+					// + ": "
+					// + event.getDescription());
+					// } catch (QuestionAlreadyExist e1) {
+					// jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorQueryAlreadyExist"));
+					// } catch (java.lang.NumberFormatException e1) {
+					// jLabelError.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorNumber"));
+				} catch (Exception e1) {
+
+					e1.printStackTrace();
+
+				}
 			}
 		});
 		scrollPaneEvents.setViewportView(tableEvents);
@@ -231,11 +263,7 @@ public class CloseEventGUI extends JFrame {
 		scrollPaneEvents_1.setBounds(new Rectangle(292, 50, 346, 150));
 		scrollPaneEvents_1.setBounds(290, 50, 346, 150);
 		getContentPane().add(scrollPaneEvents_1);
-		jButtonCloseEvent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				facade.eliminarEvent(eve);
-			}
-		});
+		
 		
 	}
 
@@ -282,36 +310,7 @@ public class CloseEventGUI extends JFrame {
 
 	}
 
-	private void jButtonCloseEvent_actionPerformed(ActionEvent e) {
-		// domain.Event event = ((domain.Event) jComboBoxEvents.getSelectedItem());
 
-		try {
-			jLabelError.setText("");
-			jLabelMsg.setText("");
-			Date eventDate = jCalendar.getDate();
-			BLFacade facade = MainGUI.getBusinessLogic();
-
-			User user = facade.getUserLogged();
-//			Pronostico pronostico = facade.getStorePronostico();
-			facade.closeEvent(eventDate);
-			facade.ajustWallet(eventDate, user);
-
-			jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("QueryClosed"));
-
-			// } catch (EventFinished e1) {
-			// jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorEventHasFinished")
-			// + ": "
-			// + event.getDescription());
-			// } catch (QuestionAlreadyExist e1) {
-			// jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorQueryAlreadyExist"));
-			// } catch (java.lang.NumberFormatException e1) {
-			// jLabelError.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorNumber"));
-		} catch (Exception e1) {
-
-			e1.printStackTrace();
-
-		}
-	}
 	
 	private void jButtonClose_actionPerformed(ActionEvent e) {
 		this.setVisible(false);

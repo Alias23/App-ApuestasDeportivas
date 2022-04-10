@@ -179,5 +179,9 @@ public class Question implements Serializable {
 	public String toString() {
 		return questionNumber + ";" + question + ";" + Float.toString(betMinimum);
 	}
+	
+	public void addProns(Pronostico pron) {
+		prons.add(pron);
+	}
 
 }

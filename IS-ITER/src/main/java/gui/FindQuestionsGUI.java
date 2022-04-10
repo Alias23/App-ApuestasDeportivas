@@ -104,9 +104,9 @@ public class FindQuestionsGUI extends JFrame {
 
 					if (monthAct != monthAnt) {
 						if (monthAct == monthAnt + 2) {
-							// Si en JCalendar est√° 30 de enero y se avanza al mes siguiente, devolver√≠a 2
+							// Si en JCalendar est· 30 de enero y se avanza al mes siguiente, devolverÌa 2
 							// de marzo (se toma como equivalente a 30 de febrero)
-							// Con este c√≥digo se dejar√° como 1 de febrero en el JCalendar
+							// Con este cÛdigo se dejar· como 1 de febrero en el JCalendar
 							calendarAct.set(Calendar.MONTH, monthAnt + 1);
 							calendarAct.set(Calendar.DAY_OF_MONTH, 1);
 						}

@@ -255,4 +255,4 @@ public class MainGUI extends JFrame {
 		jButtonCerrar.setText(ResourceBundle.getBundle("Etiquetas").getString("CerrarApuesta"));
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
 	}
-} // @jve:decl-index=0:visual-constraint="0,0"
+} // @jve:decl-index=0:visual-constraint="0,0" @jve:decl-index=0:visual-constraint="0,0"

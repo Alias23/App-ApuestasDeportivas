@@ -1,6 +1,7 @@
 package dataAccess;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -194,6 +195,10 @@ public class DataAccess {
 		}
 
 	}
+	
+	public void upgradeUser(User user) {
+		
+	}
 
 	public Event createEvent(int eventNumber, String description, Date eventDate) {
 		System.out.println(">> DataAccess: createEvent=> number= " + eventNumber + ", date= " + eventDate
@@ -207,19 +212,26 @@ public class DataAccess {
 		return ev;
 	}
 
-	public void storePronostico(Pronostico pron, Event ev, User u) {
-		for (Question a : db.find(Event.class, ev).getQuestions()) {
-			db.getTransaction().begin();
+	public void storePronostico(Pronostico pron, Event ev, User u,Question q) {
+		;
+		for (Question a : db.find(Event.class, ev.getEventNumber()).getQuestions()) {
+			//db.getTransaction().begin();
 			if (a.getQuestion().equals(pron.getQuestion().getQuestion())) {
+				
 //				System.out.println(pron.getCorrecta());
 //				u.addPronostico(pron);
-				db.persist(pron);
+				a.addProns(pron);
+				db.persist(ev);
 //				db.persist(ev);
-				break;
+			//	db.flush();
+				System.out.println("Pronostico: " + pron.getRespuesta() + " registered");
+				
+				
 			}
-			db.getTransaction().commit();
+			
+			
 		}
-		System.out.println("Pronostico: " + pron.getRespuesta() + " registered");
+		
 	}
 
 //	public void storePronosticoVerdadero(Pronostico pron, Question q, Event ev) {
@@ -235,20 +247,23 @@ public class DataAccess {
 //		System.out.println("Pronostico: " + pron.getRespuesta() + " registered");
 //	}
 
-	public void storePronosticoVerdadero(Pronostico pron, Question q, Event ev) {
+	public void storePronosticoVerdadero(Pronostico pron, Question q, Event ev,String correcta) {
+		
 		for (Question a : db.find(Event.class, ev).getQuestions()) {
-			db.getTransaction().begin();
+			//db.getTransaction().begin();
 			if (a.getQuestion().equals(pron.getQuestion().getQuestion())) {
-				System.out.println(pron.getCorrecta());
-				a.addPronsVerdaderos(pron);
-				db.persist(pron);
-				db.persist(ev);
-				break;
+				
+						pron.setCorrecta(correcta);
+						
+					
+				}
 			}
-			db.getTransaction().commit();
+			db.persist(ev);
+			//db.flush();
+			System.out.println("Pronostico: " + pron.getCorrecta() + " registered");
 		}
-		System.out.println("Pronostico: " + pron.getCorrecta() + " registered");
-	}
+		
+	
 
 	/**
 	 * This method retrieves from the database the events of a given date
@@ -263,6 +278,7 @@ public class DataAccess {
 		query.setParameter(1, date);
 		List<Event> events = query.getResultList();
 		for (Event ev : events) {
+			
 			System.out.println(ev.toString());
 			res.add(ev);
 		}
@@ -362,9 +378,13 @@ public class DataAccess {
 		return null;
 	}
 
-	public Event closeEvent(Date eventDate) {
-		Event ev = db.find(Event.class, eventDate);
+	public Event closeEvent(Event e) {
+		db.getTransaction().begin();
+		Event ev = db.find(Event.class, e);
 		ev.setAvailable(false);
+		db.persist(ev);
+		
+		db.getTransaction().commit();
 		return ev;
 	}
 
@@ -379,19 +399,42 @@ public class DataAccess {
 		}
 	}
 
-	public void adjustWallet(Date eventDate, User user) {
+	public double ajustWallet(Event e, User user) {
 		double money = 0.0;
-		Event ev = db.find(Event.class, eventDate);
-		Pronostico pr = new Pronostico(user.getDNI(), user.getQues());
-		List<Question> q = ev.getQuestions();
-		for (Question question : q) {
-			if (question.getQuestion().equals(pr.getQuestion().getQuestion())) {
-				if (question.equals(pr.getRespuesta())) {
-					money = user.getWallet() + ((pr.getApuesta()) * (question.getGananciasApuesta()));
-					user.setWallet(money);
-				}
+		Event ev = db.find(Event.class, e);
+		TypedQuery<User> query = db.createQuery("SELECT Us FROM User Us WHERE Us.getDNI()!=?1 ",User.class);
+		query.setParameter(1, null);
+		List<User> list =  query.getResultList();
+		for(User u : list) {
+			
+			
+		for(Question q : ev.getQuestions()) {
+			for(Pronostico p : q.getProns()) {
+					
+				if(u.getDNI().equals(p.getDNI())) {
+					if(p.getRespuesta().equals(p.getCorrecta())) {
+						money = user.getWallet() + ((p.getApuesta()) * (q.getGananciasApuesta()));
+						user.setWallet(money);
+						db.getTransaction().begin();						db.persist(user);
+					db.getTransaction().commit();
+						return db.find(User.class, user).getWallet();
+					}
+			}
+				
 			}
 		}
+		}
+		return 6.9;
+//		Pronostico pr = new Pronostico(user.getDNI(), user.getQues());
+//		List<Question> q = ev.getQuestions();
+//		for (Question question : q) {
+//			if (question.getQuestion().equals(pr.getQuestion().getQuestion())) {
+//				if (question.equals(pr.getRespuesta())) {
+//					money = user.getWallet() + ((pr.getApuesta()) * (question.getGananciasApuesta()));
+//					user.setWallet(money);
+//				}
+//			}
+//		}
 
 	}
 

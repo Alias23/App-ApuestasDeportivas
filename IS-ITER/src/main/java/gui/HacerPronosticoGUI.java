@@ -116,9 +116,9 @@ public class HacerPronosticoGUI extends JFrame {
 
 					if (monthAct != monthAnt) {
 						if (monthAct == monthAnt + 2) {
-							// Si en JCalendar est√° 30 de enero y se avanza al mes siguiente, devolver√≠a 2
+							// Si en JCalendar est· 30 de enero y se avanza al mes siguiente, devolverÌa 2
 							// de marzo (se toma como equivalente a 30 de febrero)
-							// Con este c√≥digo se dejar√° como 1 de febrero en el JCalendar
+							// Con este cÛdigo se dejar· como 1 de febrero en el JCalendar
 							calendarAct.set(Calendar.MONTH, monthAnt + 1);
 							calendarAct.set(Calendar.DAY_OF_MONTH, 1);
 						}
@@ -185,7 +185,7 @@ public class HacerPronosticoGUI extends JFrame {
 				Vector<Question> queries = ev.getQuestions();
 
 				tableModelQueries.setDataVector(null, columnNamesQueries);
-
+				if(ev.isAvailable()) {
 				if (queries.isEmpty())
 					jLabelQueries.setText(
 							ResourceBundle.getBundle("Etiquetas").getString("NoQueries") + ": " + ev.getDescription());
@@ -202,6 +202,9 @@ public class HacerPronosticoGUI extends JFrame {
 				}
 				tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
 				tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
+				}else {
+					gananciasLabel.setText(ResourceBundle.getBundle("Etiquetas").getString("QueryClosed"));
+				}
 			}
 		});
 
@@ -230,6 +233,7 @@ public class HacerPronosticoGUI extends JFrame {
 				int u = tableQueries.getSelectedRow();
 				domain.Event ev = (domain.Event) tableModelEvents.getValueAt(i, 2);
 				Vector<Question> queries = ev.getQuestions();
+				if(ev.isAvailable()) {
 				for (domain.Question q : queries) {
 					if (q.getQuestion().equals(tableQueries.getValueAt(u, 1))) {
 						domain.Question a = q;
@@ -242,6 +246,10 @@ public class HacerPronosticoGUI extends JFrame {
 						minBet = a.getBetMinimum();
 						break;
 					}
+				}
+				}else {
+					gananciasLabel.setText("El evento no esta disponible");
+					
 				}
 			}
 		});
@@ -288,14 +296,16 @@ public class HacerPronosticoGUI extends JFrame {
 						gananciasLabel.setText("Introduzca un pronostico");
 					} else {
 						User user = facade.getUserLogged();
+						
 //						String[] prons = new String[] {pronField.getText()};
 						Pronostico pron = new Pronostico(user.getDNI(), pronField.getText(),ques,
 								Float.parseFloat(betField.getText()));
 //						Pronostico pron = new Pronostico(user.getDNI(), prons, null, 0,
 //								Float.parseFloat(betField.getText()));
 						pron.setRespuesta(pronField.getText());
+						
 //						USER.ADDPRONOSTICO(PRON);
-						facade.storePronostico(pron,evento,user);
+						facade.storePronostico(pron,evento,user,ques);
 						gananciasLabel.setText("Apuesta realizada con exito");
 //						user.addPronostico(pron);
 //						
