@@ -153,9 +153,9 @@ public class BLFacadeImplementation implements BLFacade {
 	}
 
 	@WebMethod
-	public void storePronostico(Pronostico pron) {
+	public void storePronostico(Pronostico pron, Event ev, User u) {
 		dbManager.open(false);
-		dbManager.storePronostico(pron);
+		dbManager.storePronostico(pron,ev,u);
 		dbManager.close();
 	}
 

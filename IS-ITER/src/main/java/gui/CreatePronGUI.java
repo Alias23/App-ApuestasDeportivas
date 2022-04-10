@@ -295,9 +295,10 @@ public class CreatePronGUI extends JFrame {
 				} else {
 					String prons = pronField.getText();
 					Pronostico pronCorrecto = new Pronostico(ques, prons);
-
+					pronCorrecto.setCorrecta(prons);
+					System.out.println(prons);
 					facade.storePronosticoVerdadero(pronCorrecto, ques, evento);
-
+					
 					errorLabel.setText("Pronostico creado con exito");
 				}
 			}

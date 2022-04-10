@@ -84,7 +84,7 @@ public interface BLFacade {
 	public void dbEvent(Event event) throws EventAlreadyExists;
 
 	@WebMethod
-	public void storePronostico(Pronostico pron);
+	public void storePronostico(Pronostico pron, Event ev, User u);
 
 	@WebMethod
 	public User getUserLogin(String usuario, String contraseña);

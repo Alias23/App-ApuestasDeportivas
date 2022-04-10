@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,62 +18,85 @@ public class User {
 	private String DNI;
 	private Date birthdate;
 	private String email;
-	private boolean admin=false;
-//	private ArrayList<Pronostico> pronosticos;
+	private boolean admin = false;
+	private List<Pronostico> pronosticos = new ArrayList<Pronostico>();
 	private Question ques;
 	private double Wallet;
+	private double apuesta;
+	
+
+	public List<Pronostico> getPronosticos() {
+		return pronosticos;
+	}
+
+	public void setPronosticos(List<Pronostico> pronosticos) {
+		this.pronosticos = pronosticos;
+	}
+
+	public double getApuesta() {
+		return apuesta;
+	}
+
+	public void setApuesta(double apuesta) {
+		this.apuesta = apuesta;
+	}
 
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public String getApellidos() {
 		return apellidos;
 	}
+
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
+
 	public boolean isAdmin() {
 		return admin;
 	}
+
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
-//	public ArrayList<Pronostico> getPronosticos() {
-//		return pronosticos;
-//	}
-//	public void setPronosticos(ArrayList<Pronostico> pronosticos) {
-//		this.pronosticos = pronosticos;
-//	}
+
 	public double getWallet() {
 		return Wallet;
 	}
+
 	public void setWallet(double wallet) {
 		Wallet = wallet;
 	}
 
 	public User(String user, String password, String dNI, Date birthdate, String email, String nombre, String apellidos,
-			ArrayList<Pronostico> pron, boolean admin) {
+			 boolean admin) {
 		super();
 		this.user = user;
 		this.password = password;
 		DNI = dNI;
 		this.birthdate = birthdate;
-		this.email = email;
-//		this.pronosticos = pron;
-		this.Wallet =0.0;
+		this.email = email;	
+//		Pronostico p = new Pronostico("72534640T", "Getafe", this.getQues(), 20);
+//		this.pronosticos.add(p);
+		this.Wallet = 0.0;
 	}
+
 	public Question getQues() {
 		return ques;
 	}
+
 	public void setQues(Question ques) {
 		this.ques = ques;
 	}
+
 	public User(String user, String password) {
-		this.user=user;
-		this.password=password;
+		this.user = user;
+		this.password = password;
 	}
 
 	public String getUser() {
@@ -115,16 +139,15 @@ public class User {
 		this.email = email;
 	}
 
-//	public void addPronostico(Pronostico pron) {
-//		pronosticos.add(pron);
-//	}
+	public void addPronostico(Pronostico pron) {
+		pronosticos.add(pron);
+	}
 
 	public boolean getAdmin(String user, String password) {
 		if (user.equals("Adminuser") && password.equals("Adminpassword")) {
 			return true;
 		}
-		return  this.admin;
+		return this.admin;
 	}
-	
 
 }

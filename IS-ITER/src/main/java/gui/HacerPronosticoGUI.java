@@ -281,7 +281,7 @@ public class HacerPronosticoGUI extends JFrame {
 
 		pronButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (Float.parseFloat(betField.getText()) < minBet) {
+				if (Float.parseFloat(betField.getText()) <= minBet) {
 					gananciasLabel.setText("Introduzca una apuesta valida");
 				} else {
 					if (pronField.getText() == null) {
@@ -293,12 +293,12 @@ public class HacerPronosticoGUI extends JFrame {
 								Float.parseFloat(betField.getText()));
 //						Pronostico pron = new Pronostico(user.getDNI(), prons, null, 0,
 //								Float.parseFloat(betField.getText()));
-//						user.addPronostico(pron);
-						facade.storePronostico(pron);
+						pron.setRespuesta(pronField.getText());
+//						USER.ADDPRONOSTICO(PRON);
+						facade.storePronostico(pron,evento,user);
 						gananciasLabel.setText("Apuesta realizada con exito");
 //						user.addPronostico(pron);
-						facade.storePronostico(pron);
-						gananciasLabel.setText("Apuesta realizada con exito");
+//						
 
 					}
 				}

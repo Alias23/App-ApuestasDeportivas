@@ -2,6 +2,7 @@ package domain;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -25,9 +26,18 @@ public class Question implements Serializable {
 	private String result;
 	@XmlIDREF
 	private Event event;
-	private ArrayList<Pronostico> prons;
+	private List<Pronostico> prons = new ArrayList<Pronostico>();
+	private List<Pronostico> pronsVerdadero = new ArrayList<Pronostico>();
 
-	public ArrayList<Pronostico> getProns() {
+	public List<Pronostico> getPronsVerdadero() {
+		return pronsVerdadero;
+	}
+
+	public void setPronsVerdadero(List<Pronostico> pronsVerdadero) {
+		this.pronsVerdadero = pronsVerdadero;
+	}
+
+	public List<Pronostico> getProns() {
 		return prons;
 	}
 
@@ -76,6 +86,10 @@ public class Question implements Serializable {
 	 */
 	public void setQuestionNumber(Integer questionNumber) {
 		this.questionNumber = questionNumber;
+	}
+	
+	public void addPronsVerdaderos(Pronostico p) {
+		this.pronsVerdadero.add(p);
 	}
 
 	/**

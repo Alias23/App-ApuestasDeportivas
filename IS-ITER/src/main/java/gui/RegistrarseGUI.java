@@ -178,10 +178,10 @@ public class RegistrarseGUI extends JFrame {
 							if (password.compareTo(password2) == 0) {
 								if (emailVerify(email)) {
 									if (!facade.getUser(user)) {
-										ArrayList<Pronostico> pron = null;
+//										ArrayList<Pronostico> pron = null;
 
 										User user_new = new User(user, password, DNI, fecha, email, nombre, apellidos,
-												pron, false);
+											 false);
 										User u = new User(user,password);
 										try {
 											facade.storeUser(user_new);
