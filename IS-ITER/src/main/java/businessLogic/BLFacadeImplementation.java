@@ -152,13 +152,6 @@ public class BLFacadeImplementation implements BLFacade {
 
 	}
 
-	@WebMethod
-	public void storePronostico(Pronostico pron, Event ev, User u,Question q) {
-		dbManager.open(false);
-		dbManager.storePronostico(pron,ev,u,q);
-		dbManager.close();
-	}
-
 	public User getUserLogin(String usuario, String contraseña) {
 		dbManager.open(false);
 		User a = dbManager.getUserLogin(usuario, contraseña);
@@ -209,12 +202,7 @@ public class BLFacadeImplementation implements BLFacade {
 		return ev;
 
 	}
-	@WebMethod
-	public void storePronosticoVerdadero(Pronostico pron, Question q,Event ev,String correcta) {
-		dbManager.open(false);
-		dbManager.storePronosticoVerdadero(pron, q, ev,correcta);
-		dbManager.close();
-	}
+	
 	@WebMethod
 	public void eliminarEvent(Event e) {
 		dbManager.open(false);
@@ -228,12 +216,25 @@ public class BLFacadeImplementation implements BLFacade {
 		dbManager.close();
 	}
 	
+//	@WebMethod
+//	public double ajustWallet(Event e, User user) {
+//		dbManager.open(false);
+//		double a = dbManager.ajustWallet(e, user);
+//		dbManager.close();
+//		return a;
+//	}
 	@WebMethod
-	public double ajustWallet(Event e, User user) {
+	public User getLogged() {
 		dbManager.open(false);
-		double a = dbManager.ajustWallet(e, user);
+		User u = dbManager.getLogged();
 		dbManager.close();
-		return a;
+		return u;
 	}
-
+	@WebMethod
+	public User getLog() {
+		dbManager.open(false);
+		User u = dbManager.getLog();
+		dbManager.close();
+		return u;
+	}
 }

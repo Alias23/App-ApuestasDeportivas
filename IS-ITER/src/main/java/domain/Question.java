@@ -27,15 +27,6 @@ public class Question implements Serializable {
 	@XmlIDREF
 	private Event event;
 	private List<Pronostico> prons = new ArrayList<Pronostico>();
-	private List<Pronostico> pronsVerdadero = new ArrayList<Pronostico>();
-
-	public List<Pronostico> getPronsVerdadero() {
-		return pronsVerdadero;
-	}
-
-	public void setPronsVerdadero(List<Pronostico> pronsVerdadero) {
-		this.pronsVerdadero = pronsVerdadero;
-	}
 
 	public List<Pronostico> getProns() {
 		return prons;
@@ -47,9 +38,6 @@ public class Question implements Serializable {
 
 	public Question() {
 		super();
-	}
-	public void setPron(Pronostico pron) {
-		prons.add(pron);
 	}
 
 	public Question(Integer queryNumber, String query, float betMinimum, double gananciasApuesta, Event event) {
@@ -88,10 +76,6 @@ public class Question implements Serializable {
 		this.questionNumber = questionNumber;
 	}
 	
-	public void addPronsVerdaderos(Pronostico p) {
-		this.pronsVerdadero.add(p);
-	}
-
 	/**
 	 * Get the question description of the bet
 	 * 
@@ -180,8 +164,14 @@ public class Question implements Serializable {
 		return questionNumber + ";" + question + ";" + Float.toString(betMinimum);
 	}
 	
-	public void addProns(Pronostico pron) {
+	public Pronostico addProns(float minBet, String p) {
+		Pronostico pron = new Pronostico(minBet,p);
 		prons.add(pron);
+		return pron;
+	}
+	
+	public void setProns(List<Pronostico> prons) {
+		this.prons = prons;
 	}
 
 }

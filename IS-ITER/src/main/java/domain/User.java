@@ -21,7 +21,6 @@ public class User {
 	private String user;
 	private String password;
 	@Id
-	
 	private String DNI;
 	private Date birthdate;
 	private String email;

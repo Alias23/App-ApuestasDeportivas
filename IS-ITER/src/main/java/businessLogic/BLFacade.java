@@ -41,39 +41,18 @@ public interface BLFacade {
 	@WebMethod
 	public void closeEvent(Event e);
 
-	@WebMethod
-	public double ajustWallet(Event e, User user);
+//	@WebMethod
+//	public double ajustWallet(Event e, User user);
 
 	@WebMethod
 	public void eliminarEvent(Event e);
 
-	/**
-	 * This method retrieves the events of a given date
-	 * 
-	 * @param date in which events are retrieved
-	 * @return collection of events
-	 */
 	@WebMethod
 	public Vector<Event> getEvents(Date date);
 
-	/**
-	 * This method retrieves from the database the dates a month for which there are
-	 * events
-	 * 
-	 * @param date of the month for which days with events want to be retrieved
-	 * @return collection of dates
-	 */
 	@WebMethod
 	public Vector<Date> getEventsMonth(Date date);
 
-	@WebMethod
-	public void storePronosticoVerdadero(Pronostico pron, Question q, Event ev,String correcta);
-
-	/**
-	 * This method calls the data access to initialize the database with some events
-	 * and questions. It is invoked only when the option "initialize" is declared in
-	 * the tag dataBaseOpenMode of resources/config.xml file
-	 */
 	@WebMethod
 	public void initializeBD();
 
@@ -84,13 +63,7 @@ public interface BLFacade {
 	public void dbEvent(Event event) throws EventAlreadyExists;
 
 	@WebMethod
-	public void storePronostico(Pronostico pron, Event ev, User u,Question q);
-
-	@WebMethod
 	public User getUserLogin(String usuario, String contraseña);
-
-	@WebMethod
-	public User getUserLogged();
 
 	@WebMethod
 	public boolean getUser(String u);
@@ -100,4 +73,11 @@ public interface BLFacade {
 
 	@WebMethod
 	public int getLastEventNumber(Date date);
+	
+	@WebMethod
+	public User getLogged();
+	
+	@WebMethod
+	public User getLog();
+	
 }

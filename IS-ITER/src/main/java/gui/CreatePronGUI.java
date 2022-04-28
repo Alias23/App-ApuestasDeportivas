@@ -288,22 +288,22 @@ public class CreatePronGUI extends JFrame {
 //			}
 //		});
 
-		createPronButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (pronField.getText() == null) {
-					errorLabel.setText("Introduzca una respuesta");
-				} else {
-					String prons = pronField.getText();
-				
-					Pronostico pronCorrecto = new Pronostico(ques, prons);
-					pronCorrecto.setCorrecta(prons);
-					System.out.println(prons);
-					facade.storePronosticoVerdadero(pronCorrecto, ques, evento,prons);
-					
-					errorLabel.setText("Pronostico creado con exito");
-				}
-			}
-		});
+//		createPronButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				if (pronField.getText() == null) {
+//					errorLabel.setText("Introduzca una respuesta");
+//				} else {
+//					String prons = pronField.getText();
+//				
+//					Pronostico pronCorrecto = new Pronostico(ques, prons);
+//					pronCorrecto.setCorrecta(prons);
+//					System.out.println(prons);
+//					facade.storePronosticoVerdadero(pronCorrecto, ques, evento,prons);
+//					
+//					errorLabel.setText("Pronostico creado con exito");
+//				}
+//			}
+//		});
 
 	}
 

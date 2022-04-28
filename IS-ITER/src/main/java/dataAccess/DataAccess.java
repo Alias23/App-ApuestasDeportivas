@@ -71,6 +71,7 @@ public class DataAccess {
 				year += 1;
 			}
 			User u = new User("Adminuser", "Adminpassword");
+			
 			db.persist(u);
 			Event ev1 = new Event(1, "Atlético-Athletic", UtilDate.newDate(year, month, 17));
 			Event ev2 = new Event(2, "Eibar-Barcelona", UtilDate.newDate(year, month, 17));
@@ -101,6 +102,7 @@ public class DataAccess {
 			Question q4;
 			Question q5;
 			Question q6;
+			
 
 			if (Locale.getDefault().equals(new Locale("es"))) {
 				q1 = ev1.addQuestion("¿Quién ganará el partido?", 1, 1.5);
@@ -123,8 +125,37 @@ public class DataAccess {
 				q4 = ev11.addQuestion("Zenbat gol sartuko dira?", 2, 2);
 				q5 = ev17.addQuestion("Zeinek irabaziko du partidua?", 1, 1.5);
 				q6 = ev17.addQuestion("Golak sartuko dira lehenengo zatian?", 2, 3);
-
 			}
+			
+			Pronostico p1;
+			Pronostico p2;
+			Pronostico p3;
+			Pronostico p4;
+			Pronostico p5;
+			Pronostico p6;
+			Pronostico p7;
+			Pronostico p8;
+			Pronostico p9;
+			
+			p1 = q1.addProns(q1.getBetMinimum(),"Atlético");
+			p2 = q1.addProns(q1.getBetMinimum(),"Athletic");
+			p3 = q1.addProns(q1.getBetMinimum(),"Atlético-Athletic");
+			p4 = q1.addProns(q1.getBetMinimum(),"Atlético-Athletic");
+			p5 = q1.addProns(q1.getBetMinimum(),"Atlético-Athletic");
+			p6 = q1.addProns(q1.getBetMinimum(),"Atlético-Athletic");
+			p7 = q1.addProns(q1.getBetMinimum(),"Atlético-Athletic");
+			p8 = q1.addProns(q1.getBetMinimum(),"Atlético-Athletic");
+			p9 = q1.addProns(q1.getBetMinimum(),"Atlético-Athletic");
+			
+			db.persist(p1);
+			db.persist(p2);
+			db.persist(p3);
+			db.persist(p4);
+			db.persist(p5);
+			db.persist(p6);
+			db.persist(p7);
+			db.persist(p8);
+			db.persist(p9);
 
 			db.persist(q1);
 			db.persist(q2);
@@ -212,50 +243,22 @@ public class DataAccess {
 		return ev;
 	}
 
-	public void storePronostico(Pronostico pron, Event ev, User u, Question q) {
-		;
-		for (Question a : db.find(Event.class, ev.getEventNumber()).getQuestions()) {
-			// db.getTransaction().begin();
-			if (a.getQuestion().equals(pron.getQuestion().getQuestion())) {
-
-//				System.out.println(pron.getCorrecta());
-//				u.addPronostico(pron);
-				a.addProns(pron);
-				db.persist(ev);
+//	public void storePronostico(Pronostico pron, Event ev, User u, Question q) {
+//		;
+//		for (Question a : db.find(Event.class, ev.getEventNumber()).getQuestions()) {
+//			// db.getTransaction().begin();
+//			if (a.getQuestion().equals(pron.getQuestion().getQuestion())) {
+//
+////				System.out.println(pron.getCorrecta());
+////				u.addPronostico(pron);
+//				a.addProns(pron);
 //				db.persist(ev);
-				// db.flush();
-				System.out.println("Pronostico: " + pron.getRespuesta() + " registered");
-			}
-		}
-	}
-
-//	public void storePronosticoVerdadero(Pronostico pron, Question q, Event ev) {
-//		db.getTransaction().begin();
-//		for (Question a : db.find(Event.class, ev).getQuestions()) {
-//			if (a.equals(q)) {
-//				a.setPron(pron);
-//				db.persist(ev);
-//				break;
+////				db.persist(ev);
+//				// db.flush();
+//				System.out.println("Pronostico: " + pron.getRespuesta() + " registered");
 //			}
 //		}
-//		db.getTransaction().commit();
-//		System.out.println("Pronostico: " + pron.getRespuesta() + " registered");
 //	}
-
-	public void storePronosticoVerdadero(Pronostico pron, Question q, Event ev, String correcta) {
-
-		for (Question a : db.find(Event.class, ev).getQuestions()) {
-			// db.getTransaction().begin();
-			if (a.getQuestion().equals(pron.getQuestion().getQuestion())) {
-
-				pron.setCorrecta(correcta);
-
-			}
-		}
-		db.persist(ev);
-		// db.flush();
-		System.out.println("Pronostico: " + pron.getCorrecta() + " registered");
-	}
 
 	/**
 	 * This method retrieves from the database the events of a given date
@@ -356,8 +359,8 @@ public class DataAccess {
 	public User getUserLogin(String usuario, String contrase�a) { // false si el usuario no existe true si si
 		TypedQuery<User> query = db.createQuery("SELECT o FROM User o WHERE o.getUser()=?1 AND o.getPassword()=?2",
 				User.class);
-		query.setParameter(1, "Adminuser");
-		query.setParameter(2, "Adminpassword");
+		query.setParameter(50, "Adminuser");
+		query.setParameter(51, "Adminpassword");
 		query.setParameter(1, usuario);
 		query.setParameter(2, contrase�a);
 		Collection<User> offers = query.getResultList();
@@ -365,6 +368,33 @@ public class DataAccess {
 			Iterator<User> it = offers.iterator();
 //			while (it.hasNext()) {
 			return it.next();
+//			}
+		}
+		return null;
+	}
+
+	public User getLog() {
+		TypedQuery<User> query = db.createQuery("SELECT o FROM User o", User.class);
+		Collection<User> offers = query.getResultList();
+		if (offers.size() >= 0) {
+			Iterator<User> it = offers.iterator();
+			return it.next();
+		}
+		
+		return (User) query.getParameter(1);
+	}
+
+	public User getLogged() {
+//		int cont = 0;
+		TypedQuery<User> query = db.createQuery("SELECT o FROM User o", User.class);
+		Collection<User> offers = query.getResultList();
+		if (offers.size() >0) {
+			Iterator<User> it = offers.iterator();
+//			if (cont == 0) {
+//				it.next();
+//				cont++;
+//			} else {
+				return it.next();
 //			}
 		}
 		return null;
@@ -391,44 +421,32 @@ public class DataAccess {
 		}
 	}
 
-	public double ajustWallet(Event e, User user) {
-		double money = 0.0;
-		Event ev = db.find(Event.class, e);
-		TypedQuery<User> query = db.createQuery("SELECT Us FROM User Us WHERE Us.getDNI()!=?1 ", User.class);
-		query.setParameter(1, null);
-		List<User> list = query.getResultList();
-		for (User u : list) {
-
-			for (Question q : ev.getQuestions()) {
-				for (Pronostico p : q.getProns()) {
-
-					if (u.getDNI().equals(p.getDNI())) {
-						if (p.getRespuesta().equals(p.getCorrecta())) {
-							money = user.getWallet() + ((p.getApuesta()) * (q.getGananciasApuesta()));
-							user.setWallet(money);
-							db.getTransaction().begin();
-							db.persist(user);
-							db.getTransaction().commit();
-							return db.find(User.class, user).getWallet();
-						}
-					}
-
-				}
-			}
-		}
-		return 6.9;
-//		Pronostico pr = new Pronostico(user.getDNI(), user.getQues());
-//		List<Question> q = ev.getQuestions();
-//		for (Question question : q) {
-//			if (question.getQuestion().equals(pr.getQuestion().getQuestion())) {
-//				if (question.equals(pr.getRespuesta())) {
-//					money = user.getWallet() + ((pr.getApuesta()) * (question.getGananciasApuesta()));
-//					user.setWallet(money);
+//	public double ajustWallet(Event e, User user) {
+//		double money = 0.0;
+//		Event ev = db.find(Event.class, e);
+//		TypedQuery<User> query = db.createQuery("SELECT Us FROM User Us WHERE Us.getDNI()!=?1 ", User.class);
+//		query.setParameter(1, null);
+//		List<User> list = query.getResultList();
+//		for (User u : list) {
+//			db.getTransaction().begin();
+//			for (Question q : ev.getQuestions()) {
+//				for (Pronostico p : q.getProns()) {
+//					if (u.getDNI().equals(p.getDNI())) {
+//						System.out.println(u.getDNI());
+//						if (p.getRespuesta().equals(p.getCorrecta())) {
+//							money = user.getWallet() + ((p.getApuesta()) * (q.getGananciasApuesta()));
+//							System.out.println(money);
+//							user.setWallet(money);
+//							db.persist(user);
+//							return db.find(User.class, user).getWallet();
+//						}
+//					}
 //				}
 //			}
+//			db.getTransaction().commit();
 //		}
-
-	}
+//		return 6.5;
+//	}
 
 	public boolean getUser(String usuario) {
 		TypedQuery<User> query = db.createQuery("SELECT o FROM User o WHERE o.getUser()=?1", User.class);

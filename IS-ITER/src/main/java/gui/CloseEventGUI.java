@@ -225,10 +225,10 @@ public class CloseEventGUI extends JFrame {
 					Date eventDate = jCalendar.getDate();
 					BLFacade facade = MainGUI.getBusinessLogic();
 
-					User user = facade.getUserLogged();
+					User user = facade.getLog();
 //					Pronostico pronostico = facade.getStorePronostico();
 					facade.closeEvent(eve);
-					System.out.println(facade.ajustWallet(eve,facade.getUserLogged()));
+//					System.out.println(facade.ajustWallet(eve,facade.getLog()));
 					System.out.println(user.getWallet());
 					jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("QueryClosed"));
 

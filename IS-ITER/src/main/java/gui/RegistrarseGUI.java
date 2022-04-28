@@ -117,6 +117,13 @@ public class RegistrarseGUI extends JFrame {
 		JButton atrasButton = new JButton(ResourceBundle.getBundle("Etiquetas").getString("ATRAS"));
 		atrasButton.setBounds(103, 399, 105, 21);
 		contentPane.add(atrasButton);
+		atrasButton.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				JFrame a = new MainLoginRegister();
+				a.setVisible(true);
+				jButton2_actionPerformed(e);
+			}
+		});
 
 		JButton registrarseButton = new JButton(ResourceBundle.getBundle("Etiquetas").getString("REGISTRARSE"));
 		JLabel errorLabel = new JLabel("");
@@ -182,7 +189,12 @@ public class RegistrarseGUI extends JFrame {
 
 										User user_new = new User(user, password, DNI, fecha, email, nombre, apellidos,
 											 false);
-										User u = new User(user,password);
+										user_new.setNombre(nombre);
+										user_new.setApellidos(apellidos);
+										user_new.setUser(user);
+										user_new.setDNI(DNI);
+										
+//										User u = new User(user,password);
 										try {
 											facade.storeUser(user_new);
 											//facade.storeUser(u);
@@ -295,5 +307,8 @@ public class RegistrarseGUI extends JFrame {
 		miLetra = asignacionLetra[resto];
 		return miLetra;
 
+	}
+	private void jButton2_actionPerformed(ActionEvent e) {
+		this.setVisible(false);
 	}
 }

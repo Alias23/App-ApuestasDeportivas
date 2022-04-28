@@ -1,102 +1,70 @@
 package domain;
 
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlIDREF;
 
 @Entity
 public class Pronostico {
-	
-	
-	private String DNI;
-	private String respuesta;
+
 	@OneToOne
 	private Event event;
-	private float apuesta;
-	private String correcta;
+	private String equipo;
+	private String jugador;
+
+	private String pronostico;
+	@XmlIDREF
 	private Question question;
-//	private float cuota;
+	private float minBet;
 	
-	public String getDNI() {
-		return DNI;
+	public Pronostico() {
+		super();
+	}
+	public Pronostico(float minbet,String p) {
+		this.minBet=minbet;
+		this.pronostico=p;
+	}
+	public String getPronostico() {
+		return pronostico;
 	}
 
-	public void setDNI(String dNI) {
-		DNI = dNI;
+	public void setPronostico(String pronostico) {
+		this.pronostico = pronostico;
 	}
-
-//	public String getRespuesta() {
-//		return respuesta;
-//	}
-//
-//	public void setRespuesta(String respuesta) {
-//		this.respuesta = respuesta;
-//	}
+	
+	
 
 	public Event getEvent() {
 		return event;
 	}
 
+	public String getEquipo() {
+		return equipo;
+	}
+
+	public void setEquipo(String equipo) {
+		this.equipo = equipo;
+	}
+
+	public String getJugador() {
+		return jugador;
+	}
+
+	public void setJugador(String jugador) {
+		this.jugador = jugador;
+	}
+
+	public float getMinBet() {
+		return minBet;
+	}
+
+	public void setMinBet(float minBet) {
+		this.minBet = minBet;
+	}
+
 	public void setEvent(Event event) {
 		this.event = event;
-	}
-
-	public float getApuesta() {
-		return apuesta;
-	}
-//
-//	public String[] getRespuestas() {
-//		return respuestas;
-//	}
-//
-//	public void setRespuestas(String[] respuestas) {
-//		this.respuestas = respuestas;
-//	}
-
-//	public String getCorrecta() {
-//		return correcta;
-//	}
-//
-//	public void setCorrecta(String correcta) {
-//		this.correcta = correcta;
-//	}
-//
-//	public float getCuota() {
-//		return cuota;
-//	}
-//
-//	public void setCuota(float cuota) {
-//		this.cuota = cuota;
-//	}
-
-	public void setApuesta(float apuesta) {
-		this.apuesta = apuesta;
-	}
-
-	public void setApuesta(Integer apuesta) {
-		this.apuesta = apuesta;
-	}
-	public Pronostico(Question q,String correcta){	
-		this.question = q;
-		this.correcta = correcta;
-	}
-	
-//	public Pronostico(String dNI, String[] respuestas,String correcta,float cuota, float apuesta){
-//		super();
-//		DNI = dNI;
-//		this.respuestas = respuestas;
-//		this.correcta = correcta;
-//		this.cuota = cuota;
-//		this.apuesta = apuesta;
-//	}
-
-	public String getCorrecta() {
-		return correcta;
-	}
-
-	public void setCorrecta(String correcta) {
-		this.correcta = correcta;
 	}
 
 	public Question getQuestion() {
@@ -105,24 +73,5 @@ public class Pronostico {
 
 	public void setQuestion(Question question) {
 		this.question = question;
-	}
-
-	public Pronostico(String dni2, String respuesta, Question q, float apuesta) {
-		super();
-		this.DNI = dni2;
-		this.respuesta=respuesta;
-		this.question=q;
-		this.apuesta=apuesta;
-	}
-	public Pronostico(String dni,Question q) {
-		this.DNI=dni;
-		this.question=q;
-	}
-	public String getRespuesta() {
-		return respuesta;
-	}
-
-	public void setRespuesta(String respuesta) {
-		this.respuesta = respuesta;
 	}
 }
