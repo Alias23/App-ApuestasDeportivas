@@ -35,7 +35,7 @@ public interface BLFacade {
 	 *                              event
 	 */
 	@WebMethod
-	Question createQuestion(Event event, String question, float betMinimum, double gananciasApuesta)
+	Question createQuestion(Event event, String question, float betMinimum)
 			throws EventFinished, QuestionAlreadyExist;
 
 	@WebMethod
@@ -43,9 +43,6 @@ public interface BLFacade {
 
 //	@WebMethod
 //	public double ajustWallet(Event e, User user);
-
-	@WebMethod
-	public void eliminarEvent(Event e);
 
 	@WebMethod
 	public Vector<Event> getEvents(Date date);
@@ -67,15 +64,15 @@ public interface BLFacade {
 
 	@WebMethod
 	public boolean getUser(String u);
+	
+	@WebMethod
+	public void wallet(Event event, Question question,Pronostico p, double cuanto, double ganancia);
 
 	@WebMethod
 	public Event createEvent(int eventNumber, String description, Date eventDate) throws EventFinished;
 
 	@WebMethod
 	public int getLastEventNumber(Date date);
-	
-	@WebMethod
-	public User getLogged();
 	
 	@WebMethod
 	public User getLog();

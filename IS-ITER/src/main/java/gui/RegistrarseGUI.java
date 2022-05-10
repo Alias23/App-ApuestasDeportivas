@@ -119,8 +119,6 @@ public class RegistrarseGUI extends JFrame {
 		contentPane.add(atrasButton);
 		atrasButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				JFrame a = new MainLoginRegister();
-				a.setVisible(true);
 				jButton2_actionPerformed(e);
 			}
 		});

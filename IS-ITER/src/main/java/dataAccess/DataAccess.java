@@ -34,6 +34,7 @@ import exceptions.UserAlreadyExists;
 public class DataAccess {
 	protected static EntityManager db;
 	protected static EntityManagerFactory emf;
+	private int cont = 0;
 
 	ConfigXML c = ConfigXML.getInstance();
 
@@ -71,7 +72,7 @@ public class DataAccess {
 				year += 1;
 			}
 			User u = new User("Adminuser", "Adminpassword");
-			
+
 			db.persist(u);
 			Event ev1 = new Event(1, "Atlético-Athletic", UtilDate.newDate(year, month, 17));
 			Event ev2 = new Event(2, "Eibar-Barcelona", UtilDate.newDate(year, month, 17));
@@ -96,74 +97,6 @@ public class DataAccess {
 			Event ev19 = new Event(19, "Real Sociedad-Levante", UtilDate.newDate(year, month + 1, 28));
 			Event ev20 = new Event(20, "Betis-Real Madrid", UtilDate.newDate(year, month + 1, 28));
 
-			Question q1;
-			Question q2;
-			Question q3;
-			Question q4;
-			Question q5;
-			Question q6;
-			
-
-			if (Locale.getDefault().equals(new Locale("es"))) {
-				q1 = ev1.addQuestion("¿Quién ganará el partido?", 1, 1.5);
-				q2 = ev1.addQuestion("¿Quién meterá el primer gol?", 2, 1.5);
-				q3 = ev11.addQuestion("¿Quién ganará el partido?", 1, 3);
-				q4 = ev11.addQuestion("¿Cuántos goles se marcarán?", 2, 2);
-				q5 = ev17.addQuestion("¿Quién ganará el partido?", 1, 1.5);
-				q6 = ev17.addQuestion("¿Habrá goles en la primera parte?", 2, 3);
-			} else if (Locale.getDefault().equals(new Locale("en"))) {
-				q1 = ev1.addQuestion("Who will win the match?", 1, 1.5);
-				q2 = ev1.addQuestion("Who will score first?", 2, 1.5);
-				q3 = ev11.addQuestion("Who will win the match?", 1, 3);
-				q4 = ev11.addQuestion("How many goals will be scored in the match?", 2, 2);
-				q5 = ev17.addQuestion("Who will win the match?", 1, 1.5);
-				q6 = ev17.addQuestion("Will there be goals in the first half?", 2, 3);
-			} else {
-				q1 = ev1.addQuestion("Zeinek irabaziko du partidua?", 1, 1.5);
-				q2 = ev1.addQuestion("Zeinek sartuko du lehenengo gola?", 2, 1.5);
-				q3 = ev11.addQuestion("Zeinek irabaziko du partidua?", 1, 3);
-				q4 = ev11.addQuestion("Zenbat gol sartuko dira?", 2, 2);
-				q5 = ev17.addQuestion("Zeinek irabaziko du partidua?", 1, 1.5);
-				q6 = ev17.addQuestion("Golak sartuko dira lehenengo zatian?", 2, 3);
-			}
-			
-			Pronostico p1;
-			Pronostico p2;
-			Pronostico p3;
-			Pronostico p4;
-			Pronostico p5;
-			Pronostico p6;
-			Pronostico p7;
-			Pronostico p8;
-			Pronostico p9;
-			
-			p1 = q1.addProns(q1.getBetMinimum(),"Atlético");
-			p2 = q1.addProns(q1.getBetMinimum(),"Athletic");
-			p3 = q1.addProns(q1.getBetMinimum(),"Atlético-Athletic");
-			p4 = q1.addProns(q1.getBetMinimum(),"Atlético-Athletic");
-			p5 = q1.addProns(q1.getBetMinimum(),"Atlético-Athletic");
-			p6 = q1.addProns(q1.getBetMinimum(),"Atlético-Athletic");
-			p7 = q1.addProns(q1.getBetMinimum(),"Atlético-Athletic");
-			p8 = q1.addProns(q1.getBetMinimum(),"Atlético-Athletic");
-			p9 = q1.addProns(q1.getBetMinimum(),"Atlético-Athletic");
-			
-			db.persist(p1);
-			db.persist(p2);
-			db.persist(p3);
-			db.persist(p4);
-			db.persist(p5);
-			db.persist(p6);
-			db.persist(p7);
-			db.persist(p8);
-			db.persist(p9);
-
-			db.persist(q1);
-			db.persist(q2);
-			db.persist(q3);
-			db.persist(q4);
-			db.persist(q5);
-			db.persist(q6);
-
 			db.persist(ev1);
 			db.persist(ev2);
 			db.persist(ev3);
@@ -185,6 +118,73 @@ public class DataAccess {
 			db.persist(ev19);
 			db.persist(ev20);
 
+			Question q1;
+			Question q2;
+			Question q3;
+			Question q4;
+			Question q5;
+			Question q6;
+
+			if (Locale.getDefault().equals(new Locale("es"))) {
+				q1 = ev1.addQuestion("¿Quién ganará el partido?", 1);
+				q2 = ev1.addQuestion("¿Quién meterá el primer gol?", 2);
+				q3 = ev11.addQuestion("¿Quién ganará el partido?", 1);
+				q4 = ev11.addQuestion("¿Cuántos goles se marcarán?", 2);
+				q5 = ev17.addQuestion("¿Quién ganará el partido?", 1);
+				q6 = ev17.addQuestion("¿Habrá goles en la primera parte?", 2);
+			} else if (Locale.getDefault().equals(new Locale("en"))) {
+				q1 = ev1.addQuestion("Who will win the match?", 1);
+				q2 = ev1.addQuestion("Who will score first?", 2);
+				q3 = ev11.addQuestion("Who will win the match?", 1);
+				q4 = ev11.addQuestion("How many goals will be scored in the match?", 2);
+				q5 = ev17.addQuestion("Who will win the match?", 1);
+				q6 = ev17.addQuestion("Will there be goals in the first half?", 2);
+			} else {
+				q1 = ev1.addQuestion("Zeinek irabaziko du partidua?", 1);
+				q2 = ev1.addQuestion("Zeinek sartuko du lehenengo gola?", 2);
+				q3 = ev11.addQuestion("Zeinek irabaziko du partidua?", 1);
+				q4 = ev11.addQuestion("Zenbat gol sartuko dira?", 2);
+				q5 = ev17.addQuestion("Zeinek irabaziko du partidua?", 1);
+				q6 = ev17.addQuestion("Golak sartuko dira lehenengo zatian?", 2);
+			}
+
+			db.persist(q1);
+			db.persist(q2);
+			db.persist(q3);
+			db.persist(q4);
+			db.persist(q5);
+			db.persist(q6);
+
+			Pronostico p1;
+			Pronostico p2;
+			Pronostico p3;
+			Pronostico p4;
+			Pronostico p5;
+			Pronostico p6;
+			Pronostico p7;
+			Pronostico p8;
+			Pronostico p9;
+
+//			p1 = q1.addProns(2.5, "Atlético");
+			p1 = q1.addProns(3.0, "Atlético");
+			p2 = q1.addProns(1.0, "Athletic");
+			p3 = q2.addProns(4.0, "Matheus");
+			p4 = q2.addProns(5.0, "Suarez");
+			p5 = q2.addProns(6.0, "Garcia");
+			p6 = q2.addProns(2.0, "Williams");
+
+			db.persist(p1);
+			db.persist(p2);
+
+			db.persist(p3);
+			db.persist(p4);
+			db.persist(p5);
+			db.persist(p6);
+
+//			db.persist(p7);
+//			db.persist(p8);
+//			db.persist(p9);
+
 			db.getTransaction().commit();
 			System.out.println("Db initialized");
 		} catch (Exception e) {
@@ -192,8 +192,7 @@ public class DataAccess {
 		}
 	}
 
-	public Question createQuestion(Event event, String question, float betMinimum, double gananciasApuesta)
-			throws QuestionAlreadyExist {
+	public Question createQuestion(Event event, String question, float betMinimum) throws QuestionAlreadyExist {
 		System.out.println(">> DataAccess: createQuestion=> event= " + event + " question= " + question + " betMinimum="
 				+ betMinimum);
 
@@ -203,7 +202,7 @@ public class DataAccess {
 			throw new QuestionAlreadyExist(ResourceBundle.getBundle("Etiquetas").getString("ErrorQueryAlreadyExist"));
 
 		db.getTransaction().begin();
-		Question q = ev.addQuestion(question, betMinimum, gananciasApuesta);
+		Question q = ev.addQuestion(question, betMinimum);
 		// db.persist(q);
 		db.persist(ev); // db.persist(q) not required when CascadeType.PERSIST is added in questions
 						// property of Event class
@@ -211,6 +210,40 @@ public class DataAccess {
 		db.getTransaction().commit();
 		return q;
 
+	}
+
+	public void wallet(Event event, Question question, Pronostico p, double cuanto, double ganancia) {
+		System.out.println(">> DataAccess: wallet=> event= " + event + " question= " + question.getQuestion()
+				+ " pronostico=" + p.getPronostico() + " cuanto apuesta el usuario=" + cuanto
+				+ " ganancia por euro apostado=" + ganancia);
+		db.getTransaction().begin();
+		User u = this.getLog();
+		u.actualizarWallet(p, cuanto, ganancia);
+		u.setApuesta(cuanto);
+		db.persist(u);
+		db.getTransaction().commit();
+	}
+
+	public void closeEvent(Event e) {
+		Event ev=null;
+		ev  = db.find(Event.class, e);
+		if (db.find(Event.class, e) != null) {
+			db.getTransaction().begin();
+			e.setAvailable(false);
+			db.remove(ev);
+			db.getTransaction().commit();
+		}
+	}
+	
+	public void setPronostico(Pronostico p) {
+		Pronostico pron = db.find(Pronostico.class, p);
+		if(db.find(Pronostico.class, p) != null) {
+			db.getTransaction().begin();
+			User u = this.getLog();
+			u.addPronostico(pron);
+			db.persist(u);
+			db.getTransaction().commit();
+		}
 	}
 
 	public void storeUser(User user) throws UserAlreadyExists {
@@ -226,10 +259,11 @@ public class DataAccess {
 		}
 
 	}
-
-	public void upgradeUser(User user) {
-
-	}
+	
+//	public double setApuesta(Event e, Question q, Pronostico p,User u){
+//		
+//		return 0.0;
+//	}
 
 	public Event createEvent(int eventNumber, String description, Date eventDate) {
 		System.out.println(">> DataAccess: createEvent=> number= " + eventNumber + ", date= " + eventDate
@@ -378,47 +412,13 @@ public class DataAccess {
 		Collection<User> offers = query.getResultList();
 		if (offers.size() >= 0) {
 			Iterator<User> it = offers.iterator();
-			return it.next();
-		}
-		
-		return (User) query.getParameter(1);
-	}
-
-	public User getLogged() {
-//		int cont = 0;
-		TypedQuery<User> query = db.createQuery("SELECT o FROM User o", User.class);
-		Collection<User> offers = query.getResultList();
-		if (offers.size() >0) {
-			Iterator<User> it = offers.iterator();
-//			if (cont == 0) {
-//				it.next();
-//				cont++;
-//			} else {
+			if (it.next().isAdmin()) {
+				it.next();
+			} else {
 				return it.next();
-//			}
+			}
 		}
 		return null;
-	}
-
-	public Event closeEvent(Event e) {
-		db.getTransaction().begin();
-		Event ev = db.find(Event.class, e);
-		ev.setAvailable(false);
-		db.persist(ev);
-
-		db.getTransaction().commit();
-		return ev;
-	}
-
-	public void eliminarEvent(Event e) {
-//		TypedQuery<Event> query = db.createQuery("DELETE ev FROM Event ev WHERE ev.eventDate=e.eventDate AND ev.eventNumber=e.eventNumber", Event.class);
-//		query.executeUpdate();
-		if (db.find(Event.class, e.getEventNumber()) != null) {
-			db.getTransaction().begin();
-			db.remove(e);
-			System.out.println("Eliminado de la db:" + e);
-			db.getTransaction().commit();
-		}
 	}
 
 //	public double ajustWallet(Event e, User user) {

@@ -3,6 +3,7 @@ package domain;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,18 +22,15 @@ public class Question implements Serializable {
 	private Integer questionNumber;
 	private String question;
 	private float betMinimum;
-	private double gananciasApuesta;
 
 	private String result;
 	@XmlIDREF
 	private Event event;
-	private List<Pronostico> prons = new ArrayList<Pronostico>();
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	private Vector<Pronostico> prons = new Vector<Pronostico>();
 
-	public List<Pronostico> getProns() {
-		return prons;
-	}
-
-	public void setProns(ArrayList<Pronostico> prons) {
+	public void setProns(Vector<Pronostico> prons) {
 		this.prons = prons;
 	}
 
@@ -40,22 +38,24 @@ public class Question implements Serializable {
 		super();
 	}
 
-	public Question(Integer queryNumber, String query, float betMinimum, double gananciasApuesta, Event event) {
+	public Question(Integer queryNumber, String query, float betMinimum, Event event) {
 		super();
 		this.questionNumber = queryNumber;
 		this.question = query;
 		this.betMinimum = betMinimum;
-		this.gananciasApuesta = gananciasApuesta;
 		this.event = event;
 
 	}
 
-	public Question(String query, float betMinimum, double gananciasApuesta, Event event) {
+	public Question(String query, float betMinimum, Event event) {
 		super();
 		this.question = query;
 		this.betMinimum = betMinimum;
-		this.gananciasApuesta = gananciasApuesta;
-		// this.event = event;
+		this.event = event;
+	}
+
+	public Vector<Pronostico> getProns() {
+		return prons;
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class Question implements Serializable {
 	public void setQuestionNumber(Integer questionNumber) {
 		this.questionNumber = questionNumber;
 	}
-	
+
 	/**
 	 * Get the question description of the bet
 	 * 
@@ -113,14 +113,6 @@ public class Question implements Serializable {
 
 	public void setBetMinimum(float betMinimum) {
 		this.betMinimum = betMinimum;
-	}
-
-	public double getGananciasApuesta() {
-		return gananciasApuesta;
-	}
-
-	public void setGananciasApuesta(double gananciasApuesta) {
-		this.gananciasApuesta = gananciasApuesta;
 	}
 
 	/**
@@ -163,15 +155,17 @@ public class Question implements Serializable {
 	public String toString() {
 		return questionNumber + ";" + question + ";" + Float.toString(betMinimum);
 	}
-	
-	public Pronostico addProns(float minBet, String p) {
-		Pronostico pron = new Pronostico(minBet,p);
+
+//	public Question addQuestion(String question, float betMinimum, double gananciasApuesta) {
+//		Question q = new Question(question, betMinimum, gananciasApuesta, this);
+//		questions.add(q);
+//		return q;
+//	}
+
+	public Pronostico addProns(double ganancias, String p) {
+		Pronostico pron = new Pronostico(ganancias, p, this);
 		prons.add(pron);
 		return pron;
-	}
-	
-	public void setProns(List<Pronostico> prons) {
-		this.prons = prons;
 	}
 
 }

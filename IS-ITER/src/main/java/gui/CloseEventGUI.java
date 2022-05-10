@@ -1,86 +1,72 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.Vector;
+import businessLogic.BLFacade;
 
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import configuration.UtilDate;
 
 import com.toedter.calendar.JCalendar;
 
-import businessLogic.BLFacade;
-import configuration.UtilDate;
-import domain.Event;
+import domain.Pronostico;
+import domain.Question;
 import domain.User;
 
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.beans.*;
+import java.text.DateFormat;
+import java.util.*;
+
 import javax.swing.table.DefaultTableModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import java.awt.Dimension;
 
 public class CloseEventGUI extends JFrame {
-
 	private static final long serialVersionUID = 1L;
-	DefaultComboBoxModel<Event> modelEvents = new DefaultComboBoxModel<Event>();
 
-	private JLabel jLabelListOfEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("ListEvents"));
-	private JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
+	private final JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
+	private final JLabel jLabelQueries = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Queries"));
 	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events"));
-	private JCalendar jCalendar = new JCalendar();
-	private Calendar calendarAct = null;
-	private Calendar calendarAnt = null;
-	private JTable tableEvents = new JTable();
-	private DefaultTableModel tableModelEvents;
+	private final JLabel jLabelApuestas = new JLabel(
+			ResourceBundle.getBundle("Etiquetas").getString("ApuestasDisponibles"));
+	private JLabel jLabelHecho;
 
-	private JScrollPane scrollPaneEvents = new JScrollPane();
-
-	private JButton jButtonCloseEvent = new JButton(ResourceBundle.getBundle("Etiquetas").getString("CreateEvent")); //$NON-NLS-1$ //$NON-NLS-2$
 	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
-	private JLabel jLabelMsg = new JLabel();
-	private JLabel jLabelError = new JLabel();
-	private Event eve;
+	private Question ques;
+	// Code for JCalendar
+	private JCalendar jCalendar1 = new JCalendar();
+	private Calendar calendarAnt = null;
+	private Calendar calendarAct = null;
+	private JScrollPane scrollPaneEvents = new JScrollPane();
+	private JScrollPane scrollPaneQueries = new JScrollPane();
+	private JScrollPane scrollPaneApuestas = new JScrollPane();
+
 	private Vector<Date> datesWithEventsCurrentMonth = new Vector<Date>();
+
+	private JTable tableEvents = new JTable();
+	private JTable tableQueries = new JTable();
+	private JTable tableApuesta = new JTable();
+
+	private DefaultTableModel tableModelEvents;
+	private DefaultTableModel tableModelQueries;
+	private DefaultTableModel tableModelApuesta;
+	private JButton pronButton = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Pronostico")); //$NON-NLS-1$ //$NON-NLS-2$
+
+	BLFacade facade = MainGUI.getBusinessLogic();
+
 	private String[] columnNamesEvents = new String[] { ResourceBundle.getBundle("Etiquetas").getString("EventN"),
 			ResourceBundle.getBundle("Etiquetas").getString("Event"),
 
 	};
-	BLFacade facade = MainGUI.getBusinessLogic();
-	/**
-	 * Create the frame.
-	 */
+	private String[] columnNamesQueries = new String[] { ResourceBundle.getBundle("Etiquetas").getString("QueryN"),
+			ResourceBundle.getBundle("Etiquetas").getString("Query")
 
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					CreateEventGUI frame = new CreateEventGUI(null);
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	};
+
+	private String[] columnNamesApuestas = new String[] { ResourceBundle.getBundle("Etiquetas").getString("ApuestaMin"),
+			ResourceBundle.getBundle("Etiquetas").getString("Disponibles")
+
+	};
 
 	public CloseEventGUI(Vector<domain.Event> v) {
-
 		try {
 			jbInit(v);
 		} catch (Exception e) {
@@ -90,229 +76,309 @@ public class CloseEventGUI extends JFrame {
 
 	private void jbInit(Vector<domain.Event> v) throws Exception {
 		
-		
-
 		this.getContentPane().setLayout(null);
-		this.setSize(new Dimension(697, 370));
-		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("CreateEvent"));
-		jLabelListOfEvents.setBounds(new Rectangle(290, 18, 277, 20));
+		this.setSize(new Dimension(889, 548));
+		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("HacerApuesta"));
 
-		jCalendar.setBounds(new Rectangle(40, 50, 225, 150));
-		scrollPaneEvents.setBounds(new Rectangle(25, 44, 346, 116));
+		jLabelEventDate.setBounds(new Rectangle(40, 15, 140, 25));
+		jLabelQueries.setBounds(138, 210, 406, 14);
+		jLabelEvents.setBounds(295, 19, 259, 16);
 
-		
-		jButtonClose.setBounds(new Rectangle(310, 259, 215, 30));
+		this.getContentPane().add(jLabelEventDate, null);
+		this.getContentPane().add(jLabelQueries);
+		this.getContentPane().add(jLabelEvents);
+
+		jButtonClose.setBounds(new Rectangle(63, 443, 130, 30));
+
 		jButtonClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				jButtonClose_actionPerformed(e);
+				jButton2_actionPerformed(e);
 			}
 		});
 
-		jLabelMsg.setBounds(new Rectangle(100, 300, 380, 20));
-		jLabelMsg.setForeground(Color.red);
-		// jLabelMsg.setSize(new Dimension(305, 20));
-
-		jLabelError.setBounds(new Rectangle(100, 300, 380, 20));
-		jLabelError.setForeground(Color.red);
-
-		this.getContentPane().add(jLabelMsg, null);
-		this.getContentPane().add(jLabelError, null);
-
 		this.getContentPane().add(jButtonClose, null);
-		
-		this.getContentPane().add(jButtonCloseEvent, null);
-		this.getContentPane().add(jLabelListOfEvents, null);
 
-		this.getContentPane().add(jCalendar, null);
+		jCalendar1.setBounds(new Rectangle(40, 50, 225, 150));
 
-		
-		datesWithEventsCurrentMonth = facade.getEventsMonth(jCalendar.getDate());
-		paintDaysWithEvents(jCalendar, datesWithEventsCurrentMonth);
-
-		jLabelEventDate.setBounds(new Rectangle(40, 15, 140, 25));
-		jLabelEventDate.setBounds(40, 16, 140, 25);
-		getContentPane().add(jLabelEventDate);
+		BLFacade facade = MainGUI.getBusinessLogic();
+		datesWithEventsCurrentMonth = facade.getEventsMonth(jCalendar1.getDate());
+		CreateQuestionGUI.paintDaysWithEvents(jCalendar1, datesWithEventsCurrentMonth);
 
 		// Code for JCalendar
-		this.jCalendar.addPropertyChangeListener(new PropertyChangeListener() {
+		this.jCalendar1.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent propertychangeevent) {
-//					this.jCalendar.addPropertyChangeListener(new PropertyChangeListener() {
-//						public void propertyChange(PropertyChangeEvent propertychangeevent) {
+
 				if (propertychangeevent.getPropertyName().equals("locale")) {
-					jCalendar.setLocale((Locale) propertychangeevent.getNewValue());
+					jCalendar1.setLocale((Locale) propertychangeevent.getNewValue());
 				} else if (propertychangeevent.getPropertyName().equals("calendar")) {
 					calendarAnt = (Calendar) propertychangeevent.getOldValue();
 					calendarAct = (Calendar) propertychangeevent.getNewValue();
-					System.out.println("calendarAnt: " + calendarAnt.getTime());
-					System.out.println("calendarAct: " + calendarAct.getTime());
-					DateFormat dateformat1 = DateFormat.getDateInstance(1, jCalendar.getLocale());
+					DateFormat dateformat1 = DateFormat.getDateInstance(1, jCalendar1.getLocale());
+//					jCalendar1.setCalendar(calendarAct);
+					Date firstDay = UtilDate.trim(new Date(jCalendar1.getCalendar().getTime().getTime()));
 
 					int monthAnt = calendarAnt.get(Calendar.MONTH);
 					int monthAct = calendarAct.get(Calendar.MONTH);
+
 					if (monthAct != monthAnt) {
 						if (monthAct == monthAnt + 2) {
-							// Si en JCalendar est√° 30 de enero y se avanza al mes siguiente,
-							// devolver√≠a 2 de marzo (se toma como equivalente a 30 de febrero)
-							// Con este c√≥digo se dejar√° como 1 de febrero en el JCalendar
+							// Si en JCalendar est· 30 de enero y se avanza al mes siguiente, devolverÌa 2
+							// de marzo (se toma como equivalente a 30 de febrero)
+							// Con este cÛdigo se dejar· como 1 de febrero en el JCalendar
 							calendarAct.set(Calendar.MONTH, monthAnt + 1);
 							calendarAct.set(Calendar.DAY_OF_MONTH, 1);
 						}
 
-						jCalendar.setCalendar(calendarAct);
+						jCalendar1.setCalendar(calendarAct);
 
 						BLFacade facade = MainGUI.getBusinessLogic();
 
-						datesWithEventsCurrentMonth = facade.getEventsMonth(jCalendar.getDate());
+						datesWithEventsCurrentMonth = facade.getEventsMonth(jCalendar1.getDate());
 					}
 
-					paintDaysWithEvents(jCalendar, datesWithEventsCurrentMonth);
+					CreateQuestionGUI.paintDaysWithEvents(jCalendar1, datesWithEventsCurrentMonth);
 
-					// Date firstDay = UtilDate.trim(new
-					// Date(jCalendar.getCalendar().getTime().getTime()));
-					Date firstDay = UtilDate.trim(calendarAct.getTime());
 					try {
-					tableModelEvents.setDataVector(null, columnNamesEvents);
-					tableModelEvents.setColumnCount(3); // another column added to allocate ev objects
+						tableModelEvents.setDataVector(null, columnNamesEvents);
+						tableModelEvents.setColumnCount(3); // another column added to allocate ev objects
 
-					BLFacade facade = MainGUI.getBusinessLogic();
+						BLFacade facade = MainGUI.getBusinessLogic();
 
-					Vector<domain.Event> events = facade.getEvents(firstDay);
+						Vector<domain.Event> events = facade.getEvents(firstDay);
 
-					if (events.isEmpty())
-						jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents") + ": "
-								+ dateformat1.format(calendarAct.getTime()));
-					else
-						jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("Events") + ": "
-								+ dateformat1.format(calendarAct.getTime()));
-					for (domain.Event ev : events) {
-						Vector<Object> row = new Vector<Object>();
+						if (events.isEmpty())
+							jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents") + ": "
+									+ dateformat1.format(calendarAct.getTime()));
+						else
+							jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("Events") + ": "
+									+ dateformat1.format(calendarAct.getTime()));
+						for (domain.Event ev : events) {
+							Vector<Object> row = new Vector<Object>();
 
-						System.out.println("Events " + ev);
+							System.out.println("Events " + ev);
 
-						row.add(ev.getEventNumber());
-						row.add(ev.getDescription());
-						row.add(ev); // ev object added in order to obtain it with tableModelEvents.getValueAt(i,2)
-						tableModelEvents.addRow(row);
-					}
-					tableEvents.getColumnModel().getColumn(0).setPreferredWidth(25);
-					tableEvents.getColumnModel().getColumn(1).setPreferredWidth(268);
-					tableEvents.getColumnModel().removeColumn(tableEvents.getColumnModel().getColumn(2)); 
-					
+							row.add(ev.getEventNumber());
+							row.add(ev.getDescription());
+							row.add(ev); // ev object added in order to obtain it with tableModelEvents.getValueAt(i,2)
+							tableModelEvents.addRow(row);
+						}
+						tableEvents.getColumnModel().getColumn(0).setPreferredWidth(25);
+						tableEvents.getColumnModel().getColumn(1).setPreferredWidth(268);
+						tableEvents.getColumnModel().removeColumn(tableEvents.getColumnModel().getColumn(2)); // not
+																												// shown
+																												// in
+																												// JTable
 					} catch (Exception e1) {
 
-						jLabelError.setText(e1.getMessage());
+						jLabelQueries.setText(e1.getMessage());
 					}
 
 				}
 			}
 		});
+
+		this.getContentPane().add(jCalendar1, null);
+
 		scrollPaneEvents.setBounds(new Rectangle(292, 50, 346, 150));
+		scrollPaneQueries.setBounds(new Rectangle(138, 234, 406, 116));
 
 		tableEvents.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int i = tableEvents.getSelectedRow();
-				eve = (domain.Event) tableModelEvents.getValueAt(i, 2);
-				
-			}
-		});
-		jButtonCloseEvent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+				domain.Event ev = (domain.Event) tableModelEvents.getValueAt(i, 2);// obtain ev object
+				domain.Event evento=null;
+				evento = ev;
+				Vector<Question> queries = ev.getQuestions();
 
-				try {
-					jLabelError.setText("");
-					jLabelMsg.setText("");
-					Date eventDate = jCalendar.getDate();
-					BLFacade facade = MainGUI.getBusinessLogic();
+				tableModelQueries.setDataVector(null, columnNamesQueries);
+				if (ev.isAvailable() == true) {
+					if (queries.isEmpty())
+						jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("NoQueries") + ": "
+								+ ev.getDescription());
+					else
+						jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectedEvent") + " "
+								+ ev.getDescription());
 
-					User user = facade.getLog();
-//					Pronostico pronostico = facade.getStorePronostico();
-					facade.closeEvent(eve);
-//					System.out.println(facade.ajustWallet(eve,facade.getLog()));
-					System.out.println(user.getWallet());
-					jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("QueryClosed"));
+					for (domain.Question q : queries) {
+						Vector<Object> row = new Vector<Object>();
 
-					// } catch (EventFinished e1) {
-					// jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorEventHasFinished")
-					// + ": "
-					// + event.getDescription());
-					// } catch (QuestionAlreadyExist e1) {
-					// jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorQueryAlreadyExist"));
-					// } catch (java.lang.NumberFormatException e1) {
-					// jLabelError.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorNumber"));
-				} catch (Exception e1) {
-
-					e1.printStackTrace();
-
+						row.add(q.getQuestionNumber());
+						row.add(q.getQuestion());
+						tableModelQueries.addRow(row);
+					}
+					tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
+					tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
+				} else {
+					jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoQueries"));
 				}
 			}
 		});
+
 		scrollPaneEvents.setViewportView(tableEvents);
 		tableModelEvents = new DefaultTableModel(null, columnNamesEvents);
 
 		tableEvents.setModel(tableModelEvents);
 		tableEvents.getColumnModel().getColumn(0).setPreferredWidth(25);
 		tableEvents.getColumnModel().getColumn(1).setPreferredWidth(268);
-		
+
+		tableQueries.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				int i = tableEvents.getSelectedRow();
+				int u = tableQueries.getSelectedRow();
+				domain.Event ev = (domain.Event) tableModelEvents.getValueAt(i, 2);
+				Vector<Question> queries = ev.getQuestions();
+				tableModelApuesta.setDataVector(null, columnNamesApuestas);
+				if (ev.isAvailable() == true) {
+					for (domain.Question q : queries) {
+						if (q.getQuestion().equals(tableQueries.getValueAt(u, 1))) {
+							Vector<Pronostico> prons = (Vector<Pronostico>) q.getProns();
+							if (prons.isEmpty())
+								jLabelApuestas.setText(ResourceBundle.getBundle("Etiquetas").getString("NoApuestas")
+										+ ": " + q.getQuestion());
+							else
+								jLabelApuestas.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectedEvent")
+										+ ": " + q.getQuestion());
+							
+							for (domain.Pronostico p : prons) {
+
+								Vector<Object> row = new Vector<Object>();
+								row.add(p.getGanancia());
+								row.add(p.getPronostico());
+								tableModelApuesta.addRow(row);
+							}
+							tableApuesta.getColumnModel().getColumn(0).setPreferredWidth(130);
+							tableApuesta.getColumnModel().getColumn(1).setPreferredWidth(228);
+							q.setQuestion(tableQueries.getValueAt(i, 1).toString());
+						}
+					}
+				} else {
+					jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoQueries"));
+				}
+			}
+
+		});
+
+		scrollPaneQueries.setViewportView(tableQueries);
+		tableModelQueries = new DefaultTableModel(null, columnNamesQueries);
+
+		tableQueries.setModel(tableModelQueries);
+		tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
+		tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
+
+		this.getContentPane().add(scrollPaneQueries, null);
 		this.getContentPane().add(scrollPaneEvents, null);
 
-		jButtonCloseEvent.setBounds(new Rectangle(40, 259, 215, 30));
-		jButtonCloseEvent.setText(ResourceBundle.getBundle("Etiquetas").getString("Close"));
-		
-		JScrollPane scrollPaneEvents_1 = new JScrollPane();
-		scrollPaneEvents_1.setBounds(new Rectangle(292, 50, 346, 150));
-		scrollPaneEvents_1.setBounds(290, 50, 346, 150);
-		getContentPane().add(scrollPaneEvents_1);
-		
-		
+		pronButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int i = tableEvents.getSelectedRow();
+				int u = tableQueries.getSelectedRow();
+				int z = tableApuesta.getSelectedRow();
+				domain.Event ev = (domain.Event) tableModelEvents.getValueAt(i, 2);
+				Vector<Question> queries = ev.getQuestions();
+				if (ev.isAvailable()) {
+					facade.closeEvent(ev);
+					System.out.println(ev.getDescription()+","+ev.isAvailable()+" ,no visible");
+					for (domain.Question q : queries) {
+						if (q.getQuestion().equals(tableQueries.getValueAt(u, 1))) {
+							Vector<Pronostico> prons = (Vector<Pronostico>) q.getProns();
+							for (domain.Pronostico p : prons) {
+								if (p.getPronostico().equals(tableApuesta.getValueAt(z, 1))) {
+									User user = facade.getLog();
+									if(user.finPron(p)) {
+										user.setAvailable(true);
+										facade.wallet(ev, q, p, user.getApuesta(), p.getGanancia());
+										p.setPronostico(tableApuesta.getValueAt(u, 1).toString());
+										jLabelHecho.setText(
+												ResourceBundle.getBundle("Etiquetas").getString("EventClose"));
+									}else {
+										System.out.println("NO");
+									}
+//									//Actualizar wallet en base a la respuesta correcta
+									//Aqui tiene q haber una llamada a un metodo FACADE que guarde el dinero apostado
+//									facade.wallet(ev, q, p, //aqui,
+								}
+							}
+						}
+					}
+				}
+
+			}
+		});pronButton.setBounds(241,443,140,30);
+
+	getContentPane().add(pronButton);
+		pronButton.setVisible(true);
+
+		scrollPaneApuestas = new JScrollPane();
+		scrollPaneApuestas.setBounds(new Rectangle(292, 50, 346, 150));
+		scrollPaneApuestas.setBounds(559, 234, 225, 239);
+
+		tableApuesta = new JTable();
+		scrollPaneApuestas.setColumnHeaderView(tableApuesta);
+
+		this.getContentPane().add(scrollPaneApuestas, null);
+		scrollPaneApuestas.setViewportView(tableApuesta);
+		tableModelApuesta = new DefaultTableModel(null, columnNamesApuestas);
+
+		tableApuesta.setModel(tableModelApuesta);
+		tableApuesta.getColumnModel().getColumn(0).setPreferredWidth(130);
+		tableApuesta.getColumnModel().getColumn(1).setPreferredWidth(228);
+		tableApuesta.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int i = tableEvents.getSelectedRow();
+				int u = tableQueries.getSelectedRow();
+				int z = tableApuesta.getSelectedRow();
+				domain.Event ev = (domain.Event) tableModelEvents.getValueAt(i, 2);
+				Vector<Question> queries = ev.getQuestions();
+				if (ev.isAvailable()) {
+					for (domain.Question q : queries) {
+						if (q.getQuestion().equals(tableQueries.getValueAt(u, 1))) {
+							Vector<Pronostico> prons = (Vector<Pronostico>) q.getProns();
+							for (domain.Pronostico p : prons) {
+								if (p.getPronostico().equals(tableApuesta.getValueAt(z, 1))) {
+									domain.Pronostico s = p;
+									s.setPronostico(tableApuesta.getValueAt(u, 1).toString());
+								}
+							}
+						}
+					}
+				} else {
+					jLabelApuestas.setText("La apuesta no esta disponible");
+				}
+			}
+		});
+		this.getContentPane().add(scrollPaneApuestas, null);
+		scrollPaneApuestas.setViewportView(tableApuesta);
+		tableModelApuesta = new DefaultTableModel(null, columnNamesApuestas);
+
+		tableApuesta.setModel(tableModelApuesta);
+		tableApuesta.getColumnModel().getColumn(0).setPreferredWidth(130);
+		tableApuesta.getColumnModel().getColumn(1).setPreferredWidth(228);
+
+		jLabelApuestas.setBounds(559, 207, 308, 20);
+		getContentPane().add(jLabelApuestas);
+
+		jLabelHecho = new JLabel();
+		jLabelHecho.setForeground(Color.RED);
+		jLabelHecho.setBounds(234, 407, 163, 20);
+		getContentPane().add(jLabelHecho);
 	}
 
-	public static void paintDaysWithEvents(JCalendar jCalendar, Vector<Date> datesWithEventsCurrentMonth) {
-		// For each day with events in current month, the background color for that day
-		// is changed.
-
-		Calendar calendar = jCalendar.getCalendar();
-
-		int month = calendar.get(Calendar.MONTH);
-		int today = calendar.get(Calendar.DAY_OF_MONTH);
-		int year = calendar.get(Calendar.YEAR);
-
-		calendar.set(Calendar.DAY_OF_MONTH, 1);
-		int offset = calendar.get(Calendar.DAY_OF_WEEK);
-
-		if (Locale.getDefault().equals(new Locale("es")))
-			offset += 4;
-		else
-			offset += 5;
-
-		for (Date d : datesWithEventsCurrentMonth) {
-
-			calendar.setTime(d);
-			System.out.println(d);
-
-			// Obtain the component of the day in the panel of the DayChooser of the
-			// JCalendar.
-			// The component is located after the decorator buttons of "Sun", "Mon",... or
-			// "Lun", "Mar"...,
-			// the empty days before day 1 of month, and all the days previous to each day.
-			// That number of components is calculated with "offset" and is different in
-			// English and Spanish
-//				    		  Component o=(Component) jCalendar.getDayChooser().getDayPanel().getComponent(i+offset);; 
-			Component o = (Component) jCalendar.getDayChooser().getDayPanel()
-					.getComponent(calendar.get(Calendar.DAY_OF_MONTH) + offset);
-			o.setBackground(Color.CYAN);
-		}
-
-		calendar.set(Calendar.DAY_OF_MONTH, today);
-		calendar.set(Calendar.MONTH, month);
-		calendar.set(Calendar.YEAR, year);
-		
-
-	}
-
-
-	
-	private void jButtonClose_actionPerformed(ActionEvent e) {
+	private void jButton2_actionPerformed(ActionEvent e) {
 		this.setVisible(false);
 	}
 }
+
+//	tableEvents.addMouseListener(new MouseAdapter() {
+//		@Override
+//		public void mouseClicked(MouseEvent e) {
+//			int i = tableEvents.getSelectedRow();
+//			domain.Event ev = (domain.Event) tableModelEvents.getValueAt(i, 2); // obtain ev object
+//			facade.closeEvent(ev);
+//				System.out.println(ev.getDescription()+","+ev.isAvailable()+" ,no visible");
+//			
+//		}
+//	});

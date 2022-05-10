@@ -25,7 +25,11 @@ public class HacerPronosticoGUI extends JFrame {
 	private final JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
 	private final JLabel jLabelQueries = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Queries"));
 	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events"));
-	private JLabel jLabelApuestas = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("ApuestasDisponibles"));
+	private final JLabel jLabelApuestas = new JLabel(
+			ResourceBundle.getBundle("Etiquetas").getString("ApuestasDisponibles"));
+	private final JLabel jLabelBetMin = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("ApuestaMin"));
+	private final JLabel jLabelCuanto = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Cuanto"));
+	private JLabel jLabelHecho;
 
 	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
 	private Question ques;
@@ -65,6 +69,7 @@ public class HacerPronosticoGUI extends JFrame {
 			ResourceBundle.getBundle("Etiquetas").getString("Disponibles")
 
 	};
+	private final JTextField textFieldCuanto = new JTextField();
 
 	public HacerPronosticoGUI() {
 		try {
@@ -77,7 +82,7 @@ public class HacerPronosticoGUI extends JFrame {
 	private void jbInit() throws Exception {
 
 		this.getContentPane().setLayout(null);
-		this.setSize(new Dimension(889, 550));
+		this.setSize(new Dimension(889, 626));
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("HacerApuesta"));
 
 		jLabelEventDate.setBounds(new Rectangle(40, 15, 140, 25));
@@ -88,7 +93,7 @@ public class HacerPronosticoGUI extends JFrame {
 		this.getContentPane().add(jLabelQueries);
 		this.getContentPane().add(jLabelEvents);
 
-		jButtonClose.setBounds(new Rectangle(138, 443, 130, 30));
+		jButtonClose.setBounds(new Rectangle(50, 511, 130, 30));
 
 		jButtonClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -191,7 +196,7 @@ public class HacerPronosticoGUI extends JFrame {
 				Vector<Question> queries = ev.getQuestions();
 
 				tableModelQueries.setDataVector(null, columnNamesQueries);
-				if (ev.isAvailable()) {
+				if (ev.isAvailable() == true) {
 					if (queries.isEmpty())
 						jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("NoQueries") + ": "
 								+ ev.getDescription());
@@ -209,7 +214,7 @@ public class HacerPronosticoGUI extends JFrame {
 					tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
 					tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
 				} else {
-//					gananciasLabel.setText(ResourceBundle.getBundle("Etiquetas").getString("QueryClosed"));
+					jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoQueries"));
 				}
 			}
 		});
@@ -229,11 +234,12 @@ public class HacerPronosticoGUI extends JFrame {
 				int u = tableQueries.getSelectedRow();
 				domain.Event ev = (domain.Event) tableModelEvents.getValueAt(i, 2);
 				Vector<Question> queries = ev.getQuestions();
-				tableModelQueries.setDataVector(null, columnNamesQueries);
+//				tableModelQueries.setDataVector(null, columnNamesQueries);
 				tableModelApuesta.setDataVector(null, columnNamesApuestas);
-				if (ev.isAvailable()) {
+				if (ev.isAvailable() == true) {
 					for (domain.Question q : queries) {
 						if (q.getQuestion().equals(tableQueries.getValueAt(u, 1))) {
+//							tableModelApuesta.setDataVector(null, columnNamesApuestas);
 							Vector<Pronostico> prons = (Vector<Pronostico>) q.getProns();
 							if (prons.isEmpty())
 								jLabelApuestas.setText(ResourceBundle.getBundle("Etiquetas").getString("NoApuestas")
@@ -241,29 +247,27 @@ public class HacerPronosticoGUI extends JFrame {
 							else
 								jLabelApuestas.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectedEvent")
 										+ ": " + q.getQuestion());
+							jLabelBetMin.setText(ResourceBundle.getBundle("Etiquetas").getString("ApuestaMin") + ": "
+									+ q.getBetMinimum());
+							jLabelCuanto.setText(ResourceBundle.getBundle("Etiquetas").getString("Cuanto"));
+
 							for (domain.Pronostico p : prons) {
 
 								Vector<Object> row = new Vector<Object>();
-								row.add(p.getMinBet());
+								row.add(p.getGanancia());
 								row.add(p.getPronostico());
 								tableModelApuesta.addRow(row);
 							}
 							tableApuesta.getColumnModel().getColumn(0).setPreferredWidth(130);
 							tableApuesta.getColumnModel().getColumn(1).setPreferredWidth(228);
-//				domain.Question a = q;
-//				ques = q;
 							q.setQuestion(tableQueries.getValueAt(i, 1).toString());
-							System.out.println("Apuesta minima: " + ques.getBetMinimum());
-//						minBetLabel.setText(String.valueOf(a.getBetMinimum()));
-							System.out.println(q.getGananciasApuesta());
-//						gananciasLabel.setText(String.valueOf(a.getGananciasApuesta()));
-							minBet = q.getBetMinimum();
 						}
 					}
+				} else {
+					jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoQueries"));
 				}
 			}
 
-//					gananciasLabel.setText("El evento no esta disponible");		
 		});
 
 		scrollPaneQueries.setViewportView(tableQueries);
@@ -276,40 +280,47 @@ public class HacerPronosticoGUI extends JFrame {
 		this.getContentPane().add(scrollPaneQueries, null);
 		this.getContentPane().add(scrollPaneEvents, null);
 
-//		pronButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				if (Float.parseFloat(betField.getText()) <= minBet) {
-//					gananciasLabel.setText("Introduzca una apuesta valida");
-//				} else {
-//					if (pronField.getText() == null) {
-//						gananciasLabel.setText("Introduzca un pronostico");
-//					} else {
-//						User user = facade.getLog();
-//						System.out.println("si"+user.getNombre());
-////						String[] prons = new String[] {pronField.getText()};
-//						Pronostico pron = new Pronostico(user.getDNI(), pronField.getText(),ques,
-//								Float.parseFloat(betField.getText()));
-////						Pronostico pron = new Pronostico(user.getDNI(), prons, null, 0,
-////								Float.parseFloat(betField.getText()));
-//						pron.setRespuesta(pronField.getText());
-//						
-////						USER.ADDPRONOSTICO(PRON);
-//						facade.storePronostico(pron,evento,user,ques);
-//						gananciasLabel.setText("Apuesta realizada con exito");
-////						user.addPronostico(pron);
-////						
-//
-//					}
-//				}
-//
-//			}
-//		});
-		pronButton.setBounds(291, 443, 140, 30);
+		pronButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int i = tableEvents.getSelectedRow();
+				int u = tableQueries.getSelectedRow();
+				int z = tableApuesta.getSelectedRow();
+				domain.Event ev = (domain.Event) tableModelEvents.getValueAt(i, 2);
+				Vector<Question> queries = ev.getQuestions();
+				if (ev.isAvailable()) {
+					for (domain.Question q : queries) {
+						if (q.getQuestion().equals(tableQueries.getValueAt(u, 1))) {
+							Vector<Pronostico> prons = (Vector<Pronostico>) q.getProns();
+							for (domain.Pronostico p : prons) {
+								if (p.getPronostico().equals(tableApuesta.getValueAt(z, 1))) {
+									if (textFieldCuanto.getText().isEmpty()) {
+										jLabelApuestas.setText("Error: Introduce cuantos euros quieres apostar");
+									} else if (Double.parseDouble(textFieldCuanto.getText()) <= q.getBetMinimum()) {
+										jLabelApuestas.setText("Error: Los euros a apostar no superan el minimo");
+									}
+									facade.getLog().addPronostico(p);//esto no va hay q mirarlo
+									User user = facade.getLog();
+									user.setApuesta(Double.parseDouble(textFieldCuanto.getText()));
+//									facade.wallet(ev, q, p, Double.parseDouble(textFieldCuanto.getText()),
+//											p.getGanancia());
+									p.setPronostico(tableApuesta.getValueAt(u, 1).toString());
+									jLabelHecho.setText(
+											ResourceBundle.getBundle("Etiquetas").getString("ApuestaGuardada"));
+
+								}
+							}
+						}
+					}
+				}
+
+			}
+		});
+		pronButton.setBounds(185, 511, 140, 30);
 		getContentPane().add(pronButton);
 		pronButton.setVisible(true);
 
 		JButton jButtonLogOut = new JButton(ResourceBundle.getBundle("Etiquetas").getString("LogOut"));
-		jButtonLogOut.setBounds(466, 444, 115, 29);
+		jButtonLogOut.setBounds(340, 512, 115, 29);
 
 		getContentPane().add(jButtonLogOut);
 
@@ -319,12 +330,12 @@ public class HacerPronosticoGUI extends JFrame {
 
 		scrollPaneApuestas = new JScrollPane();
 		scrollPaneApuestas.setBounds(new Rectangle(292, 50, 346, 150));
-		scrollPaneApuestas.setBounds(627, 234, 225, 239);
-		getContentPane().add(scrollPaneApuestas, null);
+		scrollPaneApuestas.setBounds(559, 234, 225, 239);
 
 		tableApuesta = new JTable();
 		scrollPaneApuestas.setColumnHeaderView(tableApuesta);
 
+		this.getContentPane().add(scrollPaneApuestas, null);
 		scrollPaneApuestas.setViewportView(tableApuesta);
 		tableModelApuesta = new DefaultTableModel(null, columnNamesApuestas);
 
@@ -346,33 +357,55 @@ public class HacerPronosticoGUI extends JFrame {
 							for (domain.Pronostico p : prons) {
 								if (p.getPronostico().equals(tableApuesta.getValueAt(z, 1))) {
 									domain.Pronostico s = p;
+									facade.getLog().addPronostico(p);
+									if (textFieldCuanto.getText().isEmpty()) {
+										jLabelApuestas.setText("Error: Introduce cuantos euros quieres apostar");
+//									}else {
+//										facade.wallet(ev, q, p, Double.parseDouble(textFieldCuanto.getText()),
+//												p.getGanancia());
+									}
+
 									s.setPronostico(tableApuesta.getValueAt(u, 1).toString());
 								}
 							}
 						}
 					}
-//					domain.Question a = q;
-//					ques = q;
-//					a.setQuestion(tableQueries.getValueAt(i, 1).toString());
-//					System.out.println(a.getBetMinimum());
-////				minBetLabel.setText(String.valueOf(a.getBetMinimum()));
-//					System.out.println(a.getGananciasApuesta());
-////				gananciasLabel.setText(String.valueOf(a.getGananciasApuesta()));
-//					minBet = a.getBetMinimum();
-//					break;
 				} else {
 					jLabelApuestas.setText("La apuesta no esta disponible");
 				}
 			}
 		});
+		this.getContentPane().add(scrollPaneApuestas, null);
+		scrollPaneApuestas.setViewportView(tableApuesta);
+		tableModelApuesta = new DefaultTableModel(null, columnNamesApuestas);
 
-		jLabelApuestas.setBounds(633, 207, 219, 20);
+		tableApuesta.setModel(tableModelApuesta);
+		tableApuesta.getColumnModel().getColumn(0).setPreferredWidth(130);
+		tableApuesta.getColumnModel().getColumn(1).setPreferredWidth(228);
 
+		jLabelApuestas.setBounds(559, 207, 308, 20);
 		getContentPane().add(jLabelApuestas);
+
+		jLabelBetMin.setBounds(15, 366, 259, 20);
+		getContentPane().add(jLabelBetMin);
+		jLabelCuanto.setBounds(15, 402, 250, 20);
+
+		getContentPane().add(jLabelCuanto);
+
+		getContentPane().add(textFieldCuanto);
+
+//		textFieldCuanto.setText(ResourceBundle.getBundle("Etiquetas").getString("HacerPronosticoGUI.textField.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		textFieldCuanto.setBounds(15, 447, 146, 26);
+		textFieldCuanto.setColumns(10);
+		this.getContentPane().add(textFieldCuanto);
+
+		jLabelHecho = new JLabel();
+		jLabelHecho.setForeground(Color.RED);
+		jLabelHecho.setBounds(256, 475, 163, 20);
+		getContentPane().add(jLabelHecho);
 
 		jButtonProfile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				jButton2_actionPerformed(e);
 				Profile frame = new Profile();
 				frame.setVisible(true);
 			}
@@ -381,8 +414,6 @@ public class HacerPronosticoGUI extends JFrame {
 		jButtonLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jButton2_actionPerformed(e);
-				MainLoginRegister frame = new MainLoginRegister();
-				frame.setVisible(true);
 			}
 		});
 	}
@@ -390,5 +421,4 @@ public class HacerPronosticoGUI extends JFrame {
 	private void jButton2_actionPerformed(ActionEvent e) {
 		this.setVisible(false);
 	}
-
 }

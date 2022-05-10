@@ -25,15 +25,38 @@ public class User {
 	private Date birthdate;
 	private String email;
 	private boolean admin = false;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+//	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private List<Pronostico> pronosticos = new ArrayList<Pronostico>();
 	private List<Question> ques = new ArrayList<Question>();
 	private double Wallet;
 	private double apuesta;
-	
+	private boolean available=false;
+
+	public User(String user, String password, String dNI, Date birthdate, String email, String nombre, String apellidos,
+			boolean admin) {
+		super();
+		this.user = user;
+		this.password = password;
+		DNI = dNI;
+		this.birthdate = birthdate;
+		this.email = email;
+//		Pronostico p = new Pronostico("72534640T", "Getafe", this.getQues(), 20);
+//		this.pronosticos.add(p);
+		this.Wallet = 0.0;
+		this.admin = false;
+	}
 
 	public List<Pronostico> getPronosticos() {
 		return pronosticos;
+	}
+	
+	public boolean finPron(Pronostico p) {
+		for(Pronostico pron : pronosticos) {
+			if(pron.equals(p)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void setPronosticos(List<Pronostico> pronosticos) {
@@ -80,22 +103,23 @@ public class User {
 		Wallet = wallet;
 	}
 
-	public User(String user, String password, String dNI, Date birthdate, String email, String nombre, String apellidos,
-			 boolean admin) {
-		super();
-		this.user = user;
-		this.password = password;
-		DNI = dNI;
-		this.birthdate = birthdate;
-		this.email = email;	
-//		Pronostico p = new Pronostico("72534640T", "Getafe", this.getQues(), 20);
-//		this.pronosticos.add(p);
-		this.Wallet = 0.0;
+	public void actualizarWallet(Pronostico p, double cuanto, double ganancia) {
+		if(this.isAvailable()) {
+			this.setWallet(cuanto * ganancia);
+		}
+	}
+
+	public boolean isAvailable() {
+		return available;
+	}
+
+	public void setAvailable(boolean available) {
+		this.available = available;
 	}
 
 	public Question getQues(Question q) {
-		for(Question a : ques) {
-			if(a.getQuestion().equals(q.getQuestion())) {
+		for (Question a : ques) {
+			if (a.getQuestion().equals(q.getQuestion())) {
 				return a;
 			}
 		}
@@ -105,7 +129,7 @@ public class User {
 	public void setQues(Question quesi) {
 		ques.add(quesi);
 	}
-	
+
 	public List<Question> getAllQuestions() {
 		return ques;
 	}
@@ -161,6 +185,7 @@ public class User {
 
 	public boolean getAdmin(String user, String password) {
 		if (user.equals("Adminuser") && password.equals("Adminpassword")) {
+			this.setAdmin(true);
 			return true;
 		}
 		return this.admin;

@@ -43,8 +43,6 @@ public class CreateQuestionGUI extends JFrame {
 	private JLabel jLabelError = new JLabel();
 
 	private Vector<Date> datesWithEventsCurrentMonth = new Vector<Date>();
-	private final JTextField textFieldGanancias = new JTextField();
-	private final JLabel jLabelError_1 = new JLabel();
 
 	public CreateQuestionGUI(Vector<domain.Event> v) {
 		
@@ -68,8 +66,6 @@ public class CreateQuestionGUI extends JFrame {
 		jTextFieldQuery.setBounds(new Rectangle(100, 211, 429, 20));
 		jLabelMinBet.setBounds(new Rectangle(25, 243, 75, 20));
 		jTextFieldPrice.setBounds(new Rectangle(100, 243, 60, 20));
-		textFieldGanancias.setBounds(402, 277, 146, 26);
-		textFieldGanancias.setColumns(10);
 		
 		jCalendar.setBounds(new Rectangle(40, 50, 225, 150));
 		scrollPaneEvents.setBounds(new Rectangle(25, 44, 346, 116));
@@ -119,14 +115,6 @@ public class CreateQuestionGUI extends JFrame {
 		jLabelEventDate.setBounds(new Rectangle(40, 15, 140, 25));
 		jLabelEventDate.setBounds(40, 16, 140, 25);
 		getContentPane().add(jLabelEventDate);
-		
-		getContentPane().add(textFieldGanancias);
-		jLabelError_1.setText(ResourceBundle.getBundle("Etiquetas").getString("GananciasPorEuroApostado"));
-		jLabelError_1.setForeground(Color.BLACK);
-		jLabelError_1.setBounds(new Rectangle(178, 243, 198, 20));
-		jLabelError_1.setBounds(382, 243, 198, 20);
-		
-		getContentPane().add(jLabelError_1);
 
 		// Code for JCalendar
 		this.jCalendar.addPropertyChangeListener(new PropertyChangeListener() {
@@ -255,7 +243,7 @@ public class CreateQuestionGUI extends JFrame {
 
 				// It could be to trigger an exception if the introduced string is not a number
 				float inputPrice = Float.parseFloat(jTextFieldPrice.getText());
-				double inputGanancias = Double.parseDouble(textFieldGanancias.getText());
+//				double inputGanancias = Double.parseDouble(textFieldGanancias.getText());
 
 				if (inputPrice <= 0)
 					jLabelError.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorNumber"));
@@ -264,7 +252,7 @@ public class CreateQuestionGUI extends JFrame {
 					// Obtain the business logic from a StartWindow class (local or remote)
 					BLFacade facade = MainGUI.getBusinessLogic();
 
-					facade.createQuestion(event, inputQuery, inputPrice,inputGanancias);
+					facade.createQuestion(event, inputQuery, inputPrice);
 
 					jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("QueryCreated"));
 				}

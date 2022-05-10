@@ -27,14 +27,14 @@ public class Event implements Serializable {
 	private Date eventDate;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private Vector<Question> questions = new Vector<Question>();
-	private boolean available=true;
-
-	public boolean isAvailable() {
-		return available;
-	}
+	private boolean available = true;
 
 	public void setAvailable(boolean available) {
 		this.available = available;
+	}
+
+	public boolean isAvailable() {
+		return available;
 	}
 
 	public Vector<Question> getQuestions() {
@@ -96,8 +96,8 @@ public class Event implements Serializable {
 	 * @param betMinimum of that question
 	 * @return Bet
 	 */
-	public Question addQuestion(String question, float betMinimum, double gananciasApuesta) {
-		Question q = new Question(question, betMinimum, gananciasApuesta, this);
+	public Question addQuestion(String question, float betMinimum) {
+		Question q = new Question(question, betMinimum, this);
 		questions.add(q);
 		return q;
 	}
@@ -139,8 +139,8 @@ public class Event implements Serializable {
 	}
 
 	public Question addQuestionNew(Question q) {
-	        questions.add(q);
-	        return q;
-	    }
-	
+		questions.add(q);
+		return q;
+	}
+
 }

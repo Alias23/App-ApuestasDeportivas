@@ -1,30 +1,35 @@
 package domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @Entity
 public class Pronostico {
 
-	@OneToOne
-	private Event event;
-	private String equipo;
-	private String jugador;
-
+	@Id
+	@XmlJavaTypeAdapter(IntegerAdapter.class)
+	@GeneratedValue
+	private double ganancia;
 	private String pronostico;
+//	@OneToOne
+//	private Event event;
 	@XmlIDREF
 	private Question question;
-	private float minBet;
-	
+
 	public Pronostico() {
 		super();
 	}
-	public Pronostico(float minbet,String p) {
-		this.minBet=minbet;
-		this.pronostico=p;
+
+	public Pronostico(double ganancia, String p, Question question) {
+		super();
+		this.ganancia = ganancia;
+		this.pronostico = p;
+		this.question = question;
 	}
+
 	public String getPronostico() {
 		return pronostico;
 	}
@@ -32,39 +37,13 @@ public class Pronostico {
 	public void setPronostico(String pronostico) {
 		this.pronostico = pronostico;
 	}
-	
-	
 
-	public Event getEvent() {
-		return event;
+	public double getGanancia() {
+		return ganancia;
 	}
 
-	public String getEquipo() {
-		return equipo;
-	}
-
-	public void setEquipo(String equipo) {
-		this.equipo = equipo;
-	}
-
-	public String getJugador() {
-		return jugador;
-	}
-
-	public void setJugador(String jugador) {
-		this.jugador = jugador;
-	}
-
-	public float getMinBet() {
-		return minBet;
-	}
-
-	public void setMinBet(float minBet) {
-		this.minBet = minBet;
-	}
-
-	public void setEvent(Event event) {
-		this.event = event;
+	public void setGanancia(double ganancia) {
+		this.ganancia = ganancia;
 	}
 
 	public Question getQuestion() {

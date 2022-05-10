@@ -29,7 +29,7 @@ public class MainGUI extends JFrame {
 	private JButton jButtonCreateQuery = null;
 	private JButton jButtonCreateEvent = null;
 	private JButton jButtonCreateProns = null;
-	private JButton jButtonCerrar=null;
+	private JButton jButtonCerrar = null;
 
 	private static BLFacade appFacadeInterface;
 
@@ -101,11 +101,10 @@ public class MainGUI extends JFrame {
 			jContentPane.add(getBoton4());
 			jContentPane.add(getBoton5());
 
-			
 		}
 		return jContentPane;
 	}
-	
+
 	private JButton getBoton5() {
 		if (jButtonCerrar == null) {
 			jButtonCerrar = new JButton(ResourceBundle.getBundle("Etiquetas").getString("CerrarApuesta"));//$NON-NLS-1$ //$NON-NLS-2$
@@ -122,12 +121,13 @@ public class MainGUI extends JFrame {
 
 	private JButton getBoton4() {
 		if (jButtonCreateProns == null) {
-			jButtonCreateProns = new JButton(ResourceBundle.getBundle("Etiquetas").getString("CrearPronosticoCorrecto")); //$NON-NLS-1$ //$NON-NLS-2$
+			jButtonCreateProns = new JButton(
+					ResourceBundle.getBundle("Etiquetas").getString("CrearPronosticoCorrecto")); //$NON-NLS-1$ //$NON-NLS-2$
 			jButtonCreateProns.setBounds(243, 59, 230, 58);
 			jButtonCreateProns.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					JFrame a = new CreatePronGUI();
-					a.setVisible(true);
+//					JFrame a = new CreatePronGUI();
+//					a.setVisible(true);
 				}
 			});
 		}
@@ -148,8 +148,7 @@ public class MainGUI extends JFrame {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					JFrame a = new CreateQuestionGUI(new Vector<Event>());
 					a.setVisible(true);
-					 JFrame b =new CreateEventGUI(new Vector<Event>());
-					 b.setVisible(true);
+
 				}
 			});
 		}
@@ -168,10 +167,6 @@ public class MainGUI extends JFrame {
 			jButtonCreateEvent.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateEvent"));
 			jButtonCreateEvent.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-//					JFrame a = new FindQuestionsGUI();
-//
-//					a.setVisible(true);
-
 					JFrame b = new CreateEventGUI(new Vector<Event>());
 					b.setVisible(true);
 				}
@@ -255,4 +250,5 @@ public class MainGUI extends JFrame {
 		jButtonCerrar.setText(ResourceBundle.getBundle("Etiquetas").getString("CerrarApuesta"));
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
 	}
-} // @jve:decl-index=0:visual-constraint="0,0" @jve:decl-index=0:visual-constraint="0,0"
+} // @jve:decl-index=0:visual-constraint="0,0"
+	// @jve:decl-index=0:visual-constraint="0,0"

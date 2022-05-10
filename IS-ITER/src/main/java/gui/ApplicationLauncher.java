@@ -75,7 +75,6 @@ public class ApplicationLauncher {
 			MainGUI.setBussinessLogic(appFacadeInterface);
 
 
-			
 		}catch (Exception e) {
 				a.JLabelSelectOption.setText("Error: "+e.toString());
 				a.JLabelSelectOption.setForeground(Color.RED);	
