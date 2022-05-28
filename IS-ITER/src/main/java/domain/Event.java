@@ -13,10 +13,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class Event implements Serializable {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@XmlID
 	@XmlJavaTypeAdapter(IntegerAdapter.class)
@@ -25,9 +21,9 @@ public class Event implements Serializable {
 	private Integer eventNumber;
 	private String description;
 	private Date eventDate;
+	private boolean available = true;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private Vector<Question> questions = new Vector<Question>();
-	private boolean available = true;
 
 	public void setAvailable(boolean available) {
 		this.available = available;

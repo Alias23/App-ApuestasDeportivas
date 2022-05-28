@@ -96,27 +96,21 @@ public class HacerLogin extends JFrame {
 								a.setVisible(true);
 								VisibleFalse(e);
 							} else {
-								facade.getLog().setAdmin(true);
-//								if((facade.getUserLogin(user, password).getAdmin())==true) {
+
 								MainGUI m = new MainGUI();
 								m.setVisible(true);
-								
-//								}
 							}
 						} else {
 							errorLabel.setText(
 									ResourceBundle.getBundle("Etiquetas").getString("Usuarioocontraseñainvalidos"));
 						}
 					}
-
 				}
-
 			}
-
 		});
 		btnNewButton.setBounds(151, 199, 132, 29);
 		contentPane.add(btnNewButton);
-		
+
 		JButton atrasButton = new JButton("ATRAS");
 		atrasButton.setBounds(15, 199, 121, 29);
 		contentPane.add(atrasButton);
@@ -126,7 +120,8 @@ public class HacerLogin extends JFrame {
 			}
 		});
 	}
-	private void VisibleFalse(ActionEvent e ) {
+
+	private void VisibleFalse(ActionEvent e) {
 		this.setVisible(false);
 	}
 }

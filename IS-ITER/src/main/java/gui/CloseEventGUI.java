@@ -31,6 +31,7 @@ public class CloseEventGUI extends JFrame {
 
 	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
 	private Question ques;
+
 	// Code for JCalendar
 	private JCalendar jCalendar1 = new JCalendar();
 	private Calendar calendarAnt = null;
@@ -75,7 +76,7 @@ public class CloseEventGUI extends JFrame {
 	}
 
 	private void jbInit(Vector<domain.Event> v) throws Exception {
-		
+
 		this.getContentPane().setLayout(null);
 		this.setSize(new Dimension(889, 548));
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("HacerApuesta"));
@@ -187,7 +188,7 @@ public class CloseEventGUI extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int i = tableEvents.getSelectedRow();
 				domain.Event ev = (domain.Event) tableModelEvents.getValueAt(i, 2);// obtain ev object
-				domain.Event evento=null;
+				domain.Event evento = null;
 				evento = ev;
 				Vector<Question> queries = ev.getQuestions();
 
@@ -241,13 +242,14 @@ public class CloseEventGUI extends JFrame {
 							else
 								jLabelApuestas.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectedEvent")
 										+ ": " + q.getQuestion());
-							
-							for (domain.Pronostico p : prons) {
 
-								Vector<Object> row = new Vector<Object>();
-								row.add(p.getGanancia());
-								row.add(p.getPronostico());
-								tableModelApuesta.addRow(row);
+							for (domain.Pronostico p : prons) {
+								if (p.getGanancia() != 0.0) {
+									Vector<Object> row = new Vector<Object>();
+									row.add(p.getGanancia());
+									row.add(p.getPronostico());
+									tableModelApuesta.addRow(row);
+								}
 							}
 							tableApuesta.getColumnModel().getColumn(0).setPreferredWidth(130);
 							tableApuesta.getColumnModel().getColumn(1).setPreferredWidth(228);
@@ -279,26 +281,20 @@ public class CloseEventGUI extends JFrame {
 				domain.Event ev = (domain.Event) tableModelEvents.getValueAt(i, 2);
 				Vector<Question> queries = ev.getQuestions();
 				if (ev.isAvailable()) {
-					facade.closeEvent(ev);
-					System.out.println(ev.getDescription()+","+ev.isAvailable()+" ,no visible");
 					for (domain.Question q : queries) {
 						if (q.getQuestion().equals(tableQueries.getValueAt(u, 1))) {
 							Vector<Pronostico> prons = (Vector<Pronostico>) q.getProns();
 							for (domain.Pronostico p : prons) {
 								if (p.getPronostico().equals(tableApuesta.getValueAt(z, 1))) {
 									User user = facade.getLog();
-									if(user.finPron(p)) {
-										user.setAvailable(true);
+									if (user.finPron(p)) {
 										facade.wallet(ev, q, p, user.getApuesta(), p.getGanancia());
 										p.setPronostico(tableApuesta.getValueAt(u, 1).toString());
-										jLabelHecho.setText(
-												ResourceBundle.getBundle("Etiquetas").getString("EventClose"));
-									}else {
+										jLabelHecho
+												.setText(ResourceBundle.getBundle("Etiquetas").getString("EventClose"));
+									} else {
 										System.out.println("NO");
 									}
-//									//Actualizar wallet en base a la respuesta correcta
-									//Aqui tiene q haber una llamada a un metodo FACADE que guarde el dinero apostado
-//									facade.wallet(ev, q, p, //aqui,
 								}
 							}
 						}
@@ -306,9 +302,10 @@ public class CloseEventGUI extends JFrame {
 				}
 
 			}
-		});pronButton.setBounds(241,443,140,30);
+		});
+		pronButton.setBounds(241, 443, 140, 30);
 
-	getContentPane().add(pronButton);
+		getContentPane().add(pronButton);
 		pronButton.setVisible(true);
 
 		scrollPaneApuestas = new JScrollPane();
@@ -371,14 +368,3 @@ public class CloseEventGUI extends JFrame {
 		this.setVisible(false);
 	}
 }
-
-//	tableEvents.addMouseListener(new MouseAdapter() {
-//		@Override
-//		public void mouseClicked(MouseEvent e) {
-//			int i = tableEvents.getSelectedRow();
-//			domain.Event ev = (domain.Event) tableModelEvents.getValueAt(i, 2); // obtain ev object
-//			facade.closeEvent(ev);
-//				System.out.println(ev.getDescription()+","+ev.isAvailable()+" ,no visible");
-//			
-//		}
-//	});

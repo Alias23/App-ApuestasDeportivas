@@ -14,6 +14,7 @@ import dataAccess.DataAccess;
 import domain.Question;
 
 import domain.User;
+import domain.EquipoJugador;
 import domain.Event;
 import domain.Pronostico;
 import exceptions.EventAlreadyExists;
@@ -139,7 +140,6 @@ public class BLFacadeImplementation implements BLFacade {
 		dbManager.open(false);
 		dbManager.storeUser(user);
 		dbManager.close();
-		// TODO Auto-generated method stub
 
 	}
 
@@ -148,7 +148,6 @@ public class BLFacadeImplementation implements BLFacade {
 		dbManager.open(false);
 		dbManager.dbEvent(event);
 		dbManager.close();
-		// TODO Auto-generated method stub
 
 	}
 
@@ -188,43 +187,73 @@ public class BLFacadeImplementation implements BLFacade {
 	}
 
 	@WebMethod
-	public Event createEvent(int eventNumber, String description, Date eventDate) throws EventFinished {
+	public Event createEvent(String description, Date eventDate) throws EventFinished {
 		dbManager.open(false);
 		Event ev = null;
 
 		if (new Date().compareTo(eventDate) > 0)
 			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").getString("ErrorDateHasPasses"));
 
-		ev = dbManager.createEvent(eventNumber, description, eventDate);
+		ev = dbManager.createEvent(description, eventDate);
 
 		dbManager.close();
 
 		return ev;
 
 	}
-	
+
+	@WebMethod
+	public Pronostico getPronostico(String p) {
+		dbManager.open(false);
+		Pronostico pr = dbManager.getPronostico(p);
+		dbManager.close();
+		return pr;
+	}
+
 	@WebMethod
 	public void closeEvent(Event e) {
 		dbManager.open(false);
 		dbManager.closeEvent(e);
 		dbManager.close();
 	}
-	
+
 	@WebMethod
-	public void wallet(Event event, Question question,Pronostico p, double cuanto, double ganancia) {
+	public void wallet(Event event, Question question, Pronostico p, double cuanto, double ganancia) {
 		dbManager.open(false);
 		dbManager.wallet(event, question, p, cuanto, ganancia);
 		dbManager.close();
 	}
-	
-	
-//	@WebMethod
-//	public double ajustWallet(Event e, User user) {
-//		dbManager.open(false);
-//		double a = dbManager.ajustWallet(e, user);
-//		dbManager.close();
-//		return a;
-//	}
+
+	@WebMethod
+	public void setPron(Pronostico p, String pr) {
+		dbManager.open(false);
+		dbManager.setPron(p, pr);
+		dbManager.close();
+	}
+
+	@WebMethod
+	public Pronostico createPronostico(double ganancias, String description, Integer num, int q) {
+		dbManager.open(false);
+		Pronostico p = dbManager.createPronostico(ganancias, description, num, q);
+		dbManager.close();
+		return p;
+	}
+
+	@WebMethod
+	public Vector<EquipoJugador> getEquipo(Date date) {
+		dbManager.open(false);
+		Vector<EquipoJugador> e = dbManager.getEquipo(date);
+		dbManager.close();
+		return e;
+	}
+
+	@WebMethod
+	public void setApues(double a) {
+		dbManager.open(false);
+		dbManager.setApues(a);
+		dbManager.close();
+
+	}
 
 	@WebMethod
 	public User getLog() {

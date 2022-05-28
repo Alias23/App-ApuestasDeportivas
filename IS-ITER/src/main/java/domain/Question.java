@@ -22,11 +22,9 @@ public class Question implements Serializable {
 	private Integer questionNumber;
 	private String question;
 	private float betMinimum;
-
 	private String result;
 	@XmlIDREF
 	private Event event;
-	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private Vector<Pronostico> prons = new Vector<Pronostico>();
 
@@ -156,14 +154,15 @@ public class Question implements Serializable {
 		return questionNumber + ";" + question + ";" + Float.toString(betMinimum);
 	}
 
-//	public Question addQuestion(String question, float betMinimum, double gananciasApuesta) {
-//		Question q = new Question(question, betMinimum, gananciasApuesta, this);
-//		questions.add(q);
-//		return q;
-//	}
-
-	public Pronostico addProns(double ganancias, String p) {
-		Pronostico pron = new Pronostico(ganancias, p, this);
+		
+	public Pronostico addProns(double ganancias, String p,Integer num) {
+		Pronostico pron = new Pronostico(ganancias, p,num);
+		prons.add(pron);
+		return pron;
+	} 
+	
+	public Pronostico addProns2(Integer num, String p) {
+		Pronostico pron = new Pronostico(num,p);
 		prons.add(pron);
 		return pron;
 	}

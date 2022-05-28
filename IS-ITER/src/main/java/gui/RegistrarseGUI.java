@@ -183,19 +183,14 @@ public class RegistrarseGUI extends JFrame {
 							if (password.compareTo(password2) == 0) {
 								if (emailVerify(email)) {
 									if (!facade.getUser(user)) {
-//										ArrayList<Pronostico> pron = null;
-
 										User user_new = new User(user, password, DNI, fecha, email, nombre, apellidos,
-											 false);
+												false);
 										user_new.setNombre(nombre);
 										user_new.setApellidos(apellidos);
 										user_new.setUser(user);
 										user_new.setDNI(DNI);
-										
-//										User u = new User(user,password);
 										try {
 											facade.storeUser(user_new);
-											//facade.storeUser(u);
 											errorLabel.setText(ResourceBundle.getBundle("Etiquetas")
 													.getString("Registradoconexito"));
 											try {
@@ -207,7 +202,6 @@ public class RegistrarseGUI extends JFrame {
 												ex.printStackTrace();
 											}
 										} catch (UserAlreadyExists e1) {
-											// TODO Auto-generated catch block
 											e1.printStackTrace();
 										}
 									} else {
@@ -306,6 +300,7 @@ public class RegistrarseGUI extends JFrame {
 		return miLetra;
 
 	}
+
 	private void jButton2_actionPerformed(ActionEvent e) {
 		this.setVisible(false);
 	}

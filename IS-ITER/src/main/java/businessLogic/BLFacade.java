@@ -6,6 +6,7 @@ import java.util.Date;
 //import domain.Booking;
 import domain.Question;
 import domain.User;
+import domain.EquipoJugador;
 import domain.Event;
 import domain.Pronostico;
 import exceptions.EventAlreadyExists;
@@ -35,14 +36,22 @@ public interface BLFacade {
 	 *                              event
 	 */
 	@WebMethod
-	Question createQuestion(Event event, String question, float betMinimum)
-			throws EventFinished, QuestionAlreadyExist;
+	Question createQuestion(Event event, String question, float betMinimum) throws EventFinished, QuestionAlreadyExist;
 
 	@WebMethod
 	public void closeEvent(Event e);
 
-//	@WebMethod
-//	public double ajustWallet(Event e, User user);
+	@WebMethod
+	public Pronostico createPronostico(double ganancias, String description, Integer num, int q);
+
+	@WebMethod
+	public Vector<EquipoJugador> getEquipo(Date date);
+
+	@WebMethod
+	public void setApues(double a);
+
+	@WebMethod
+	public void setPron(Pronostico p, String pr);
 
 	@WebMethod
 	public Vector<Event> getEvents(Date date);
@@ -52,6 +61,9 @@ public interface BLFacade {
 
 	@WebMethod
 	public void initializeBD();
+
+	@WebMethod
+	public Pronostico getPronostico(String p);
 
 	@WebMethod
 	public void storeUser(User user) throws UserAlreadyExists;
@@ -64,17 +76,17 @@ public interface BLFacade {
 
 	@WebMethod
 	public boolean getUser(String u);
-	
-	@WebMethod
-	public void wallet(Event event, Question question,Pronostico p, double cuanto, double ganancia);
 
 	@WebMethod
-	public Event createEvent(int eventNumber, String description, Date eventDate) throws EventFinished;
+	public void wallet(Event event, Question question, Pronostico p, double cuanto, double ganancia);
+
+	@WebMethod
+	public Event createEvent(String description, Date eventDate) throws EventFinished;
 
 	@WebMethod
 	public int getLastEventNumber(Date date);
-	
+
 	@WebMethod
 	public User getLog();
-	
+
 }

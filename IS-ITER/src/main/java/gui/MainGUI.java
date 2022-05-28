@@ -58,9 +58,7 @@ public class MainGUI extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				try {
-					// if (ConfigXML.getInstance().isBusinessLogicLocal()) facade.close();
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					System.out.println(
 							"Error: " + e1.toString() + " , probably problems with Business Logic or Database");
 				}
@@ -69,7 +67,6 @@ public class MainGUI extends JFrame {
 		});
 
 		initialize();
-		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	/**
@@ -78,7 +75,6 @@ public class MainGUI extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		// this.setSize(271, 295);
 		this.setSize(495, 290);
 		this.setContentPane(getJContentPane());
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
@@ -126,8 +122,8 @@ public class MainGUI extends JFrame {
 			jButtonCreateProns.setBounds(243, 59, 230, 58);
 			jButtonCreateProns.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-//					JFrame a = new CreatePronGUI();
-//					a.setVisible(true);
+					JFrame a = new CreatePronosticoGUI(new Vector<domain.Pronostico>());
+					a.setVisible(true);
 				}
 			});
 		}
@@ -167,7 +163,7 @@ public class MainGUI extends JFrame {
 			jButtonCreateEvent.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateEvent"));
 			jButtonCreateEvent.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					JFrame b = new CreateEventGUI(new Vector<Event>());
+					JFrame b = new CreateEventGUI(new Vector<domain.EquipoJugador>());
 					b.setVisible(true);
 				}
 			});
@@ -250,5 +246,4 @@ public class MainGUI extends JFrame {
 		jButtonCerrar.setText(ResourceBundle.getBundle("Etiquetas").getString("CerrarApuesta"));
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
 	}
-} // @jve:decl-index=0:visual-constraint="0,0"
-	// @jve:decl-index=0:visual-constraint="0,0"
+}

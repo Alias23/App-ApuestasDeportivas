@@ -24,13 +24,13 @@ public class User {
 	private String DNI;
 	private Date birthdate;
 	private String email;
-	private boolean admin = false;
-//	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private List<Pronostico> pronosticos = new ArrayList<Pronostico>();
-	private List<Question> ques = new ArrayList<Question>();
-	private double Wallet;
-	private double apuesta;
+	private boolean admin;
+	private double Wallet=0.0;
+	private double apuesta=0.0;
 	private boolean available=false;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	private List<Pronostico> pronosticos = new ArrayList<Pronostico>();
+	
 
 	public User(String user, String password, String dNI, Date birthdate, String email, String nombre, String apellidos,
 			boolean admin) {
@@ -40,9 +40,6 @@ public class User {
 		DNI = dNI;
 		this.birthdate = birthdate;
 		this.email = email;
-//		Pronostico p = new Pronostico("72534640T", "Getafe", this.getQues(), 20);
-//		this.pronosticos.add(p);
-		this.Wallet = 0.0;
 		this.admin = false;
 	}
 
@@ -52,7 +49,7 @@ public class User {
 	
 	public boolean finPron(Pronostico p) {
 		for(Pronostico pron : pronosticos) {
-			if(pron.equals(p)) {
+			if(pron.getPronostico().equals(p.getPronostico())) {
 				return true;
 			}
 		}
@@ -117,23 +114,6 @@ public class User {
 		this.available = available;
 	}
 
-	public Question getQues(Question q) {
-		for (Question a : ques) {
-			if (a.getQuestion().equals(q.getQuestion())) {
-				return a;
-			}
-		}
-		return null;
-	}
-
-	public void setQues(Question quesi) {
-		ques.add(quesi);
-	}
-
-	public List<Question> getAllQuestions() {
-		return ques;
-	}
-
 	public User(String user, String password) {
 		this.user = user;
 		this.password = password;
@@ -181,6 +161,7 @@ public class User {
 
 	public void addPronostico(Pronostico pron) {
 		pronosticos.add(pron);
+		
 	}
 
 	public boolean getAdmin(String user, String password) {

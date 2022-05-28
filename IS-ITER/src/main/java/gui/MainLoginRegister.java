@@ -65,9 +65,7 @@ public class MainLoginRegister extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				try {
-					// if (ConfigXML.getInstance().isBusinessLogicLocal()) facade.close();
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					System.out.println(
 							"Error: " + e1.toString() + " , probably problems with Business Logic or Database");
 				}
@@ -76,7 +74,6 @@ public class MainLoginRegister extends JFrame {
 		});
 
 		initialize();
-		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	/**
@@ -85,7 +82,6 @@ public class MainLoginRegister extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		// this.setSize(271, 295);
 		this.setSize(495, 290);
 		this.setContentPane(getJContentPane());
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
@@ -239,9 +235,4 @@ public class MainLoginRegister extends JFrame {
 		JButtonApuestas.setText(ResourceBundle.getBundle("Etiquetas").getString("ApuestasDisponibles"));
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
 	}
-
-//	private void visibleFalse(ActionEvent e) {
-//		this.setVisible(false);
-//	}
-
 }

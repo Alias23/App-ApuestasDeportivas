@@ -5,6 +5,7 @@ import configuration.UtilDate;
 
 import com.toedter.calendar.JCalendar;
 
+import domain.Pronostico;
 import domain.Question;
 import javax.swing.*;
 import java.awt.*;
@@ -21,23 +22,34 @@ public class FindQuestionsGUI extends JFrame {
 	private final JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
 	private final JLabel jLabelQueries = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Queries"));
 	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events"));
+	private final JLabel jLabelApuestas = new JLabel(
+			ResourceBundle.getBundle("Etiquetas").getString("ApuestasDisponibles"));
+	private final JLabel jLabelBetMin = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("ApuestaMin"));
+	private JLabel jLabelHecho;
 
 	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
-
+	private Question ques;
 	// Code for JCalendar
 	private JCalendar jCalendar1 = new JCalendar();
 	private Calendar calendarAnt = null;
 	private Calendar calendarAct = null;
 	private JScrollPane scrollPaneEvents = new JScrollPane();
 	private JScrollPane scrollPaneQueries = new JScrollPane();
+	private JScrollPane scrollPaneApuestas = new JScrollPane();
 
 	private Vector<Date> datesWithEventsCurrentMonth = new Vector<Date>();
 
 	private JTable tableEvents = new JTable();
 	private JTable tableQueries = new JTable();
+	private JTable tableApuesta = new JTable();
 
 	private DefaultTableModel tableModelEvents;
 	private DefaultTableModel tableModelQueries;
+	private DefaultTableModel tableModelApuesta;
+	// Local variables
+	private float minBet;
+	private domain.Event evento;
+	BLFacade facade = MainGUI.getBusinessLogic();
 
 	private String[] columnNamesEvents = new String[] { ResourceBundle.getBundle("Etiquetas").getString("EventN"),
 			ResourceBundle.getBundle("Etiquetas").getString("Event"),
@@ -45,6 +57,11 @@ public class FindQuestionsGUI extends JFrame {
 	};
 	private String[] columnNamesQueries = new String[] { ResourceBundle.getBundle("Etiquetas").getString("QueryN"),
 			ResourceBundle.getBundle("Etiquetas").getString("Query")
+
+	};
+
+	private String[] columnNamesApuestas = new String[] { ResourceBundle.getBundle("Etiquetas").getString("ApuestaMin"),
+			ResourceBundle.getBundle("Etiquetas").getString("Disponibles")
 
 	};
 
@@ -59,18 +76,18 @@ public class FindQuestionsGUI extends JFrame {
 	private void jbInit() throws Exception {
 
 		this.getContentPane().setLayout(null);
-		this.setSize(new Dimension(700, 500));
-		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("QueryQueries"));
+		this.setSize(new Dimension(889, 551));
+		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("HacerApuesta"));
 
 		jLabelEventDate.setBounds(new Rectangle(40, 15, 140, 25));
-		jLabelQueries.setBounds(138, 248, 406, 14);
+		jLabelQueries.setBounds(138, 210, 406, 14);
 		jLabelEvents.setBounds(295, 19, 259, 16);
 
 		this.getContentPane().add(jLabelEventDate, null);
 		this.getContentPane().add(jLabelQueries);
 		this.getContentPane().add(jLabelEvents);
 
-		jButtonClose.setBounds(new Rectangle(159, 406, 130, 30));
+		jButtonClose.setBounds(new Rectangle(65, 427, 130, 30));
 
 		jButtonClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -96,7 +113,6 @@ public class FindQuestionsGUI extends JFrame {
 					calendarAnt = (Calendar) propertychangeevent.getOldValue();
 					calendarAct = (Calendar) propertychangeevent.getNewValue();
 					DateFormat dateformat1 = DateFormat.getDateInstance(1, jCalendar1.getLocale());
-//					jCalendar1.setCalendar(calendarAct);
 					Date firstDay = UtilDate.trim(new Date(jCalendar1.getCalendar().getTime().getTime()));
 
 					int monthAnt = calendarAnt.get(Calendar.MONTH);
@@ -162,33 +178,37 @@ public class FindQuestionsGUI extends JFrame {
 		this.getContentPane().add(jCalendar1, null);
 
 		scrollPaneEvents.setBounds(new Rectangle(292, 50, 346, 150));
-		scrollPaneQueries.setBounds(new Rectangle(138, 274, 406, 116));
+		scrollPaneQueries.setBounds(new Rectangle(138, 234, 406, 116));
 
 		tableEvents.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int i = tableEvents.getSelectedRow();
-				domain.Event ev = (domain.Event) tableModelEvents.getValueAt(i, 2); // obtain ev object
+				domain.Event ev = (domain.Event) tableModelEvents.getValueAt(i, 2);// obtain ev object
+				evento = ev;
 				Vector<Question> queries = ev.getQuestions();
 
 				tableModelQueries.setDataVector(null, columnNamesQueries);
+				if (ev.isAvailable() == true) {
+					if (queries.isEmpty())
+						jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("NoQueries") + ": "
+								+ ev.getDescription());
+					else
+						jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectedEvent") + " "
+								+ ev.getDescription());
 
-				if (queries.isEmpty())
-					jLabelQueries.setText(
-							ResourceBundle.getBundle("Etiquetas").getString("NoQueries") + ": " + ev.getDescription());
-				else
-					jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectedEvent") + " "
-							+ ev.getDescription());
+					for (domain.Question q : queries) {
+						Vector<Object> row = new Vector<Object>();
 
-				for (domain.Question q : queries) {
-					Vector<Object> row = new Vector<Object>();
-
-					row.add(q.getQuestionNumber());
-					row.add(q.getQuestion());
-					tableModelQueries.addRow(row);
+						row.add(q.getQuestionNumber());
+						row.add(q.getQuestion());
+						tableModelQueries.addRow(row);
+					}
+					tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
+					tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
+				} else {
+					jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoQueries"));
 				}
-				tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
-				tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
 			}
 		});
 
@@ -199,6 +219,48 @@ public class FindQuestionsGUI extends JFrame {
 		tableEvents.getColumnModel().getColumn(0).setPreferredWidth(25);
 		tableEvents.getColumnModel().getColumn(1).setPreferredWidth(268);
 
+		tableQueries.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				int i = tableEvents.getSelectedRow();
+				int u = tableQueries.getSelectedRow();
+				domain.Event ev = (domain.Event) tableModelEvents.getValueAt(i, 2);
+				Vector<Question> queries = ev.getQuestions();
+				tableModelApuesta.setDataVector(null, columnNamesApuestas);
+				if (ev.isAvailable() == true) {
+					for (domain.Question q : queries) {
+						if (q.getQuestion().equals(tableQueries.getValueAt(u, 1))) {
+							Vector<Pronostico> prons = (Vector<Pronostico>) q.getProns();
+							if (prons.isEmpty())
+								jLabelApuestas.setText(ResourceBundle.getBundle("Etiquetas").getString("NoApuestas")
+										+ ": " + q.getQuestion());
+							else
+								jLabelApuestas.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectedEvent")
+										+ ": " + q.getQuestion());
+							jLabelBetMin.setText(ResourceBundle.getBundle("Etiquetas").getString("ApuestaMin") + ": "
+									+ q.getBetMinimum());
+
+							for (domain.Pronostico p : prons) {
+								if (p.getGanancia() != 0.0) {
+									Vector<Object> row = new Vector<Object>();
+									row.add(p.getGanancia());
+									row.add(p.getPronostico());
+									tableModelApuesta.addRow(row);
+								}
+							}
+							tableApuesta.getColumnModel().getColumn(0).setPreferredWidth(130);
+							tableApuesta.getColumnModel().getColumn(1).setPreferredWidth(228);
+							q.setQuestion(tableQueries.getValueAt(i, 1).toString());
+						}
+					}
+				} else {
+					jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoQueries"));
+				}
+			}
+
+		});
+
 		scrollPaneQueries.setViewportView(tableQueries);
 		tableModelQueries = new DefaultTableModel(null, columnNamesQueries);
 
@@ -206,11 +268,69 @@ public class FindQuestionsGUI extends JFrame {
 		tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
 		tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
 
-		this.getContentPane().add(scrollPaneEvents, null);
 		this.getContentPane().add(scrollPaneQueries, null);
+		this.getContentPane().add(scrollPaneEvents, null);
 
-		JButton jButtonApostar = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Apostar")); //$NON-NLS-1$ //$NON-NLS-2$
-		jButtonApostar.setBounds(353, 407, 115, 29);
+		scrollPaneApuestas = new JScrollPane();
+		scrollPaneApuestas.setBounds(new Rectangle(292, 50, 346, 150));
+		scrollPaneApuestas.setBounds(559, 234, 225, 239);
+
+		tableApuesta = new JTable();
+		scrollPaneApuestas.setColumnHeaderView(tableApuesta);
+
+		this.getContentPane().add(scrollPaneApuestas, null);
+		scrollPaneApuestas.setViewportView(tableApuesta);
+		tableModelApuesta = new DefaultTableModel(null, columnNamesApuestas);
+
+		tableApuesta.setModel(tableModelApuesta);
+		tableApuesta.getColumnModel().getColumn(0).setPreferredWidth(130);
+		tableApuesta.getColumnModel().getColumn(1).setPreferredWidth(228);
+		tableApuesta.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int i = tableEvents.getSelectedRow();
+				int u = tableQueries.getSelectedRow();
+				int z = tableApuesta.getSelectedRow();
+				domain.Event ev = (domain.Event) tableModelEvents.getValueAt(i, 2);
+				Vector<Question> queries = ev.getQuestions();
+				if (ev.isAvailable()) {
+					for (domain.Question q : queries) {
+						if (q.getQuestion().equals(tableQueries.getValueAt(u, 1))) {
+							Vector<Pronostico> prons = (Vector<Pronostico>) q.getProns();
+							for (domain.Pronostico p : prons) {
+								if (p.getPronostico().equals(tableApuesta.getValueAt(z, 1))) {
+									domain.Pronostico s = p;
+									p.setPronostico(tableApuesta.getValueAt(u, 1).toString());
+								}
+							}
+						}
+					}
+				} else {
+					jLabelApuestas.setText("La apuesta no esta disponible");
+				}
+			}
+		});
+		this.getContentPane().add(scrollPaneApuestas, null);
+		scrollPaneApuestas.setViewportView(tableApuesta);
+		tableModelApuesta = new DefaultTableModel(null, columnNamesApuestas);
+
+		tableApuesta.setModel(tableModelApuesta);
+		tableApuesta.getColumnModel().getColumn(0).setPreferredWidth(130);
+		tableApuesta.getColumnModel().getColumn(1).setPreferredWidth(228);
+
+		jLabelApuestas.setBounds(559, 207, 308, 20);
+		getContentPane().add(jLabelApuestas);
+
+		jLabelBetMin.setBounds(15, 366, 259, 20);
+		getContentPane().add(jLabelBetMin);
+
+		jLabelHecho = new JLabel();
+		jLabelHecho.setForeground(Color.RED);
+		jLabelHecho.setBounds(256, 475, 163, 20);
+		getContentPane().add(jLabelHecho);
+
+		JButton jButtonApostar = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Apostar"));
+		jButtonApostar.setBounds(210, 428, 115, 29);
 		getContentPane().add(jButtonApostar);
 		jButtonApostar.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -218,7 +338,6 @@ public class FindQuestionsGUI extends JFrame {
 				a.setVisible(true);
 			}
 		});
-
 	}
 
 	private void jButton2_actionPerformed(ActionEvent e) {

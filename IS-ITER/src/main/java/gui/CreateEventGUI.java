@@ -1,10 +1,13 @@
 package gui;
 
 import java.awt.Color;
+
 import java.awt.Component;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.DateFormat;
@@ -16,15 +19,20 @@ import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 import com.toedter.calendar.JCalendar;
 
 import businessLogic.BLFacade;
 import configuration.UtilDate;
+import domain.*;
 import domain.Event;
+import domain.Question;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.Dimension;
@@ -32,48 +40,37 @@ import java.awt.Dimension;
 public class CreateEventGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-
-	private JComboBox<Event> jComboBoxEvents = new JComboBox<Event>();
 	DefaultComboBoxModel<Event> modelEvents = new DefaultComboBoxModel<Event>();
-
-	private JLabel jLabelListOfEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("ListEvents"));
-	private JLabel localTeamLabel = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("LocTeam")); //$NON-NLS-1$ //$NON-NLS-2$
-	private JLabel vistTeam = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("VisTeam")); //$NON-NLS-1$ //$NON-NLS-2$
 	private JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
-
-	private JTextField localTeamTextField = new JTextField();
-	private JTextField visTeamTextField = new JTextField();
 	private JCalendar jCalendar = new JCalendar();
 	private Calendar calendarAct = null;
 	private Calendar calendarAnt = null;
 
-	private JScrollPane scrollPaneEvents = new JScrollPane();
+	private JScrollPane scrollPaneEquipo1 = new JScrollPane();
+	private JScrollPane scrollPaneEquipo2 = new JScrollPane();
+	private JTable tableEquipo1 = new JTable();
+	private JTable tableEquipo2 = new JTable();
+
+	private DefaultTableModel tableModelEquipo1;
+	private DefaultTableModel tableModelEquipo2;
+
+	private String inputLocalTeam;
+	private String inputVisitingTeam;
 
 	private JButton jButtonCreate = new JButton(ResourceBundle.getBundle("Etiquetas").getString("CreateEvent")); //$NON-NLS-1$ //$NON-NLS-2$
 	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
 	private JLabel jLabelMsg = new JLabel();
 	private JLabel jLabelError = new JLabel();
 
+	private String[] columnNamesEquipo1 = new String[] { ResourceBundle.getBundle("Etiquetas").getString("EquipoN"),
+			ResourceBundle.getBundle("Etiquetas").getString("Equipo"), };
+
+	private String[] columnNamesEquipo2 = new String[] { ResourceBundle.getBundle("Etiquetas").getString("EquipoN"),
+			ResourceBundle.getBundle("Etiquetas").getString("Equipo"), };
+
 	private Vector<Date> datesWithEventsCurrentMonth = new Vector<Date>();
 
-	/**
-	 * Create the frame.
-	 */
-
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					CreateEventGUI frame = new CreateEventGUI(null);
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	public CreateEventGUI(Vector<domain.Event> v) {
+	public CreateEventGUI(Vector<domain.EquipoJugador> v) {
 
 		try {
 			jbInit(v);
@@ -82,42 +79,32 @@ public class CreateEventGUI extends JFrame {
 		}
 	}
 
-	private void jbInit(Vector<domain.Event> v) throws Exception {
+	private void jbInit(Vector<domain.EquipoJugador> v) throws Exception {
 
 		this.getContentPane().setLayout(null);
-		this.setSize(new Dimension(604, 370));
+		this.setSize(new Dimension(813, 493));
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("CreateEvent"));
 
-		jComboBoxEvents.setModel(modelEvents);
-		jComboBoxEvents.setBounds(new Rectangle(275, 47, 250, 20));
-		jLabelListOfEvents.setBounds(new Rectangle(290, 18, 277, 20));
-		localTeamLabel.setBounds(new Rectangle(25, 211, 90, 20));
-		localTeamTextField.setBounds(new Rectangle(125, 211, 140, 20));
-		vistTeam.setBounds(new Rectangle(25, 243, 90, 20));
-		visTeamTextField.setBounds(new Rectangle(125, 243, 140, 20));
-
 		jCalendar.setBounds(new Rectangle(40, 50, 225, 150));
-		scrollPaneEvents.setBounds(new Rectangle(25, 44, 346, 116));
 
-		jButtonCreate.setBounds(new Rectangle(350, 199, 130, 30));
+		jButtonCreate.setBounds(new Rectangle(94, 334, 130, 30));
 
 		jButtonCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jButtonCreate_actionPerformed(e);
 			}
 		});
-		jButtonClose.setBounds(new Rectangle(350, 240, 130, 30));
+		jButtonClose.setBounds(new Rectangle(258, 334, 130, 30));
 		jButtonClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jButtonClose_actionPerformed(e);
 			}
 		});
 
-		jLabelMsg.setBounds(new Rectangle(100, 300, 380, 20));
+		jLabelMsg.setBounds(new Rectangle(25, 240, 256, 20));
 		jLabelMsg.setForeground(Color.red);
-		// jLabelMsg.setSize(new Dimension(305, 20));
 
-		jLabelError.setBounds(new Rectangle(100, 300, 380, 20));
+		jLabelError.setBounds(new Rectangle(15, 216, 277, 20));
 		jLabelError.setForeground(Color.red);
 
 		this.getContentPane().add(jLabelMsg, null);
@@ -125,13 +112,6 @@ public class CreateEventGUI extends JFrame {
 
 		this.getContentPane().add(jButtonClose, null);
 		this.getContentPane().add(jButtonCreate, null);
-		this.getContentPane().add(localTeamTextField, null);
-		this.getContentPane().add(localTeamLabel, null);
-		this.getContentPane().add(visTeamTextField, null);
-
-		this.getContentPane().add(vistTeam, null);
-		this.getContentPane().add(jLabelListOfEvents, null);
-		this.getContentPane().add(jComboBoxEvents, null);
 
 		this.getContentPane().add(jCalendar, null);
 
@@ -143,27 +123,36 @@ public class CreateEventGUI extends JFrame {
 		jLabelEventDate.setBounds(40, 16, 140, 25);
 		getContentPane().add(jLabelEventDate);
 
+		scrollPaneEquipo1.setBounds(new Rectangle(292, 50, 346, 150));
+		scrollPaneEquipo1.setBounds(303, 50, 207, 210);
+		getContentPane().add(scrollPaneEquipo1);
+
+		JLabel jLabelEquipo1 = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("SelectOption")); //$NON-NLS-1$ //$NON-NLS-2$
+		jLabelEquipo1.setBounds(303, 18, 165, 20);
+		getContentPane().add(jLabelEquipo1);
+
+		// Code for JCalendar
 		// Code for JCalendar
 		this.jCalendar.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent propertychangeevent) {
-//					this.jCalendar.addPropertyChangeListener(new PropertyChangeListener() {
-//						public void propertyChange(PropertyChangeEvent propertychangeevent) {
+
 				if (propertychangeevent.getPropertyName().equals("locale")) {
 					jCalendar.setLocale((Locale) propertychangeevent.getNewValue());
 				} else if (propertychangeevent.getPropertyName().equals("calendar")) {
 					calendarAnt = (Calendar) propertychangeevent.getOldValue();
 					calendarAct = (Calendar) propertychangeevent.getNewValue();
-					System.out.println("calendarAnt: " + calendarAnt.getTime());
-					System.out.println("calendarAct: " + calendarAct.getTime());
 					DateFormat dateformat1 = DateFormat.getDateInstance(1, jCalendar.getLocale());
+//							jCalendar1.setCalendar(calendarAct);
+					Date firstDay = UtilDate.trim(new Date(jCalendar.getCalendar().getTime().getTime()));
 
 					int monthAnt = calendarAnt.get(Calendar.MONTH);
 					int monthAct = calendarAct.get(Calendar.MONTH);
+
 					if (monthAct != monthAnt) {
 						if (monthAct == monthAnt + 2) {
-							// Si en JCalendar estÃ¡ 30 de enero y se avanza al mes siguiente,
-							// devolverÃ­a 2 de marzo (se toma como equivalente a 30 de febrero)
-							// Con este cÃ³digo se dejarÃ¡ como 1 de febrero en el JCalendar
+							// Si en JCalendar est� 30 de enero y se avanza al mes siguiente, devolver�a 2
+							// de marzo (se toma como equivalente a 30 de febrero)
+							// Con este c�digo se dejar� como 1 de febrero en el JCalendar
 							calendarAct.set(Calendar.MONTH, monthAnt + 1);
 							calendarAct.set(Calendar.DAY_OF_MONTH, 1);
 						}
@@ -175,43 +164,103 @@ public class CreateEventGUI extends JFrame {
 						datesWithEventsCurrentMonth = facade.getEventsMonth(jCalendar.getDate());
 					}
 
-					paintDaysWithEvents(jCalendar, datesWithEventsCurrentMonth);
-
-					// Date firstDay = UtilDate.trim(new
-					// Date(jCalendar.getCalendar().getTime().getTime()));
-					Date firstDay = UtilDate.trim(calendarAct.getTime());
+					CreateQuestionGUI.paintDaysWithEvents(jCalendar, datesWithEventsCurrentMonth);
 
 					try {
+						tableModelEquipo1.setDataVector(null, columnNamesEquipo1);
+						tableModelEquipo1.setColumnCount(3); // another column added to allocate ev objects
+
+						tableModelEquipo2.setDataVector(null, columnNamesEquipo2);
+						tableModelEquipo2.setColumnCount(3); // another column added to allocate ev objects
+
 						BLFacade facade = MainGUI.getBusinessLogic();
 
-						Vector<domain.Event> events = facade.getEvents(firstDay);
+						Vector<EquipoJugador> equipos = facade.getEquipo(firstDay);
 
-						if (events.isEmpty())
-							jLabelListOfEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents")
-									+ ": " + dateformat1.format(calendarAct.getTime()));
-						else
-							jLabelListOfEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("Events") + ": "
+						if (equipos.isEmpty())
+							jLabelEquipo1.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents") + ": "
 									+ dateformat1.format(calendarAct.getTime()));
-						jComboBoxEvents.removeAllItems();
-						System.out.println("Events " + events);
+						else
+							jLabelEquipo1.setText(ResourceBundle.getBundle("Etiquetas").getString("Events") + ": "
+									+ dateformat1.format(calendarAct.getTime()));
+						for (EquipoJugador eq : equipos) {
+							Vector<Object> row = new Vector<Object>();
+							System.out.println("Evento: " + eq.getDescription());
 
-						for (domain.Event ev : events)
-							modelEvents.addElement(ev);
-						jComboBoxEvents.repaint();
+							row.add(eq.getEventNumber());
+							row.add(eq.getDescription());
+							row.add(eq); // ev object added in order to obtain it with tableModelEvents.getValueAt(i,2)
+							tableModelEquipo1.addRow(row);
+							tableModelEquipo2.addRow(row);
 
-//							if (events.size() == 0)
-//								jButtonCreate.setEnabled(false);
-//							else
-//								jButtonCreate.setEnabled(true);
+						}
+						tableEquipo1.getColumnModel().getColumn(0).setPreferredWidth(60);
+						tableEquipo1.getColumnModel().getColumn(1).setPreferredWidth(268);
+						tableEquipo1.getColumnModel().removeColumn(tableEquipo1.getColumnModel().getColumn(2)); // not
 
+						tableEquipo2.getColumnModel().getColumn(0).setPreferredWidth(60);
+						tableEquipo2.getColumnModel().getColumn(1).setPreferredWidth(268);
+						tableEquipo2.getColumnModel().removeColumn(tableEquipo2.getColumnModel().getColumn(2)); // sho
+																												// // in
+						// JTable
 					} catch (Exception e1) {
-
-						jLabelError.setText(e1.getMessage());
+						System.out.println("no funtziona");
 					}
 
 				}
 			}
 		});
+
+		this.getContentPane().add(jCalendar, null);
+
+		tableEquipo1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int i = tableEquipo1.getSelectedRow();
+				domain.EquipoJugador eq = (domain.EquipoJugador) tableModelEquipo1.getValueAt(i, 2);// obtain ev object
+				inputLocalTeam = eq.getDescription();
+			}
+		});
+
+		tableEquipo2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int i = tableEquipo2.getSelectedRow();
+				domain.EquipoJugador eq1 = (domain.EquipoJugador) tableModelEquipo2.getValueAt(i, 2);// obtain ev object
+				inputVisitingTeam = eq1.getDescription();
+			}
+		});
+
+		scrollPaneEquipo1.setViewportView(tableEquipo1);
+		tableModelEquipo1 = new DefaultTableModel(null, columnNamesEquipo1);
+
+		scrollPaneEquipo1.setViewportView(tableEquipo1);
+		this.getContentPane().add(scrollPaneEquipo1, null);
+		tableEquipo1.setModel(tableModelEquipo1);
+
+		scrollPaneEquipo2.setViewportView(tableEquipo2);
+		tableModelEquipo2 = new DefaultTableModel(null, columnNamesEquipo2);
+
+		scrollPaneEquipo2.setViewportView(tableEquipo2);
+		this.getContentPane().add(scrollPaneEquipo2, null);
+		tableEquipo2.setModel(tableModelEquipo2);
+
+		scrollPaneEquipo2.setBounds(new Rectangle(292, 50, 346, 150));
+		scrollPaneEquipo2.setBounds(555, 50, 207, 210);
+		getContentPane().add(scrollPaneEquipo2);
+
+		JLabel jLabelEquipo2 = new JLabel("SelectOption");
+		jLabelEquipo2.setBounds(555, 18, 165, 20);
+		getContentPane().add(jLabelEquipo2);
+
+		tableEquipo1.setModel(tableModelEquipo1);
+		tableEquipo1.getColumnModel().getColumn(0).setPreferredWidth(60);
+		tableEquipo1.getColumnModel().getColumn(1).setPreferredWidth(268);
+
+		tableEquipo2.setModel(tableModelEquipo2);
+		tableEquipo2.getColumnModel().getColumn(0).setPreferredWidth(60);
+		tableEquipo2.getColumnModel().getColumn(1).setPreferredWidth(268);
+
 	}
 
 	public static void paintDaysWithEvents(JCalendar jCalendar, Vector<Date> datesWithEventsCurrentMonth) {
@@ -264,8 +313,6 @@ public class CreateEventGUI extends JFrame {
 			jLabelMsg.setText("");
 
 			// Displays an exception if the query field is empty
-			String inputLocalTeam = localTeamTextField.getText();
-			String inputVisitingTeam = visTeamTextField.getText();
 
 			String inputDescription = inputLocalTeam + "-" + inputVisitingTeam;
 
@@ -291,20 +338,12 @@ public class CreateEventGUI extends JFrame {
 						eventNum = facade.getLastEventNumber(eventDate) + 1;
 					}
 
-					facade.createEvent(eventNum, inputDescription, eventDate);
+					facade.createEvent(inputDescription, eventDate);
 
 					jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("QueryCreated"));
 				}
 			} else
 				jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorEventL"));
-			// } catch (EventFinished e1) {
-			// jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorEventHasFinished")
-			// + ": "
-			// + event.getDescription());
-			// } catch (QuestionAlreadyExist e1) {
-			// jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorQueryAlreadyExist"));
-			// } catch (java.lang.NumberFormatException e1) {
-			// jLabelError.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorNumber"));
 		} catch (Exception e1) {
 
 			e1.printStackTrace();
@@ -315,5 +354,4 @@ public class CreateEventGUI extends JFrame {
 	private void jButtonClose_actionPerformed(ActionEvent e) {
 		this.setVisible(false);
 	}
-
 }

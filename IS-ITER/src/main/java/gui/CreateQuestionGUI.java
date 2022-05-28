@@ -45,7 +45,7 @@ public class CreateQuestionGUI extends JFrame {
 	private Vector<Date> datesWithEventsCurrentMonth = new Vector<Date>();
 
 	public CreateQuestionGUI(Vector<domain.Event> v) {
-		
+
 		try {
 			jbInit(v);
 		} catch (Exception e) {
@@ -66,7 +66,7 @@ public class CreateQuestionGUI extends JFrame {
 		jTextFieldQuery.setBounds(new Rectangle(100, 211, 429, 20));
 		jLabelMinBet.setBounds(new Rectangle(25, 243, 75, 20));
 		jTextFieldPrice.setBounds(new Rectangle(100, 243, 60, 20));
-		
+
 		jCalendar.setBounds(new Rectangle(40, 50, 225, 150));
 		scrollPaneEvents.setBounds(new Rectangle(25, 44, 346, 116));
 
@@ -87,8 +87,6 @@ public class CreateQuestionGUI extends JFrame {
 
 		jLabelMsg.setBounds(new Rectangle(275, 182, 305, 20));
 		jLabelMsg.setForeground(Color.red);
-//		jLabelError.setText(ResourceBundle.getBundle("Etiquetas").getString("GananciasPorEuroApostado")); //$NON-NLS-1$ //$NON-NLS-2$
-		// jLabelMsg.setSize(new Dimension(305, 20));
 
 		jLabelError.setBounds(new Rectangle(178, 243, 198, 20));
 		jLabelError.setForeground(Color.BLACK);
@@ -119,8 +117,6 @@ public class CreateQuestionGUI extends JFrame {
 		// Code for JCalendar
 		this.jCalendar.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent propertychangeevent) {
-//				this.jCalendar.addPropertyChangeListener(new PropertyChangeListener() {
-//					public void propertyChange(PropertyChangeEvent propertychangeevent) {
 				if (propertychangeevent.getPropertyName().equals("locale")) {
 					jCalendar.setLocale((Locale) propertychangeevent.getNewValue());
 				} else if (propertychangeevent.getPropertyName().equals("calendar")) {
@@ -150,8 +146,6 @@ public class CreateQuestionGUI extends JFrame {
 
 					paintDaysWithEvents(jCalendar, datesWithEventsCurrentMonth);
 
-					// Date firstDay = UtilDate.trim(new
-					// Date(jCalendar.getCalendar().getTime().getTime()));
 					Date firstDay = UtilDate.trim(calendarAct.getTime());
 
 					try {
@@ -238,12 +232,11 @@ public class CreateQuestionGUI extends JFrame {
 
 			// Displays an exception if the query field is empty
 			String inputQuery = jTextFieldQuery.getText();
-			
+
 			if (inputQuery.length() > 0) {
 
 				// It could be to trigger an exception if the introduced string is not a number
 				float inputPrice = Float.parseFloat(jTextFieldPrice.getText());
-//				double inputGanancias = Double.parseDouble(textFieldGanancias.getText());
 
 				if (inputPrice <= 0)
 					jLabelError.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorNumber"));
