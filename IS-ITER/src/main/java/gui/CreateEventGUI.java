@@ -70,7 +70,7 @@ public class CreateEventGUI extends JFrame {
 
 	private Vector<Date> datesWithEventsCurrentMonth = new Vector<Date>();
 
-	public CreateEventGUI(Vector<domain.EquipoJugador> v) {
+	public CreateEventGUI(Vector<domain.Equipo> v) {
 
 		try {
 			jbInit(v);
@@ -79,7 +79,7 @@ public class CreateEventGUI extends JFrame {
 		}
 	}
 
-	private void jbInit(Vector<domain.EquipoJugador> v) throws Exception {
+	private void jbInit(Vector<domain.Equipo> v) throws Exception {
 
 		this.getContentPane().setLayout(null);
 		this.setSize(new Dimension(813, 493));
@@ -94,6 +94,7 @@ public class CreateEventGUI extends JFrame {
 				jButtonCreate_actionPerformed(e);
 			}
 		});
+		
 		jButtonClose.setBounds(new Rectangle(258, 334, 130, 30));
 		jButtonClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -172,20 +173,15 @@ public class CreateEventGUI extends JFrame {
 
 						tableModelEquipo2.setDataVector(null, columnNamesEquipo2);
 						tableModelEquipo2.setColumnCount(3); // another column added to allocate ev objects
+					
+						
 
 						BLFacade facade = MainGUI.getBusinessLogic();
+						Vector<Equipo> equipos = facade.getEquipo(firstDay);
 
-						Vector<EquipoJugador> equipos = facade.getEquipo(firstDay);
-
-						if (equipos.isEmpty())
-							jLabelEquipo1.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents") + ": "
-									+ dateformat1.format(calendarAct.getTime()));
-						else
-							jLabelEquipo1.setText(ResourceBundle.getBundle("Etiquetas").getString("Events") + ": "
-									+ dateformat1.format(calendarAct.getTime()));
-						for (EquipoJugador eq : equipos) {
+						for (Equipo eq : equipos) {
 							Vector<Object> row = new Vector<Object>();
-							System.out.println("Evento: " + eq.getDescription());
+							System.out.println("Equipo: " + eq.getDescription());
 
 							row.add(eq.getEventNumber());
 							row.add(eq.getDescription());
@@ -196,13 +192,12 @@ public class CreateEventGUI extends JFrame {
 						}
 						tableEquipo1.getColumnModel().getColumn(0).setPreferredWidth(60);
 						tableEquipo1.getColumnModel().getColumn(1).setPreferredWidth(268);
-						tableEquipo1.getColumnModel().removeColumn(tableEquipo1.getColumnModel().getColumn(2)); // not
+						tableEquipo1.getColumnModel().removeColumn(tableEquipo1.getColumnModel().getColumn(2));
 
 						tableEquipo2.getColumnModel().getColumn(0).setPreferredWidth(60);
 						tableEquipo2.getColumnModel().getColumn(1).setPreferredWidth(268);
-						tableEquipo2.getColumnModel().removeColumn(tableEquipo2.getColumnModel().getColumn(2)); // sho
-																												// // in
-						// JTable
+						tableEquipo2.getColumnModel().removeColumn(tableEquipo2.getColumnModel().getColumn(2)); 
+					
 					} catch (Exception e1) {
 						System.out.println("no funtziona");
 					}
@@ -217,7 +212,7 @@ public class CreateEventGUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int i = tableEquipo1.getSelectedRow();
-				domain.EquipoJugador eq = (domain.EquipoJugador) tableModelEquipo1.getValueAt(i, 2);// obtain ev object
+				domain.Equipo eq = (domain.Equipo) tableModelEquipo1.getValueAt(i, 2);// obtain ev object
 				inputLocalTeam = eq.getDescription();
 			}
 		});
@@ -226,7 +221,7 @@ public class CreateEventGUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int i = tableEquipo2.getSelectedRow();
-				domain.EquipoJugador eq1 = (domain.EquipoJugador) tableModelEquipo2.getValueAt(i, 2);// obtain ev object
+				domain.Equipo eq1 = (domain.Equipo) tableModelEquipo2.getValueAt(i, 2);// obtain ev object
 				inputVisitingTeam = eq1.getDescription();
 			}
 		});

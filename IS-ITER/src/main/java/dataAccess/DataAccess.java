@@ -73,36 +73,46 @@ public class DataAccess {
 
 			db.persist(u);
 
-			EquipoJugador e1 = new EquipoJugador(1, "Atlético", UtilDate.newDate(year, month, 17));
-			EquipoJugador e2 = new EquipoJugador(2, "Athletic", UtilDate.newDate(year, month, 17));
-			EquipoJugador e3 = new EquipoJugador(3, "Eibar", UtilDate.newDate(year, month, 17));
-			EquipoJugador e4 = new EquipoJugador(4, "Barcelona", UtilDate.newDate(year, month, 17));
-			EquipoJugador e5 = new EquipoJugador(5, "Getafe", UtilDate.newDate(year, month, 17));
-			EquipoJugador e6 = new EquipoJugador(6, "Celta", UtilDate.newDate(year, month, 17));
-			EquipoJugador e7 = new EquipoJugador(7, "Alavés", UtilDate.newDate(year, month, 17));
-			EquipoJugador e8 = new EquipoJugador(8, "Deportivo", UtilDate.newDate(year, month, 17));
-			EquipoJugador e9 = new EquipoJugador(9, "Español", UtilDate.newDate(year, month, 17));
-			EquipoJugador e10 = new EquipoJugador(10, "Villareal", UtilDate.newDate(year, month, 17));
-			EquipoJugador e11 = new EquipoJugador(11, "Las Palmas", UtilDate.newDate(year, month, 17));
-			EquipoJugador e12 = new EquipoJugador(12, "Sevilla", UtilDate.newDate(year, month, 17));
-			EquipoJugador e13 = new EquipoJugador(13, "Malaga", UtilDate.newDate(year, month, 17));
-			EquipoJugador e14 = new EquipoJugador(14, "Valencia", UtilDate.newDate(year, month, 17));
-			EquipoJugador e15 = new EquipoJugador(15, "Girona", UtilDate.newDate(year, month, 17));
-			EquipoJugador e17 = new EquipoJugador(16, "Leganés", UtilDate.newDate(year, month, 17));
-			EquipoJugador e18 = new EquipoJugador(17, "Real Sociedad", UtilDate.newDate(year, month, 17));
-			EquipoJugador e19 = new EquipoJugador(18, "Levante", UtilDate.newDate(year, month, 17));
-			EquipoJugador e16 = new EquipoJugador(19, "Betis", UtilDate.newDate(year, month, 17));
-			EquipoJugador e20 = new EquipoJugador(20, "Real Madrid", UtilDate.newDate(year, month, 17));
+			Equipo e1 = new Equipo(1, "Atlético", UtilDate.newDate(year, month, 17));
+			Equipo e2 = new Equipo(2, "Athletic", UtilDate.newDate(year, month, 17));
+			Equipo e3 = new Equipo(3, "Eibar", UtilDate.newDate(year, month, 17));
+			Equipo e4 = new Equipo(4, "Barcelona", UtilDate.newDate(year, month, 17));
+			Equipo e5 = new Equipo(5, "Getafe", UtilDate.newDate(year, month, 17));
+			Equipo e6 = new Equipo(6, "Celta", UtilDate.newDate(year, month, 17));
+			Equipo e7 = new Equipo(7, "Alavés", UtilDate.newDate(year, month, 17));
+			Equipo e8 = new Equipo(8, "Deportivo", UtilDate.newDate(year, month, 17));
+			Equipo e9 = new Equipo(9, "Español", UtilDate.newDate(year, month, 17));
+			Equipo e10 = new Equipo(10, "Villareal", UtilDate.newDate(year, month, 17));
+			Equipo e11 = new Equipo(11, "Las Palmas", UtilDate.newDate(year, month, 17));
+			Equipo e12 = new Equipo(12, "Sevilla", UtilDate.newDate(year, month, 17));
+			Equipo e13 = new Equipo(13, "Malaga", UtilDate.newDate(year, month, 17));
+			Equipo e14 = new Equipo(14, "Valencia", UtilDate.newDate(year, month, 17));
+			Equipo e15 = new Equipo(15, "Girona", UtilDate.newDate(year, month, 17));
+			Equipo e17 = new Equipo(16, "Leganés", UtilDate.newDate(year, month, 17));
+			Equipo e18 = new Equipo(17, "Real Sociedad", UtilDate.newDate(year, month, 17));
+			Equipo e19 = new Equipo(18, "Levante", UtilDate.newDate(year, month, 17));
+			Equipo e16 = new Equipo(19, "Betis", UtilDate.newDate(year, month, 17));
+			Equipo e20 = new Equipo(20, "Real Madrid", UtilDate.newDate(year, month, 17));
 
-			EquipoJugador e21 = new EquipoJugador(21, "Atlético", UtilDate.newDate(year, month, 1));
-			EquipoJugador e22 = new EquipoJugador(22, "Athletic", UtilDate.newDate(year, month, 1));
-			EquipoJugador e23 = new EquipoJugador(23, "Eibar", UtilDate.newDate(year, month, 1));
-			EquipoJugador e24 = new EquipoJugador(24, "Barcelona", UtilDate.newDate(year, month, 1));
-			EquipoJugador e25 = new EquipoJugador(25, "Getafe", UtilDate.newDate(year, month, 1));
-			EquipoJugador e26 = new EquipoJugador(26, "Celta", UtilDate.newDate(year, month, 1));
-			EquipoJugador e27 = new EquipoJugador(27, "Alavés", UtilDate.newDate(year, month, 1));
-			EquipoJugador e28 = new EquipoJugador(28, "Deportivo", UtilDate.newDate(year, month, 1));
-			EquipoJugador e29 = new EquipoJugador(29, "Español", UtilDate.newDate(year, month, 1));
+			Equipo e21 = new Equipo(21, "Atlético", UtilDate.newDate(year, month, 1));
+			Equipo e22 = new Equipo(22, "Athletic", UtilDate.newDate(year, month, 1));
+			Equipo e23 = new Equipo(23, "Eibar", UtilDate.newDate(year, month, 1));
+			Equipo e24 = new Equipo(24, "Barcelona", UtilDate.newDate(year, month, 1));
+			Equipo e25 = new Equipo(25, "Getafe", UtilDate.newDate(year, month, 1));
+			Equipo e26 = new Equipo(26, "Celta", UtilDate.newDate(year, month, 1));
+			Equipo e27 = new Equipo(27, "Alavés", UtilDate.newDate(year, month, 1));
+			Equipo e28 = new Equipo(28, "Deportivo", UtilDate.newDate(year, month, 1));
+			Equipo e29 = new Equipo(29, "Español", UtilDate.newDate(year, month, 1));
+
+//			Equipo e30 = new Equipo(30, "Atlético");
+//			Equipo e31 = new Equipo(31, "Athletic");
+//			Equipo e32 = new Equipo(32, "Eibar");
+//			Equipo e33 = new Equipo(33, "Barcelona");
+//			Equipo e34 = new Equipo(34, "Getafe");
+//			Equipo e35 = new Equipo(35, "Celta");
+//			Equipo e36 = new Equipo(36, "Alavés");
+//			Equipo e37 = new Equipo(37, "Deportivo");
+//			Equipo e38 = new Equipo(38, "Español");
 
 			db.persist(e1);
 			db.persist(e2);
@@ -133,6 +143,18 @@ public class DataAccess {
 			db.persist(e27);
 			db.persist(e28);
 			db.persist(e29);
+//			db.persist(e30);
+//			db.persist(e31);
+//			db.persist(e32);
+//			db.persist(e33);
+//			db.persist(e34);
+//			db.persist(e35);
+//			db.persist(e36);
+//			db.persist(e37);
+//			db.persist(e38);
+
+//			Jugador j1 = e1.addJugador(1, "Williams", e1.getDescription());
+//			db.persist(j1);
 
 			Event ev1 = new Event(1, "Atlético-Athletic", UtilDate.newDate(year, month, 17));
 			Event ev2 = new Event(2, "Eibar-Barcelona", UtilDate.newDate(year, month, 17));
@@ -225,39 +247,45 @@ public class DataAccess {
 			Pronostico p8;
 			Pronostico p9;
 
-			p1 = q1.addProns(3.0, "Atlético", 1);
+			p1 = q1.addProns(0.0, "Atlético", 1);
 			p2 = q1.addProns(1.0, "Athletic", 2);
 
 			Pronostico e40 = q2.addProns(0.0, "Berenguer", 11);
-			Pronostico e41 = q2.addProns(0.0, "Yuri", 12);
-			Pronostico e42 = q2.addProns(0.0, "Muniain", 13);
-			Pronostico e43 = q2.addProns(0.0, "Joao", 14);
-			Pronostico e44 = q2.addProns(0.0, "Lemar", 15);
-			Pronostico e45 = q2.addProns(0.0, "Hermoso", 16);
+			Pronostico e41 = q2.addProns(3.0, "Yuri", 12);
+			Pronostico e42 = q2.addProns(1.0, "Muniain", 13);
+			Pronostico e43 = q2.addProns(4.0, "Joao", 14);
+			Pronostico e44 = q2.addProns(1.5, "Lemar", 15);
+			Pronostico e45 = q2.addProns(1.2, "Hermoso", 16);
 
 			db.persist(p1);
 			db.persist(p2);
 
-			Pronostico e31 = q5.addProns(0.0, "Málaga", 7);
-			Pronostico e32 = q5.addProns(0.0, "Valencia", 8);
+//			Pronostico e39 = q5.addProns(0.0, "Málaga", 7);
+//			Pronostico e46 = q5.addProns(0.0, "Valencia", 8);
+//
+			Pronostico e47 = q3.addProns(0.0, "Atlético", 9);
+			Pronostico e48 = q3.addProns(0.0, "Athletic", 10);
+			Pronostico e49 = q6.addProns(0.0, "Falcao", 17);
+			Pronostico e50 = q6.addProns(0.0, "Juaquin", 18);
 
-			Pronostico e33 = q3.addProns(0.0, "Atlético", 9);
-			Pronostico e34 = q3.addProns(0.0, "Athletic", 10);
-			Pronostico e35 = q6.addProns(0.0, "Falcao", 17);
-			Pronostico e36 = q6.addProns(0.0, "Juaquin", 18);
-
-			db.persist(e31);
-			db.persist(e32);
-			db.persist(e33);
-			db.persist(e34);
-			db.persist(e35);
-			db.persist(e36);
+//			db.persist(e31);
+//			db.persist(e32);
+//			db.persist(e33);
+//			db.persist(e34);
+//			db.persist(e35);
+//			db.persist(e36);
 			db.persist(e40);
 			db.persist(e41);
 			db.persist(e42);
 			db.persist(e43);
 			db.persist(e44);
 			db.persist(e45);
+//			db.persist(e39);
+//			db.persist(e46);
+			db.persist(e47);
+			db.persist(e48);
+			db.persist(e49);
+			db.persist(e50);
 
 			db.getTransaction().commit();
 			System.out.println("Db initialized");
@@ -341,6 +369,27 @@ public class DataAccess {
 
 	}
 
+	public Equipo createEquipo(String description, Date eventDate) {
+		System.out.println(">> DataAccess: createEvent=> description: " + description + ", fecha=" + eventDate);
+		db.getTransaction().begin();
+		Equipo eq = new Equipo(description, eventDate);
+		db.persist(eq);
+		db.getTransaction().commit();
+		return eq;
+	}
+
+	public Jugador createJugador(String nombre, String equipo, String apellidos, String dorsal, int e) {
+		System.out.println(">> DataAccess: createPronostico=> nombre= " + nombre + ", apellidos= " + apellidos
+				+ ", dorsal=" + dorsal  + ", equipo=" + equipo);
+		Equipo eq = db.find(Equipo.class, e);
+		System.out.println(eq.getDescription());
+		db.getTransaction().begin();
+		Jugador j = eq.addJugador(nombre, equipo, apellidos, dorsal);
+		db.persist(j);
+		db.getTransaction().commit();
+		return j;
+	}
+
 	public Event createEvent(String description, Date eventDate) {
 		System.out.println(">> DataAccess: createEvent=> date= " + eventDate + ", description: " + description);
 		db.getTransaction().begin();
@@ -356,10 +405,18 @@ public class DataAccess {
 		Question ques = db.find(Question.class, q);
 		System.out.println(ques.getQuestion());
 		db.getTransaction().begin();
+		if(description==null) {
+			Pronostico p = ques.addProns(ganancias, "Lemar", num);
+			db.persist(p);
+			db.getTransaction().commit();
+			return p;
+		}else {
 			Pronostico p = ques.addProns(ganancias, description, num);
 			db.persist(p);
 			db.getTransaction().commit();
 			return p;
+		}
+		
 	}
 
 	/**
@@ -394,15 +451,38 @@ public class DataAccess {
 		return null;
 	}
 
-	public Vector<EquipoJugador> getEquipo(Date date) {
+	public int getNumeroEquipo() {
+		int cont = 0;
+		System.out.println(">> DataAccess: getNumeroEquipo");
+		TypedQuery<Equipo> query = db.createQuery("SELECT eq FROM Equipo eq", Equipo.class);
+		List<Equipo> equipos = query.getResultList();
+		for (Equipo equipo : equipos) {
+			if (equipo != null) {
+				cont++;
+			}
+		}
+		return cont;
+	}
+
+	public Equipo getEq(String equi) {
+		System.out.println(">> DataAccess: getEq");
+		TypedQuery<Equipo> query = db.createQuery("SELECT eq FROM Equipo eq WHERE eq.description=?1", Equipo.class);
+		query.setParameter(1, equi);
+		Collection<Equipo> offers = query.getResultList();
+		if (offers.size() != 0) {
+			Iterator<Equipo> it = offers.iterator();
+			return it.next();
+		}
+		return null;
+	}
+
+	public Vector<Equipo> getEquipo(Date date) {
 		System.out.println(">> DataAccess: getEquipo");
-		Vector<EquipoJugador> res = new Vector<EquipoJugador>();
-		TypedQuery<EquipoJugador> query = db.createQuery("SELECT eq FROM EquipoJugador eq WHERE eq.eventDate=?1",
-				EquipoJugador.class);
+		Vector<Equipo> res = new Vector<Equipo>();
+		TypedQuery<Equipo> query = db.createQuery("SELECT eq FROM Equipo eq WHERE eq.eventDate=?1", Equipo.class);
 		query.setParameter(1, date);
-		List<EquipoJugador> equipos = query.getResultList();
-		for (EquipoJugador equipo : equipos) {
-			System.out.println(equipo.toString());
+		List<Equipo> equipos = query.getResultList();
+		for (Equipo equipo : equipos) {
 			res.add(equipo);
 		}
 		return res;

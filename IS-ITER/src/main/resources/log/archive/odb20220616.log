@@ -1,0 +1,26 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-06-16 19:21:41 #1 store] 
+Database 'C:\Users\34644\git\repository\IS-ITER\src\main\resources\bets.temp' has been recovered (tr. 9-9)
+
+[2022-06-16 19:21:41 #2 store] 
+Database 'C:\Users\34644\git\repository\IS-ITER\src\main\resources\bets.temp' is opened by 24632@MSI
+
+[2022-06-16 19:21:41 #3 type] 
+Type domain.User is not enhanced.
+
+[2022-06-16 19:21:41 #4 type] 
+Type domain.Pronostico is not enhanced.
+
+[2022-06-16 19:21:42 #5 type] 
+Type domain.Question is not enhanced.
+
+[2022-06-16 19:21:42 #6 type] 
+Type domain.Event is not enhanced.
+
+[2022-06-16 19:21:42 #7 type] 
+Type domain.Equipo is not enhanced.
+
+[2022-06-16 19:21:42 #8 type] 
+Type domain.Jugador is not enhanced.
+

@@ -259,7 +259,7 @@ public class HacerPronosticoGUI extends JFrame {
 							}
 							tableApuesta.getColumnModel().getColumn(0).setPreferredWidth(130);
 							tableApuesta.getColumnModel().getColumn(1).setPreferredWidth(228);
-							q.setQuestion(tableQueries.getValueAt(i, 1).toString());
+							q.setQuestion(tableQueries.getValueAt(u, 1).toString());
 						}
 					}
 				} else {
@@ -299,7 +299,7 @@ public class HacerPronosticoGUI extends JFrame {
 									}
 									facade.setApues((Double.parseDouble(textFieldCuanto.getText())));
 									facade.setPron(p, p.getPronostico());
-									p.setPronostico(tableApuesta.getValueAt(u, 1).toString());
+									p.setPronostico(tableApuesta.getValueAt(z, 1).toString());
 									jLabelHecho.setText(
 											ResourceBundle.getBundle("Etiquetas").getString("ApuestaGuardada"));
 								}
@@ -355,7 +355,7 @@ public class HacerPronosticoGUI extends JFrame {
 									if (textFieldCuanto.getText().isEmpty()) {
 										jLabelApuestas.setText("Error: Introduce cuantos euros quieres apostar");
 									}
-									p.setPronostico(tableApuesta.getValueAt(u, 1).toString());
+									p.setPronostico(tableApuesta.getValueAt(z, 1).toString());
 								}
 							}
 						}

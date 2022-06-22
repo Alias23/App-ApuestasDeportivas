@@ -1,0 +1,410 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-06-11 17:29:38 #1 store] 
+Database 'C:\Users\34644\git\repository\IS-ITER\src\main\resources\bets.temp' is opened by 16212@MSI
+
+[2022-06-11 17:29:38 #2 type.registry] 
+New type domain.User
+
+[2022-06-11 17:29:38 #3 type] 
+Type domain.User is not enhanced.
+
+[2022-06-11 17:29:38 #4 type.registry] 
+New type domain.Pronostico
+
+[2022-06-11 17:29:38 #5 type] 
+Type domain.Pronostico is not enhanced.
+
+[2022-06-11 17:29:39 #6 type.registry] 
+New type domain.Question
+
+[2022-06-11 17:29:39 #7 type] 
+Type domain.Question is not enhanced.
+
+[2022-06-11 17:29:39 #8 type.registry] 
+New type java.util.Vector<domain.Pronostico>
+
+[2022-06-11 17:29:39 #9 type.registry] 
+New type domain.Event
+
+[2022-06-11 17:29:39 #10 type] 
+Type domain.Event is not enhanced.
+
+[2022-06-11 17:29:39 #11 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-06-11 17:29:39 #12 type.registry] 
+New type domain.Equipo
+
+[2022-06-11 17:29:39 #13 type] 
+Type domain.Equipo is not enhanced.
+
+[2022-06-11 17:29:39 #14 type.registry] 
+New type domain.Jugador
+
+[2022-06-11 17:29:39 #15 type.registry] 
+New type java.util.ArrayList<domain.Jugador>
+
+[2022-06-11 17:29:39 #16 type] 
+Type domain.Jugador is not enhanced.
+
+[2022-06-11 17:29:39 #17 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2022-06-11 17:29:39 #18 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2022-06-11 17:29:39 #19 type.registry] 
+New type java.util.ArrayList<domain.Pronostico>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-06-11 17:31:19 #1 store] 
+Database 'C:\Users\34644\git\repository\IS-ITER\src\main\resources\bets.temp' is opened by 8844@MSI
+
+[2022-06-11 17:31:19 #2 type.registry] 
+New type domain.User
+
+[2022-06-11 17:31:19 #3 type] 
+Type domain.User is not enhanced.
+
+[2022-06-11 17:31:19 #4 type.registry] 
+New type domain.Pronostico
+
+[2022-06-11 17:31:19 #5 type] 
+Type domain.Pronostico is not enhanced.
+
+[2022-06-11 17:31:19 #6 type.registry] 
+New type domain.Question
+
+[2022-06-11 17:31:19 #7 type] 
+Type domain.Question is not enhanced.
+
+[2022-06-11 17:31:19 #8 type.registry] 
+New type java.util.Vector<domain.Pronostico>
+
+[2022-06-11 17:31:19 #9 type.registry] 
+New type domain.Event
+
+[2022-06-11 17:31:19 #10 type] 
+Type domain.Event is not enhanced.
+
+[2022-06-11 17:31:19 #11 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-06-11 17:31:19 #12 type.registry] 
+New type domain.Equipo
+
+[2022-06-11 17:31:19 #13 type] 
+Type domain.Equipo is not enhanced.
+
+[2022-06-11 17:31:19 #14 type.registry] 
+New type domain.Jugador
+
+[2022-06-11 17:31:19 #15 type.registry] 
+New type java.util.ArrayList<domain.Jugador>
+
+[2022-06-11 17:31:19 #16 type] 
+Type domain.Jugador is not enhanced.
+
+[2022-06-11 17:31:19 #17 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2022-06-11 17:31:19 #18 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2022-06-11 17:31:19 #19 type.registry] 
+New type java.util.ArrayList<domain.Pronostico>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-06-11 17:34:36 #1 store] 
+Database 'C:\Users\34644\git\repository\IS-ITER\src\main\resources\bets.temp' is opened by 14472@MSI
+
+[2022-06-11 17:34:36 #2 type.registry] 
+New type domain.User
+
+[2022-06-11 17:34:36 #3 type] 
+Type domain.User is not enhanced.
+
+[2022-06-11 17:34:36 #4 type.registry] 
+New type domain.Pronostico
+
+[2022-06-11 17:34:36 #5 type] 
+Type domain.Pronostico is not enhanced.
+
+[2022-06-11 17:34:36 #6 type.registry] 
+New type domain.Question
+
+[2022-06-11 17:34:36 #7 type] 
+Type domain.Question is not enhanced.
+
+[2022-06-11 17:34:36 #8 type.registry] 
+New type java.util.Vector<domain.Pronostico>
+
+[2022-06-11 17:34:36 #9 type.registry] 
+New type domain.Event
+
+[2022-06-11 17:34:36 #10 type] 
+Type domain.Event is not enhanced.
+
+[2022-06-11 17:34:36 #11 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-06-11 17:34:36 #12 type.registry] 
+New type domain.Equipo
+
+[2022-06-11 17:34:36 #13 type] 
+Type domain.Equipo is not enhanced.
+
+[2022-06-11 17:34:36 #14 type.registry] 
+New type domain.Jugador
+
+[2022-06-11 17:34:36 #15 type.registry] 
+New type java.util.ArrayList<domain.Jugador>
+
+[2022-06-11 17:34:36 #16 type] 
+Type domain.Jugador is not enhanced.
+
+[2022-06-11 17:34:36 #17 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2022-06-11 17:34:36 #18 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2022-06-11 17:34:36 #19 type.registry] 
+New type java.util.ArrayList<domain.Pronostico>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-06-11 17:35:29 #1 store] 
+Database 'C:\Users\34644\git\repository\IS-ITER\src\main\resources\bets.temp' has been recovered (tr. 1-8)
+
+[2022-06-11 17:35:29 #2 store] 
+Database 'C:\Users\34644\git\repository\IS-ITER\src\main\resources\bets.temp' is opened by 9336@MSI
+
+[2022-06-11 17:35:29 #3 type] 
+Type domain.User is not enhanced.
+
+[2022-06-11 17:35:29 #4 type] 
+Type domain.Pronostico is not enhanced.
+
+[2022-06-11 17:35:29 #5 type] 
+Type domain.Question is not enhanced.
+
+[2022-06-11 17:35:29 #6 type] 
+Type domain.Event is not enhanced.
+
+[2022-06-11 17:35:29 #7 type] 
+Type domain.Equipo is not enhanced.
+
+[2022-06-11 17:35:29 #8 type] 
+Type domain.Jugador is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-06-11 17:38:49 #1 store] 
+Database 'C:\Users\34644\git\repository\IS-ITER\src\main\resources\bets.temp' is opened by 28644@MSI
+
+[2022-06-11 17:38:49 #2 type] 
+Type domain.User is not enhanced.
+
+[2022-06-11 17:38:49 #3 type] 
+Type domain.Pronostico is not enhanced.
+
+[2022-06-11 17:38:49 #4 type] 
+Type domain.Question is not enhanced.
+
+[2022-06-11 17:38:49 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-06-11 17:38:49 #6 type] 
+Type domain.Equipo is not enhanced.
+
+[2022-06-11 17:38:49 #7 type] 
+Type domain.Jugador is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-06-11 17:40:01 #1 store] 
+Database 'C:\Users\34644\git\repository\IS-ITER\src\main\resources\bets.temp' is opened by 12656@MSI
+
+[2022-06-11 17:40:01 #2 type] 
+Type domain.User is not enhanced.
+
+[2022-06-11 17:40:01 #3 type] 
+Type domain.Pronostico is not enhanced.
+
+[2022-06-11 17:40:01 #4 type] 
+Type domain.Question is not enhanced.
+
+[2022-06-11 17:40:01 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-06-11 17:40:01 #6 type] 
+Type domain.Equipo is not enhanced.
+
+[2022-06-11 17:40:01 #7 type] 
+Type domain.Jugador is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-06-11 17:40:47 #1 store] 
+Database 'C:\Users\34644\git\repository\IS-ITER\src\main\resources\bets.temp' is opened by 2772@MSI
+
+[2022-06-11 17:40:48 #2 type] 
+Type domain.User is not enhanced.
+
+[2022-06-11 17:40:48 #3 type] 
+Type domain.Pronostico is not enhanced.
+
+[2022-06-11 17:40:48 #4 type] 
+Type domain.Question is not enhanced.
+
+[2022-06-11 17:40:48 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-06-11 17:40:48 #6 type] 
+Type domain.Equipo is not enhanced.
+
+[2022-06-11 17:40:48 #7 type] 
+Type domain.Jugador is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-06-11 17:42:25 #1 store] 
+Database 'C:\Users\34644\git\repository\IS-ITER\src\main\resources\bets.temp' is opened by 27884@MSI
+
+[2022-06-11 17:42:25 #2 type] 
+Type domain.User is not enhanced.
+
+[2022-06-11 17:42:25 #3 type] 
+Type domain.Pronostico is not enhanced.
+
+[2022-06-11 17:42:25 #4 type] 
+Type domain.Question is not enhanced.
+
+[2022-06-11 17:42:25 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-06-11 17:42:25 #6 type] 
+Type domain.Equipo is not enhanced.
+
+[2022-06-11 17:42:25 #7 type] 
+Type domain.Jugador is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-06-11 17:45:51 #1 store] 
+Database 'C:\Users\34644\git\repository\IS-ITER\src\main\resources\bets.temp' is opened by 20744@MSI
+
+[2022-06-11 17:45:51 #2 type] 
+Type domain.User is not enhanced.
+
+[2022-06-11 17:45:51 #3 type] 
+Type domain.Pronostico is not enhanced.
+
+[2022-06-11 17:45:51 #4 type] 
+Type domain.Question is not enhanced.
+
+[2022-06-11 17:45:51 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-06-11 17:45:51 #6 type] 
+Type domain.Equipo is not enhanced.
+
+[2022-06-11 17:45:51 #7 type] 
+Type domain.Jugador is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-06-11 17:48:43 #1 store] 
+Database 'C:\Users\34644\git\repository\IS-ITER\src\main\resources\bets.temp' is opened by 28876@MSI
+
+[2022-06-11 17:48:43 #2 type] 
+Type domain.User is not enhanced.
+
+[2022-06-11 17:48:43 #3 type] 
+Type domain.Pronostico is not enhanced.
+
+[2022-06-11 17:48:43 #4 type] 
+Type domain.Question is not enhanced.
+
+[2022-06-11 17:48:43 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-06-11 17:48:43 #6 type] 
+Type domain.Equipo is not enhanced.
+
+[2022-06-11 17:48:43 #7 type] 
+Type domain.Jugador is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-06-11 17:50:05 #1 store] 
+Database 'C:\Users\34644\git\repository\IS-ITER\src\main\resources\bets.temp' is opened by 26664@MSI
+
+[2022-06-11 17:50:05 #2 type] 
+Type domain.User is not enhanced.
+
+[2022-06-11 17:50:05 #3 type] 
+Type domain.Pronostico is not enhanced.
+
+[2022-06-11 17:50:05 #4 type] 
+Type domain.Question is not enhanced.
+
+[2022-06-11 17:50:05 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-06-11 17:50:05 #6 type] 
+Type domain.Equipo is not enhanced.
+
+[2022-06-11 17:50:05 #7 type] 
+Type domain.Jugador is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-06-11 17:51:48 #1 store] 
+Database 'C:\Users\34644\git\repository\IS-ITER\src\main\resources\bets.temp' is opened by 24488@MSI
+
+[2022-06-11 17:51:48 #2 type] 
+Type domain.User is not enhanced.
+
+[2022-06-11 17:51:48 #3 type] 
+Type domain.Pronostico is not enhanced.
+
+[2022-06-11 17:51:48 #4 type] 
+Type domain.Question is not enhanced.
+
+[2022-06-11 17:51:48 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-06-11 17:51:48 #6 type] 
+Type domain.Equipo is not enhanced.
+
+[2022-06-11 17:51:48 #7 type] 
+Type domain.Jugador is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-06-11 17:54:56 #1 store] 
+Database 'C:\Users\34644\git\repository\IS-ITER\src\main\resources\bets.temp' is opened by 15904@MSI
+
+[2022-06-11 17:54:56 #2 type] 
+Type domain.User is not enhanced.
+
+[2022-06-11 17:54:56 #3 type] 
+Type domain.Pronostico is not enhanced.
+
+[2022-06-11 17:54:56 #4 type] 
+Type domain.Question is not enhanced.
+
+[2022-06-11 17:54:56 #5 type] 
+Type domain.Event is not enhanced.
+
+[2022-06-11 17:54:56 #6 type] 
+Type domain.Equipo is not enhanced.
+
+[2022-06-11 17:54:56 #7 type] 
+Type domain.Jugador is not enhanced.
+

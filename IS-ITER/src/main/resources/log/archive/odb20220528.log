@@ -1,0 +1,76 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-05-28 16:53:10 #1 store] 
+Database 'C:\Users\34644\git\repository\IS-ITER\src\main\resources\bets.temp' is opened by 13416@MSI
+
+[2022-05-28 16:53:10 #2 type.registry] 
+New type domain.User
+
+[2022-05-28 16:53:10 #3 type] 
+Type domain.User is not enhanced.
+
+[2022-05-28 16:53:10 #4 type.registry] 
+New type domain.Pronostico
+
+[2022-05-28 16:53:10 #5 type] 
+Type domain.Pronostico is not enhanced.
+
+[2022-05-28 16:53:10 #6 type.registry] 
+New type domain.EquipoJugador
+
+[2022-05-28 16:53:10 #7 type.registry] 
+New type java.util.Vector<domain.EquipoJugador>
+
+[2022-05-28 16:53:10 #8 type.registry] 
+New type domain.Question
+
+[2022-05-28 16:53:10 #9 type] 
+Type domain.EquipoJugador is not enhanced.
+
+[2022-05-28 16:53:10 #10 type] 
+Type domain.Question is not enhanced.
+
+[2022-05-28 16:53:10 #11 type.registry] 
+New type java.util.Vector<domain.Pronostico>
+
+[2022-05-28 16:53:10 #12 type.registry] 
+New type domain.Event
+
+[2022-05-28 16:53:10 #13 type] 
+Type domain.Event is not enhanced.
+
+[2022-05-28 16:53:10 #14 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2022-05-28 16:53:10 #15 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2022-05-28 16:53:10 #16 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2022-05-28 16:53:10 #17 type.registry] 
+New type java.util.ArrayList<domain.Pronostico>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2022-05-28 16:53:40 #1 store] 
+Database 'C:\Users\34644\git\repository\IS-ITER\src\main\resources\bets.temp' has been recovered (tr. 1-7)
+
+[2022-05-28 16:53:40 #2 store] 
+Database 'C:\Users\34644\git\repository\IS-ITER\src\main\resources\bets.temp' is opened by 30376@MSI
+
+[2022-05-28 16:53:40 #3 type] 
+Type domain.User is not enhanced.
+
+[2022-05-28 16:53:40 #4 type] 
+Type domain.Pronostico is not enhanced.
+
+[2022-05-28 16:53:40 #5 type] 
+Type domain.EquipoJugador is not enhanced.
+
+[2022-05-28 16:53:40 #6 type] 
+Type domain.Question is not enhanced.
+
+[2022-05-28 16:53:40 #7 type] 
+Type domain.Event is not enhanced.
+

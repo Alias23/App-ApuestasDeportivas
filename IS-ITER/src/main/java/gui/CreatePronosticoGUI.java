@@ -280,7 +280,7 @@ public class CreatePronosticoGUI extends JFrame {
 							tablePronostico1.getColumnModel().getColumn(0).setPreferredWidth(60);
 							tablePronostico1.getColumnModel().getColumn(1).setPreferredWidth(268);
 
-							q.setQuestion(tableQueries.getValueAt(i, 1).toString());
+							q.setQuestion(tableQueries.getValueAt(u, 1).toString());
 						}
 					}
 					jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoQueries"));
@@ -316,7 +316,7 @@ public class CreatePronosticoGUI extends JFrame {
 								if (p.getPronostico().equals(tablePronostico1.getValueAt(z, 1))) {
 									System.out.println(p.getPronostico());
 									inputDescription = p.getPronostico();
-									p.setPronostico(tablePronostico1.getValueAt(u, 1).toString());
+									p.setPronostico(tablePronostico1.getValueAt(z, 1).toString());
 									ganan = p.getGanancia();
 								}
 							}

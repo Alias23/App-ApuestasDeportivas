@@ -6,6 +6,7 @@ package gui;
 
 import javax.swing.*;
 
+import domain.Equipo;
 import domain.Event;
 import businessLogic.BLFacade;
 
@@ -30,6 +31,7 @@ public class MainGUI extends JFrame {
 	private JButton jButtonCreateEvent = null;
 	private JButton jButtonCreateProns = null;
 	private JButton jButtonCerrar = null;
+	private JButton jButtonAñadirEquipo = null;
 
 	private static BLFacade appFacadeInterface;
 
@@ -47,6 +49,7 @@ public class MainGUI extends JFrame {
 	private JRadioButton rdbtnNewRadioButton_2;
 	private JPanel panel;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JButton jButtonAñadirJugador;
 
 	/**
 	 * This is the default constructor
@@ -75,7 +78,7 @@ public class MainGUI extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(495, 290);
+		this.setSize(725, 284);
 		this.setContentPane(getJContentPane());
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
 	}
@@ -96,9 +99,39 @@ public class MainGUI extends JFrame {
 
 			jContentPane.add(getBoton4());
 			jContentPane.add(getBoton5());
+			jContentPane.add(getBoton6());
+			jContentPane.add(getJBoton7());
 
 		}
 		return jContentPane;
+	}
+
+	private JButton getJBoton7() {
+		if (jButtonAñadirJugador == null) {
+			jButtonAñadirJugador = new JButton(ResourceBundle.getBundle("Etiquetas").getString("AñadirJugador"));
+			jButtonAñadirJugador.setBounds(474, 117, 229, 58);
+			jButtonAñadirJugador.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					JFrame a = new AñadirJugador();
+					a.setVisible(true);
+				}
+			});
+		}
+		return jButtonAñadirJugador;
+	}
+
+	private JButton getBoton6() {
+		if (jButtonAñadirEquipo == null) {
+			jButtonAñadirEquipo = new JButton(ResourceBundle.getBundle("Etiquetas").getString("AñadirEquipo"));
+			jButtonAñadirEquipo.setBounds(474, 59, 229, 58);
+			jButtonAñadirEquipo.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					JFrame a = new AñadirEquipo(new Vector<domain.Jugador>());
+					a.setVisible(true);
+				}
+			});
+		}
+		return jButtonAñadirEquipo;
 	}
 
 	private JButton getBoton5() {
@@ -118,7 +151,7 @@ public class MainGUI extends JFrame {
 	private JButton getBoton4() {
 		if (jButtonCreateProns == null) {
 			jButtonCreateProns = new JButton(
-					ResourceBundle.getBundle("Etiquetas").getString("CrearPronosticoCorrecto")); //$NON-NLS-1$ //$NON-NLS-2$
+					ResourceBundle.getBundle("Etiquetas").getString("CrearPronosticoCorrecto"));
 			jButtonCreateProns.setBounds(243, 59, 230, 58);
 			jButtonCreateProns.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -163,7 +196,7 @@ public class MainGUI extends JFrame {
 			jButtonCreateEvent.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateEvent"));
 			jButtonCreateEvent.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					JFrame b = new CreateEventGUI(new Vector<domain.EquipoJugador>());
+					JFrame b = new CreateEventGUI(new Vector<domain.Equipo>());
 					b.setVisible(true);
 				}
 			});
@@ -174,7 +207,7 @@ public class MainGUI extends JFrame {
 	private JLabel getLblNewLabel() {
 		if (jLabelSelectOption == null) {
 			jLabelSelectOption = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("SelectOption"));
-			jLabelSelectOption.setBounds(0, 1, 473, 58);
+			jLabelSelectOption.setBounds(116, 0, 473, 58);
 			jLabelSelectOption.setFont(new Font("Tahoma", Font.BOLD, 13));
 			jLabelSelectOption.setForeground(Color.BLACK);
 			jLabelSelectOption.setHorizontalAlignment(SwingConstants.CENTER);
@@ -230,7 +263,7 @@ public class MainGUI extends JFrame {
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
-			panel.setBounds(0, 175, 473, 58);
+			panel.setBounds(147, 175, 473, 53);
 			panel.add(getRdbtnNewRadioButton_1());
 			panel.add(getRdbtnNewRadioButton_2());
 			panel.add(getRdbtnNewRadioButton());
@@ -244,6 +277,7 @@ public class MainGUI extends JFrame {
 		jButtonCreateQuery.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateQuery"));
 		jButtonCreateProns.setText(ResourceBundle.getBundle("Etiquetas").getString("CrearPronostico"));
 		jButtonCerrar.setText(ResourceBundle.getBundle("Etiquetas").getString("CerrarApuesta"));
+		jButtonAñadirEquipo.setText(ResourceBundle.getBundle("Etiquetas").getString("AñadirEquipo"));
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
 	}
 }

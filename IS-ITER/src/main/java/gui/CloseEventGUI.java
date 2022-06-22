@@ -253,7 +253,7 @@ public class CloseEventGUI extends JFrame {
 							}
 							tableApuesta.getColumnModel().getColumn(0).setPreferredWidth(130);
 							tableApuesta.getColumnModel().getColumn(1).setPreferredWidth(228);
-							q.setQuestion(tableQueries.getValueAt(i, 1).toString());
+							q.setQuestion(tableQueries.getValueAt(u, 1).toString());
 						}
 					}
 				} else {
@@ -289,7 +289,7 @@ public class CloseEventGUI extends JFrame {
 									User user = facade.getLog();
 									if (user.finPron(p)) {
 										facade.wallet(ev, q, p, user.getApuesta(), p.getGanancia());
-										p.setPronostico(tableApuesta.getValueAt(u, 1).toString());
+										p.setPronostico(tableApuesta.getValueAt(z, 1).toString());
 										jLabelHecho
 												.setText(ResourceBundle.getBundle("Etiquetas").getString("EventClose"));
 									} else {
@@ -337,7 +337,7 @@ public class CloseEventGUI extends JFrame {
 							for (domain.Pronostico p : prons) {
 								if (p.getPronostico().equals(tableApuesta.getValueAt(z, 1))) {
 									domain.Pronostico s = p;
-									s.setPronostico(tableApuesta.getValueAt(u, 1).toString());
+									s.setPronostico(tableApuesta.getValueAt(z, 1).toString());
 								}
 							}
 						}

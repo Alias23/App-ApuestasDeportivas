@@ -2,6 +2,7 @@ package businessLogic;
 
 //hola
 import java.util.Date;
+
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Vector;
@@ -11,12 +12,9 @@ import javax.jws.WebService;
 
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
-import domain.Question;
 
-import domain.User;
-import domain.EquipoJugador;
-import domain.Event;
-import domain.Pronostico;
+import domain.*;
+
 import exceptions.EventAlreadyExists;
 import exceptions.EventFinished;
 import exceptions.QuestionAlreadyExist;
@@ -174,6 +172,7 @@ public class BLFacadeImplementation implements BLFacade {
 		return a;
 	}
 
+	@WebMethod
 	public int getLastEventNumber(Date date) {
 		int num = 0;
 		dbManager.open(false);
@@ -184,6 +183,15 @@ public class BLFacadeImplementation implements BLFacade {
 			}
 		}
 		return num;
+	}
+
+	@WebMethod
+	public int getNumeroEquipo() {
+		int cont = 0;
+		dbManager.open(false);
+		cont = dbManager.getNumeroEquipo();
+		dbManager.close();
+		return cont;
 	}
 
 	@WebMethod
@@ -240,9 +248,33 @@ public class BLFacadeImplementation implements BLFacade {
 	}
 
 	@WebMethod
-	public Vector<EquipoJugador> getEquipo(Date date) {
+	public Equipo createEquipo(String description, Date eventDate) {
 		dbManager.open(false);
-		Vector<EquipoJugador> e = dbManager.getEquipo(date);
+		Equipo eq = dbManager.createEquipo(description, eventDate);
+		dbManager.close();
+		return eq;
+	}
+
+	@WebMethod
+	public Jugador createJugador(String nombre, String equipo, String apellidos, String dorsal, int e) {
+		dbManager.open(false);
+		Jugador j = dbManager.createJugador(nombre, equipo, apellidos, dorsal, e);
+		dbManager.close();
+		return j;
+	}
+
+	@WebMethod
+	public Equipo getEq(String eq) {
+		dbManager.open(false);
+		Equipo e = dbManager.getEq(eq);
+		dbManager.close();
+		return e;
+	}
+
+	@WebMethod
+	public Vector<Equipo> getEquipo(Date date) {
+		dbManager.open(false);
+		Vector<Equipo> e = dbManager.getEquipo(date);
 		dbManager.close();
 		return e;
 	}

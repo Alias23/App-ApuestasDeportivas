@@ -1,14 +1,12 @@
 package businessLogic;
 
 import java.util.Vector;
+
 import java.util.Date;
 
 //import domain.Booking;
-import domain.Question;
-import domain.User;
-import domain.EquipoJugador;
-import domain.Event;
-import domain.Pronostico;
+
+import domain.*;
 import exceptions.EventAlreadyExists;
 import exceptions.EventFinished;
 import exceptions.QuestionAlreadyExist;
@@ -45,7 +43,7 @@ public interface BLFacade {
 	public Pronostico createPronostico(double ganancias, String description, Integer num, int q);
 
 	@WebMethod
-	public Vector<EquipoJugador> getEquipo(Date date);
+	public Vector<Equipo> getEquipo(Date date);
 
 	@WebMethod
 	public void setApues(double a);
@@ -60,10 +58,22 @@ public interface BLFacade {
 	public Vector<Date> getEventsMonth(Date date);
 
 	@WebMethod
+	public int getNumeroEquipo();
+
+	@WebMethod
+	public Equipo getEq(String eq);
+
+	@WebMethod
 	public void initializeBD();
 
 	@WebMethod
 	public Pronostico getPronostico(String p);
+
+	@WebMethod
+	public Equipo createEquipo(String description, Date eventDate);
+
+	@WebMethod
+	public Jugador createJugador(String nombre, String equipo, String apellidos, String dorsal, int e);
 
 	@WebMethod
 	public void storeUser(User user) throws UserAlreadyExists;
