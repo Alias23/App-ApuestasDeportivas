@@ -32,7 +32,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class AñadirEquipo extends JFrame {
+public class AnadirEquipo extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldEq = new JTextField();;
@@ -45,7 +45,7 @@ public class AñadirEquipo extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AñadirEquipo(Vector<domain.Jugador> v) {
+	public AnadirEquipo(Vector<domain.Jugador> v) {
 
 		try {
 			jbInit(v);

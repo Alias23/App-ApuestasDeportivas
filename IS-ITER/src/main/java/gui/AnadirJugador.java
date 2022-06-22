@@ -27,7 +27,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.Color;
 
-public class AñadirJugador extends JFrame {
+public class AnadirJugador extends JFrame {
 
 	private JPanel contentPane;
 
@@ -42,7 +42,7 @@ public class AñadirJugador extends JFrame {
 	private JLabel jLabelE = new JLabel(); 
 
 
-	public AñadirJugador() {
+	public AnadirJugador() {
 
 		try {
 			jbInit();

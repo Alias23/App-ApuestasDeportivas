@@ -112,7 +112,7 @@ public class MainGUI extends JFrame {
 			jButtonAñadirJugador.setBounds(474, 117, 229, 58);
 			jButtonAñadirJugador.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					JFrame a = new AñadirJugador();
+					JFrame a = new AnadirJugador();
 					a.setVisible(true);
 				}
 			});
@@ -126,7 +126,7 @@ public class MainGUI extends JFrame {
 			jButtonAñadirEquipo.setBounds(474, 59, 229, 58);
 			jButtonAñadirEquipo.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					JFrame a = new AñadirEquipo(new Vector<domain.Jugador>());
+					JFrame a = new AnadirEquipo(new Vector<domain.Jugador>());
 					a.setVisible(true);
 				}
 			});
