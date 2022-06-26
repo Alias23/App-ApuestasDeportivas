@@ -240,9 +240,9 @@ public class BLFacadeImplementation implements BLFacade {
 	}
 
 	@WebMethod
-	public Pronostico createPronostico(double ganancias, String description, Integer num, int q) {
+	public Pronostico createPronostico(double ganancias, String description, int q) {
 		dbManager.open(false);
-		Pronostico p = dbManager.createPronostico(ganancias, description, num, q);
+		Pronostico p = dbManager.createPronostico(ganancias, description, q);
 		dbManager.close();
 		return p;
 	}

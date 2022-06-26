@@ -33,6 +33,11 @@ public class Pronostico {
 		this.eventNumber = eventNumber;
 	}
 
+	public Pronostico(double ganancia, String p) {
+		this.ganancia = ganancia;
+		this.pronostico = p;
+	}
+
 	public Pronostico(Integer eventNumber, String p) {
 		this.pronostico = p;
 		this.eventNumber = eventNumber;

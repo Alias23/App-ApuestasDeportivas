@@ -426,7 +426,7 @@ public class CreatePronosticoGUI extends JFrame {
 				eventNum = facade.getLastEventNumber(eventDate) + 16;
 			}
 
-			facade.createPronostico(Double.parseDouble(textFieldGanancia.getText()), inputDescription, eventNum, ques);
+			facade.createPronostico(Double.parseDouble(textFieldGanancia.getText()), inputDescription, ques);
 
 			jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("QueryCreated"));
 

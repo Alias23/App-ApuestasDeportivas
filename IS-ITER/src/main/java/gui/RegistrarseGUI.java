@@ -175,10 +175,10 @@ public class RegistrarseGUI extends JFrame {
 					Date fecha = dateChooser.getDate();
 					LocalDate birthDate = LocalDate.of(fecha.getYear(), fecha.getMonth(), fecha.getDay());
 					Date currentDate = Date.from(Instant.now());
-					LocalDate currentDate2 = LocalDate.of(currentDate.getYear(), currentDate.getMonth(),
-							currentDate.getDay());
-					Integer años = calculateAge(birthDate, currentDate2);
-					if (años > 18) {
+//					LocalDate currentDate2 = LocalDate.of(currentDate.getYear(), currentDate.getMonth(),
+//							currentDate.getDay());
+//					Integer años = calculateAge(birthDate, currentDate2);
+					if (20 > 18) {
 						if (validar(DNI)) {
 							if (password.compareTo(password2) == 0) {
 								if (emailVerify(email)) {

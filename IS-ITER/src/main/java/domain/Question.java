@@ -161,8 +161,8 @@ public class Question implements Serializable {
 		return pron;
 	} 
 	
-	public Pronostico addProns2(Integer num, String p) {
-		Pronostico pron = new Pronostico(num,p);
+	public Pronostico addProns2(double ganancias, String p) {
+		Pronostico pron = new Pronostico(ganancias,p);
 		prons.add(pron);
 		return pron;
 	}

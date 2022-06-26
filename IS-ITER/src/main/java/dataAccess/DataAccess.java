@@ -260,8 +260,8 @@ public class DataAccess {
 			db.persist(p1);
 			db.persist(p2);
 
-//			Pronostico e39 = q5.addProns(0.0, "Málaga", 7);
-//			Pronostico e46 = q5.addProns(0.0, "Valencia", 8);
+			Pronostico e39 = q5.addProns(0.0, "Málaga", 7);
+			Pronostico e46 = q5.addProns(0.0, "Valencia", 8);
 //
 			Pronostico e47 = q3.addProns(0.0, "Atlético", 9);
 			Pronostico e48 = q3.addProns(0.0, "Athletic", 10);
@@ -280,8 +280,8 @@ public class DataAccess {
 			db.persist(e43);
 			db.persist(e44);
 			db.persist(e45);
-//			db.persist(e39);
-//			db.persist(e46);
+			db.persist(e39);
+			db.persist(e46);
 			db.persist(e47);
 			db.persist(e48);
 			db.persist(e49);
@@ -399,24 +399,15 @@ public class DataAccess {
 		return ev;
 	}
 
-	public Pronostico createPronostico(double ganancias, String description, Integer num, int q) {
-		System.out.println(">> DataAccess: createPronostico=> ganancias= " + ganancias + ", description: " + description
-				+ ", number=" + num);
+	public Pronostico createPronostico(double ganancias, String description, int q) {
+		System.out.println(">> DataAccess: createPronostico=> ganancias= " + ganancias + ", description: " + description);
 		Question ques = db.find(Question.class, q);
 		System.out.println(ques.getQuestion());
 		db.getTransaction().begin();
-		if(description==null) {
-			Pronostico p = ques.addProns(ganancias, "Lemar", num);
+			Pronostico p = ques.addProns2(ganancias, description);
 			db.persist(p);
 			db.getTransaction().commit();
 			return p;
-		}else {
-			Pronostico p = ques.addProns(ganancias, description, num);
-			db.persist(p);
-			db.getTransaction().commit();
-			return p;
-		}
-		
 	}
 
 	/**

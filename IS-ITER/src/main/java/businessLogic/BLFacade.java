@@ -40,7 +40,7 @@ public interface BLFacade {
 	public void closeEvent(Event e);
 
 	@WebMethod
-	public Pronostico createPronostico(double ganancias, String description, Integer num, int q);
+	public Pronostico createPronostico(double ganancias, String description, int q);
 
 	@WebMethod
 	public Vector<Equipo> getEquipo(Date date);
